@@ -1,0 +1,42 @@
+//Base Styles
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: red;
+}
+
+// + + Colours + +
+
+// + + F O N T S + +
+
+// Font Choices
+
+$primaryFont: 'Roboto', sans-serif;
+$secondaryFont: 'Lato', sans-serif;
+
+// Font Sizing
+
+$displayFontSize: 3em;
+$bodyFontSize: 0.8em;
+
+// Letter Spacing
+
+$displayLetterSpacing: 0.1em;
+$displayTexttransform: uppercase;
+$bodyLineHeight: 2em;
+
+
+// + + L A Y O U T + +
+
+// Spacing
+
+$sectionPadding: 6em 3em;
+
+// Highlighting
+
+// ::selection {
+//   background: $ydaPink; /* WebKit/Blink Browsers */
+// }
+// ::-moz-selection {
+//   background: $ydaPink; /* Gecko Browsers */
+// }
