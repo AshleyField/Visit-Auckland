@@ -1,4 +1,4 @@
-# Visit Auckland Group Prokect
+# Visit Auckland Group Project
 
 ###### How to install node and work on files at home.
 
