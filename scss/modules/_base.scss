@@ -17,6 +17,7 @@ $lightBlue: #6698C2;
 
 $primaryFont: 'Roboto', sans-serif;
 $secondaryFont: 'Lato', sans-serif;
+$oswaldFont: 'Oswald', sans-serif;
 
 // Font Sizing
 
@@ -44,3 +45,9 @@ $sectionPadding: 6em 3em;
 // ::-moz-selection {
 //   background: $ydaPink; /* Gecko Browsers */
 // }
+
+// + + M I X I N S + +
+
+@mixin textShadow {
+	text-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
