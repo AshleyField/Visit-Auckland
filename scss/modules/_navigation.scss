@@ -51,12 +51,13 @@ nav {
 
 		a {
 			text-decoration: none;
-			color: $secondaryColor;
+			color: $darkBlue;
 		}
 	}
 
 	.active {
-		color: $primaryColor;
+		color: $darkBlue;
+		font-weight: 700;
 	}
 }
 
@@ -66,7 +67,7 @@ nav {
 	right: .4em;
 	margin: .5em;
 	font-size: 1.5em;
-	color: $secondaryColor;
+	color: $darkBlue;
 
 }
 
@@ -139,13 +140,13 @@ nav {
 
 				a {
 					text-decoration: none;
-					color: $secondaryColor;
+					color: $lightBlue;
 					font-weight: 300;
 				}
 			}
 
 			.active {
-				color: $primaryColor;
+				color: $lightBlue;
 			}
 		}
 		.desktop-nav {
