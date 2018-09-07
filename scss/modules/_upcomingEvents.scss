@@ -3,7 +3,7 @@
 
 .upcoming-events{
 	// border: 1px red solid;
-	height:100vh;
+	min-height: 100vh;
 	// margin: auto;
 	display:block;
 	width:95%;
@@ -18,13 +18,12 @@
 		// border: 1px red solid;
 		font-family: $secondaryFont;
 		font-size: 1.5em;
-		width: 100%;
 				
 		h1{
-			border-bottom: 3px green solid;
+			border-bottom: 3px $lightBlue solid;
 			display: inline-block;
 			line-height:1em;
-			padding-bottom:0.5em;
+			padding-bottom:0.2em;
 		}
 
 	}
@@ -112,8 +111,6 @@
 @media only screen and (min-width : 40em) {
 
 	.upcoming-events{
-		height: 100vh;
-
 		display: flex;
 		flex-wrap: wrap;
 
@@ -136,10 +133,6 @@
 
 
 	.upcoming-events{
-		height: 100vh;
-
-		display: flex;
-		flex-wrap: wrap;
 
 	
 		.events{
@@ -162,11 +155,6 @@
 	}
 
 	.upcoming-events{
-		height: 100vh;
-
-		display: flex;
-		flex-wrap: wrap;
-
 	
 		.events{
 			
