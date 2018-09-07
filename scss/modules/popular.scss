@@ -2,10 +2,17 @@
 
 .popular{
 
-	.col-md-6{
-		// outline:red solid 1px;
+	padding-top:1em;
+	padding-bottom: 1em;
 
+	.filter{
+		padding-top: 1em;
+
+		h5{
+			font-size: 0.9em;
+		}
 	}
+
 
 	#pop-content{
 
@@ -16,7 +23,6 @@
 			text-transform:$displayTexttransform;
 			border-bottom: $lightBlue solid 3px;
 			padding-bottom: 5px;
-			margin-top:5px;
 			display: inline-block;
 
 		}
@@ -24,6 +30,7 @@
 		p{
 			width:50%;
 			font-style:italic;
+			padding-top: 0.5em;
 		}	
 
 		.flex-box{
@@ -33,16 +40,10 @@
 		}
 
 		ul{
+			padding-left: 0;
 			list-style-type:none;
 			justify-content:space-around;
-			li{
-				
-				// padding:0 1em 0 1em;
 
-				i{
-					// display:block;
-				}
-			}
 		}
 
 	}
@@ -65,7 +66,7 @@
 			float:left;
 			box-sizing:border-box;
 			padding:0.5em;
-			// outline:1px green solid;
+
 
 			&.desktop-only{
 				display:none;
@@ -76,11 +77,17 @@
 				display:flex;
 				justify-content:around;
 				text-align:center;
+				background-color: #f2f2f0;
+				margin-top: 2%;
+				line-height: 1.2em;
+				padding-top: 0.5em;
+				font-size: 0.8em;
+
 
 				p{
 					display:inline-block;
 					flex: 1 0 25%;
-					padding-top: 0.2em;
+					padding-top: 0.5em;
 
 
 				}
@@ -91,13 +98,8 @@
 				}
 			}
 
-			// &:nth-child(2){
-			// 	height: 200px;
-			// }
-
 			.grid-content{
 
-				// border:1px red solid;
 
 				img{
 					background-position: center;
@@ -148,14 +150,6 @@
 				
 			}
 
-		
-
-
-
-
-
-
-
 
 		}	
 
@@ -175,6 +169,12 @@
 
     	#pop-content{
 
+    		.flex-box{
+
+				flex-wrap:wrap;
+
+    		}
+
 			h1{
 				padding-bottom: 0.5em;
 				margin-top:0.5em;
@@ -187,9 +187,41 @@
 
 			}
 
-		}		
+			ul{
+					
+				li{
+					margin-right: auto;
+				}
+
+				li:hover{
+					color:$lightBlue;
+				}
+
+
+
+			}
+
+		}	
+
+		.filter{
+			padding-top: 3em;
+
+
+			h5{
+				border-bottom: $lightBlue solid 2px;
+				padding-bottom: 0.5em;
+
+			}
+		}	
         
         .grid-bla{
+
+        	.pop-info{
+
+        		i:hover{
+					color:$lightBlue;
+        		}
+        	}
 
         	.grid-item-bla{
 
@@ -197,9 +229,6 @@
         			display:block;
         		}
 
-        		.grid-content{
-
-				}
 
 				&:nth-child(2){
 					img{
