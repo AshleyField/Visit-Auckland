@@ -1,21 +1,23 @@
+/*All devices and mobile phone*/
+
 .popular{
 
 	.col-md-6{
-		outline:red solid 1px;
-		background-color:peachpuff;
+		// outline:red solid 1px;
 
 	}
 
 	#pop-content{
 
 		h1{
-		// font-size:$mobileDisplayFontSize;
-		// letter-spacing:$displayLetterSpacing;
-		// text-transform:$displayTexttransform;
-		border-bottom: green solid 2px;
-		padding-bottom: 5px;
-		margin-top:5px;
-		display: inline-block;
+			font-family:$oswaldFont;
+			font-size:$mobileDisplayFontSize;
+			letter-spacing:$displayLetterSpacing;
+			text-transform:$displayTexttransform;
+			border-bottom: $lightBlue solid 3px;
+			padding-bottom: 5px;
+			margin-top:5px;
+			display: inline-block;
 
 		}
 
@@ -63,7 +65,11 @@
 			float:left;
 			box-sizing:border-box;
 			padding:0.5em;
-			outline:1px green solid;
+			// outline:1px green solid;
+
+			&.desktop-only{
+				display:none;
+			}	
 
 			.pop-info{
 
@@ -91,7 +97,7 @@
 
 			.grid-content{
 
-				border:1px red solid;
+				// border:1px red solid;
 
 				img{
 					background-position: center;
@@ -105,7 +111,7 @@
 			&:nth-child(2){
 				img{
 
-					height:100px;
+					height:120px;
 
 				}
 			
@@ -135,12 +141,14 @@
 			&:nth-child(5){
 				img{
 
-					height:100px;
+					height:120px;
 
 				}
 			
 				
 			}
+
+		
 
 
 
@@ -158,16 +166,124 @@
 }	
 
 
-@media only screen and (min-width : 40em) {
+@media only screen and (min-width : 60em) {
 
 
     .popular {
+
+    	padding:1.5em;
+
+    	#pop-content{
+
+			h1{
+				padding-bottom: 0.5em;
+				margin-top:0.5em;
+
+
+			}
+
+			p{
+				padding: 1em 0 1em 0;
+
+			}
+
+		}		
         
         .grid-bla{
+
+        	.grid-item-bla{
+
+        		&.desktop-only{
+        			display:block;
+        		}
+
+        		.grid-content{
+
+				}
+
+				&:nth-child(2){
+					img{
+
+						height:130px;
+
+					}
+			
+				}	
+				&:nth-child(3){
+					img{
+
+						height:200px;
+
+					}
+			
+				}	
+				&:nth-child(4){
+					img{
+
+						height:130px;
+
+					}
+			
+				}
+				&:nth-child(5){
+					img{
+
+						height:210px;
+
+					}
+			
+				}	
+				&:nth-child(6){
+					img{
+
+						height:210px;
+
+					}
+			
+				}	
+				&:nth-child(7){
+					img{
+
+						height:130px;
+
+					}
+			
+				}	
+				&:nth-child(8){
+					img{
+
+						height:210px;
+
+					}
+			
+				}
+				&:nth-child(9){
+					img{
+
+						height:130px;
+
+					}
+			
+				}	
+				&:nth-child(10){
+					img{
+
+						height:130px;
+
+					}
+			
+				}	
+								
+        	}
+
 			
 			.grid-item-bla, .grid-sizer-bla{
 				width:33%;
 			}
+
+			
+
+			
 
 
         }
