@@ -1,0 +1,41 @@
+// Login
+
+.login-area {
+
+	.login-title {
+		h1 {
+			text-align: center;
+			font-family: $oswaldFont;
+			text-transform: uppercase;
+			letter-spacing: $displayLetterSpacing;
+			margin: 1em;
+		}
+	}
+	.login-fields {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		.form-row {
+			flex: 1 0 90%;
+			margin-bottom: 1em;
+
+			input {
+				outline: none;
+				border: none;
+				border-bottom: 2px $darkBlue solid;
+			}
+
+			#submit {
+				border: 1px $darkBlue solid;
+				border-radius: 0;
+				margin: 1em auto;
+				background-color: $darkBlue;
+				color: #fff;
+				padding: 1em;
+				width: 80%;
+				max-wdith: 10em;
+			}
+		}
+	}
+}
