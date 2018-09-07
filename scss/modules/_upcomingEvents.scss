@@ -18,10 +18,11 @@
 		// border: 1px red solid;
 		font-family: $secondaryFont;
 		font-size: 1.5em;
-		border-bottom: 3px green solid;
-		display: inline-block;
-		
+		width: 100%;
+				
 		h1{
+			border-bottom: 3px green solid;
+			display: inline-block;
 			line-height:1em;
 			padding-bottom:0.5em;
 		}
@@ -32,11 +33,12 @@
 
 	.info{
 		// border: 1px red solid;
+		font-size: 0.6em;
 		padding-top:1em;
 		padding-bottom:2em;
-		width:60%;
+		width:80%;
 		font-family: $primaryFont;
-		font-size: $bodyFontSize;
+		// font-size: $bodyFontSize;
 		
 	}
 
@@ -50,8 +52,6 @@
 			width:100%;
 			// margin:auto;
 			// height: 5em;
-			
-
 		}
 
 		.details{
@@ -106,19 +106,22 @@
 }
 
 
+
 /*for small tablet - inclusive*/
 
 @media only screen and (min-width : 40em) {
 
 	.upcoming-events{
+		height: 100vh;
 
 		display: flex;
-			flex-wrap: wrap;
+		flex-wrap: wrap;
 
 	
 		.events{
 			
-			flex: 1 0 20%;
+			flex: 1 0 40%;
+			padding:1em;
 
 		}
 	}
@@ -130,6 +133,22 @@
 /*for tablet - inclusive*/
 
 @media only screen and (min-width : 60em) {
+
+
+	.upcoming-events{
+		height: 100vh;
+
+		display: flex;
+		flex-wrap: wrap;
+
+	
+		.events{
+			
+			flex: 1 0 50%;
+			padding:1em;
+
+		}
+	}
 }
 
 
@@ -137,4 +156,23 @@
 /*for destop - inclusive*/
 
 @media only screen and (min-width : 80em) {
+
+	.heading{
+		height:0em;
+	}
+
+	.upcoming-events{
+		height: 100vh;
+
+		display: flex;
+		flex-wrap: wrap;
+
+	
+		.events{
+			
+			flex: 1 0 10%;
+			padding:1em;
+
+		}
+	}
 }
