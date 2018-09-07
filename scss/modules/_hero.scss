@@ -1,4 +1,4 @@
-.heading {
+.header {
 	height: 100vh;
 	background-image: url('../../assets/images/hero-image-mobile.jpeg');
 	background-position: center;
@@ -78,7 +78,7 @@
 
 @media only screen and (max-height: 660px) {
 
-	.heading {
+	.header {
 		.hero {
 			top: 60%;
 		}
@@ -87,7 +87,7 @@
 
 @media only screen and (min-width : 40em) {
 
-	.heading {
+	.header {
 		.hero-inner {
 			h1 {
 				font-size: 4em;
@@ -112,7 +112,7 @@
 
 @media only screen and (min-width : 60em) {
 
-	.heading {
+	.header {
 		background-image: url('../../assets/images/hero-image-desktop.jpeg');
 	}
 }
