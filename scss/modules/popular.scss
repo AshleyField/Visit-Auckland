@@ -4,14 +4,14 @@
 		outline:red solid 1px;
 		background-color:peachpuff;
 
-		}
+	}
 
 	#pop-content{
 
 		h1{
-		font-size:$mobileDisplayFontSize;
-		letter-spacing:$displayLetterSpacing;
-		text-transform:$displayTexttransform;
+		// font-size:$mobileDisplayFontSize;
+		// letter-spacing:$displayLetterSpacing;
+		// text-transform:$displayTexttransform;
 		border-bottom: green solid 2px;
 		padding-bottom: 5px;
 		margin-top:5px;
@@ -27,7 +27,6 @@
 		.flex-box{
 			width:100%;
 			display:flex;
-
 
 		}
 
@@ -48,36 +47,107 @@
 
 //-------grid CSS-------//
 
-	#grid-container-bla{
-		// content: '';
-  		display: block;
-  		clear: both;
-  		border:1px green solid;
+	.grid-bla{
 
+		&:after{
+			content:"";
+			display: block;
+  			clear: both;
+		}
 
   		.grid-item-bla, .grid-sizer-bla{
-  			width: 45%;
+  			width: 50%;
   		}
 
   		.grid-item-bla{
-		float:left;
-		background-color:pink;
-		height:100px;
-		outline: red solid 1px;
-		margin: 5px;
+			float:left;
+			box-sizing:border-box;
+			padding:0.5em;
+			outline:1px green solid;
 
+			.pop-info{
+
+				display:flex;
+				justify-content:around;
+				text-align:center;
+
+				p{
+					display:inline-block;
+					flex: 1 0 25%;
+					padding-top: 0.2em;
+
+
+				}
+
+				i{
+					flex:1 0 25%;
+					padding-top: 0.5em;
+				}
+			}
+
+			// &:nth-child(2){
+			// 	height: 200px;
+			// }
+
+			.grid-content{
+
+				border:1px red solid;
+
+				img{
+					background-position: center;
+					background-size:cover;
+					width:100%;
+				}
+
+
+			}
 
 			&:nth-child(2){
-				height: 200px;
+				img{
+
+					height:100px;
+
+				}
+			
+				
+			}
+
+			&:nth-child(3){
+				img{
+
+					height:200px;
+
+				}
+			
+				
+			}
+
+			&:nth-child(4){
+				img{
+
+					height:210px;
+
+				}
+			
+				
+			}
+
+			&:nth-child(5){
+				img{
+
+					height:100px;
+
+				}
+			
+				
 			}
 
 
-		// img{
-		// 	display:block;
-		// 	max-width:100%;
-		// 	background-size:cover;
-		// 	background-position: center;
-		// }	
+
+
+
+
+
 
 		}	
 
@@ -85,15 +155,32 @@
 	}
 
 
+}	
+
+
+@media only screen and (min-width : 40em) {
+
+
+    .popular {
+        
+        .grid-bla{
+			
+			.grid-item-bla, .grid-sizer-bla{
+				width:33%;
+			}
+
+
+        }
+
+
+
+    }
+}
+
+
 	
-}
 
 
-@media only screen and (min-width : 40em) and (max-width : 59.99999em) {
-
-	.popular{
-
-	}
 
 
-}
+
