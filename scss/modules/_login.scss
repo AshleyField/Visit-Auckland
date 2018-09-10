@@ -1,6 +1,19 @@
 // Login
 
+#loginModal {
+	.modal-dialog {
+		max-width: 800px;
+
+		.modal-content{
+			border-radius:0;
+			height:90vh;
+		}
+	}
+}
+
 .login-area {
+	padding: 2em 1em;
+	padding-bottom: 6em;
 
 	.login-title {
 		h1 {
@@ -11,19 +24,70 @@
 			margin: 1em;
 		}
 	}
+
+	.social-title {
+		flex: 1 0 90%;
+		margin: 2em 0 3em 0;
+		h1 {
+			text-align: center;
+			font-family: $oswaldFont;
+			text-transform: uppercase;
+			letter-spacing: $displayLetterSpacing;
+			font-size: 1.5em;
+			position: relative;
+
+			&:before {
+				content: '';
+				height: 2px;
+				width: 1.5em;
+				background-color: $darkBlue;
+				position: absolute;
+				top: .6em;
+				left: 1em;
+				display: block;
+			}
+
+			&:after {
+				content: '';
+				height: 2px;
+				width: 1.5em;
+				background-color: $darkBlue;
+				position: absolute;
+				top: .6em;
+				right: 1em;
+				display: block;
+			}
+		}
+	}
+
 	.login-fields {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 
+		form {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+
 		.form-row {
 			flex: 1 0 90%;
 			margin-bottom: 1em;
+
+			&:last-child{
+				margin-bottom: 0;
+			}
 
 			input {
 				outline: none;
 				border: none;
 				border-bottom: 2px $darkBlue solid;
+				width: 80%;
+				margin: auto;
 			}
 
 			#submit {
@@ -32,9 +96,81 @@
 				margin: 1em auto;
 				background-color: $darkBlue;
 				color: #fff;
-				padding: 1em;
+				padding: 0.5em;
 				width: 80%;
 				max-wdith: 10em;
+			}
+		}
+
+		.social{
+			flex: 1 0 90%;
+
+			&-row{
+				display:flex;
+				margin:1em auto;
+				width: 80%;
+				background-color: $darkBlue;
+				padding: 0 1em;
+				height: 2.5em;
+				line-height: 2.5em;
+				color:#fff;
+
+				i{
+					flex: 0 0 10%;
+					line-height: 2.5em;
+				}
+
+				&:first-child{
+					background-color: #3b5998;
+					margin-top: 0;
+				}
+
+				&:nth-child(2){
+					background-color: #db3236;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (min-width : 40em) {
+
+	.login-area {
+		.social-title {
+			h1 {
+
+				&:before {
+					width: 3em;
+					left: 7em;
+				}
+
+				&:after {
+					width: 3em;
+					right: 7em;
+				}
+			}
+		}
+	}	
+
+}
+
+@media only screen and (min-width : 60em) {
+	.login-area{
+		padding: 2em 6em;
+		padding-bottom: 6em;
+
+		.social-title {
+			h1 {
+
+				&:before {
+					width: 4em;
+					left: 5em;
+				}
+
+				&:after {
+					width: 4em;
+					right: 5em;
+				}
 			}
 		}
 	}
