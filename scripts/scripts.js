@@ -26,17 +26,16 @@ $(function() {
     //masonry grid for popular section
 
     var $grid = $('.grid-bla').isotope({
-	  // set itemSelector so .grid-sizer is not used in layout
+	  
 	  itemSelector: '.grid-item-bla',
 	  percentPosition: true,
 	  masonry: {
-	    // use element for option
+	    //column width set in CSS
 	    columnWidth: '.grid-sizer-bla'
+
 	  }
 	});
 
-    $grid.imagesLoaded().progress( function() {
-        $grid.isotope('layout');
-    });
+
 
 });
