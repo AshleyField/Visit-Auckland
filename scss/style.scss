@@ -4,7 +4,6 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import 'modules/base';
 @import 'modules/custom';
-@import 'modules/popular';
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 @import "../node_modules/bootstrap/scss/root";
@@ -44,3 +43,5 @@
 @import "modules/footer";
 @import "modules/upcomingEvents";
 @import "modules/login";
+@import 'modules/popular';
+@import 'modules/maparea';
