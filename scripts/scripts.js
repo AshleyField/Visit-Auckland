@@ -91,11 +91,35 @@ $(function() {
             console.log(data);
             console.log(venues);
 
+            var icon = '';
+
             _(venues).each(function(venue){
                 console.log('hi');
 
+                switch(venue.category) {
+                    case "Park":
+                        icon = 'parkIcon';
+                        break;
+                    case "Hotel":
+                        icon = 'hotelIcon';
+                        break;
+                    case "Gym":
+                        icon = 'gymIcon';
+                        break;
+                    case "Bar":
+                        icon = 'barIcon';
+                        break;
+                    case "Coffee Shop", "Café":
+                        icon = 'coffeeIcon';
+                        break;
+                    default:
+                        icon = 'locationIcon'
+                }
+
+                console.log('Icon Name: ' + icon);
+
                 let venueIcon = L.icon({
-                    iconUrl: 'assets/cafe.svg',
+                    iconUrl: '../assets/icons/' + icon + '.svg',
                     iconSize: [30,30]
                 });
 
