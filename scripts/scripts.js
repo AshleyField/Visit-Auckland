@@ -44,101 +44,128 @@ $(function() {
 	});
 
 
-    //------------------starting map javascript
+
+});
+
+const version = '?v=20170901';
+const clientid = '&client_id=NMXJZAHXRWHSYSLXYGNJC4032TRUV1BJMGJ5KGNKN3QXVSRI';
+const clientSecret = '&client_secret=BQ1G5KHZAHTXNISQU4HDDXVNRYB4BL0AAKTLDTFXM0F10N10';
+const key = version + clientid + clientSecret;
+let map; 
+let markerHTML = $('#templateMarker').text();
+let markerTemplate = Template7(markerHTML).compile();
+
+$(function(){
+
+    let center = [-36.8446152873055,174.76662397384644];
+    map = L.map('map',{scrollWheelZoom:false}).setView(center,17);
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
 
 
-    // mapboxgl.accessToken = 'pk.eyJ1IjoibWx5MDIyMyIsImEiOiJjamxuNGc5Zm8xZjdyM2twaGpsa3E2cnRmIn0.YC9jrYJYIQWj25EF4Wn3Zg';
-    // const map = new mapboxgl.Map({
-    //     container: 'map',
-    //     style: 'mapbox://styles/mly0223/cjln4h5eu5wca2snqpippvx3f',
-    //     center: [174.767164, -36.851146],
-    //     zoom: 15
-    // });
+    var iconFood = '../assets/images/lightbluepin.svg';
+    var iconDrinks = '../assets/images/darkbluepin.svg';
+    var iconShop = '../assets/images/pinkpin.svg';
+    var iconSight = '../assets/images/purplepin.svg';
 
-    const version = '?v=20170901';
-    const clientid = '&client_id=NMXJZAHXRWHSYSLXYGNJC4032TRUV1BJMGJ5KGNKN3QXVSRI';
-    const clientSecret = '&client_secret=BQ1G5KHZAHTXNISQU4HDDXVNRYB4BL0AAKTLDTFXM0F10N10';
-    const key = version + clientid + clientSecret;
 
-    $(function(){
+    getVenues('food',iconFood);
+    getVenues('drinks',iconDrinks);
+    getVenues('shops',iconShop);
+    getVenues('sights',iconSight);
 
-        let center = [-36.8446152873055,174.76662397384644];
-        let map = L.map('map').setView(center,17);
-        L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
-
-        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&limit=50&ll=-36.8446152873055,174.76662397384644';
-
-        $.ajax({
-        url:exploreUrl,
-        dataType:'jsonp',
-            success:function(res){
-                var data = res.response.groups["0"].items;
-
-                // console.log(data);
-
-                //  map data to a simpler venues format
-
-                var venues = _(data).map(function(item){ // this function is to transform each item into smaller pieces of data. these items/venues have alot of data 
-                //in the console. Also called mapping data
-                    return{
-                        latlng:{lat:item.venue.location.lat,lng:item.venue.location.lng},
-                        name:item.venue.name,
-                        venueid:item.venue.id,
-                        category:item.venue.categories["0"].name,
-                        address:item.venue.location
-                    };
-
-                });
-
-                console.log(venues);
-
-                //loop list of venues and add a marker onto the map
-                _(venues).each(function(venue){
-
-                   
-
-                    var iconImage = '../assets/images/food.svg'; //default marker
-
-                    if(venue.category == 'cafe'){
-
-                         var iconImage = '../assets/images/location.svg';
-                    }
-
-                    if(venue.category == 'bar'){
-
-                         var iconImage = '../assets/images/food.svg';
-                    }
-                    if(venue.category == 'Hotel'){
-
-                         var iconImage = '../assets/images/location.svg';
-                    }
-
-                    let foodIcon = L.icon({
-                        iconUrl:iconImage,
-                        iconSize:[30,30]
-
-                    });
-                     
-                    let marker = L.marker(venue.latlng,{icon:foodIcon}).addTo(map);
-                    // marker.venueid = venue.venueid;  
-
-                    
-                });
-
-                
-                // let marker = L.marker(venue.latlng,).addTo(map);
-               
-
-            
-            }
-
-        });
-
-    });
 
 
 });
 
+
+
+
+function getVenues(section,icon){
+
+    // &limit=50 add this in after section+'if i want more markers
+
+    let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&section='+section+'&ll=-36.8446152873055,174.76662397384644';
+
+    $.ajax({
+    url:exploreUrl,
+    dataType:'jsonp',
+        success:function(res){
+            var data = res.response.groups["0"].items;
+
+            console.log(data);
+
+            //  map data to a simpler venues format
+
+            var venues = _(data).map(function(item){ // this function is to transform each item into smaller pieces of data. these items/venues have alot of data 
+            //in the console. Also called mapping data
+                return{
+                    latlng:{lat:item.venue.location.lat,lng:item.venue.location.lng},
+                    name:item.venue.name,
+                    venueid:item.venue.id,
+                    category:item.venue.categories["0"].name,
+                    address:item.venue.location
+                };
+
+            });
+
+            //loop list of venues and add a marker onto the map
+            _(venues).each(function(venue){
+
+
+                // var iconImage = '../assets/images/darkbluepin.svg'; //default marker
+
+
+                let foodIcon = L.icon({
+                    iconUrl:icon,
+                    iconSize:[60,60]
+
+                });
+                 
+                let marker = L.marker(venue.latlng,{icon:foodIcon}).addTo(map);
+                marker.venueid = venue.venueid;
+
+                marker.on('click',function(){
+                    let venueUrl = 'https://api.foursquare.com/v2/venues/'+//from foursquare doc, 
+                    this.venueid+key;
+
+                    $.ajax({
+                        url:venueUrl,
+                        dataType:'jsonp',
+                        success:function(res){
+                            var venue = res.response.venue;
+
+                            $('.modal-title').text(venue.name);
+                            var photo = venue.bestPhoto; //find where to go from dom inspection
+                            var source = photo.prefix+'100x100'+photo.suffix;
+                            var contact = venue.contact.phone;
+                            var address = venue.location.address;
+                            var category = venue.categories.name;
+                            $('.modal-body').empty();
+                            $('<img src="'+source+'">').appendTo('.modal-body');
+                            $('<p>Phone:'+contact+'</p>').appendTo('.modal-body');
+                            $('<p>Address:'+address+'</p>').appendTo('.modal-body');
+                            $('<p>category:'+category+'</p>').appendTo('.modal-body');
+
+                            $('#venueModal').modal('show');
+                        }
+                    });
+
+
+                });
+
+
+                
+            });
+
+            
+
+           
+
+        
+        }
+
+    });
+}
 
 
 
