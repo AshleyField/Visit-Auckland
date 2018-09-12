@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="0 0 847 1058.75" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd">
+	<defs>
+		<style type="text/css">
+   
+    .fil1 {fill:none}
+    .fil0 {fill:black}
+   		</style>
+	</defs>
+
+	<g>
+		<path class="fil0" d="M299 164l-7 0c-9,0 -16,8 -16,17 0,9 7,16 16,16l7 0c9,0 16,-7 16,-16 0,-9 -7,-17 -16,-17z"/>
+		<path class="fil0" d="M380 164l-6 0c-9,0 -16,8 -16,17 0,9 7,16 16,16l6 0c9,0 17,-7 17,-16 0,-9 -8,-17 -17,-17z"/>
+		<path class="fil0" d="M472 164l-7 0c-9,0 -16,8 -16,17 0,9 7,16 16,16l7 0c9,0 16,-7 16,-16 0,-9 -7,-17 -16,-17z"/>
+		<path class="fil0" d="M553 164l-6 0c-9,0 -17,8 -17,17 0,9 8,16 17,16l6 0c9,0 16,-7 16,-16 0,-9 -7,-17 -16,-17z"/>
+		<line class="fil1" x1="306" y1="494" x2="423" y2="578"/>
+		<line class="fil1" x1="539" y1="494" x2="423" y2="578"/>
+		<path class="fil1" d="M78 512l120 76m120 -76l-120 76"/>
+		<line class="fil1" x1="769" y1="512" x2="649" y2="588"/>
+		<line class="fil1" x1="529" y1="512" x2="649" y2="588"/><path class="fil0" d="M797 578l0 -65c50,0 50,-33 0,-33l0 -65c13,0 35,3 35,-16 0,-405 -818,-405 -818,0 0,19 21,16 34,16l0 65c-48,0 -48,33 0,33l0 65c-13,0 -34,-3 -34,16 0,53 -18,157 62,157l693 0c80,0 63,-104 63,-157 0,-19 -22,-16 -35,-16zm-32 -47l-74 47 74 0 0 -47zm-116 40l91 -58 -182 0 91 58zm-42 7l-85 -54 -75 54 160 0zm-500 -65l91 58 92 -58 -183 0zm217 12l-84 53 158 0 -74 -53zm-167 53l-76 -48 0 48 76 0zm266 -17l66 -48 -132 0 66 48zm-376 -178c21,-340 730,-340 751,0l-751 0zm34 97l0 -65 684 0 0 65 -684 0zm688 239l-693 0c-43,0 -30,-77 -30,-108l753 0c0,31 13,108 -30,108z"/>
+	</g>
+</svg>
