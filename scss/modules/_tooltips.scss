@@ -1,0 +1,33 @@
+
+#marker-container{
+
+			margin: 20vh auto;
+			width:200px;
+			outline: $darkBlue solid 2px;
+			
+
+			.modal-content{
+				border:none;
+				border-radius:0;
+
+				.modal-body{
+					overflow-wrap:break-word;
+				}
+			}
+
+			.venue-image{
+				background-position:center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				height:150px;
+
+
+
+				&.modal-header{
+					border-radius:0;
+				}
+
+			}
+
+		}	
+

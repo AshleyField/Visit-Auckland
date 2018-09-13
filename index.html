@@ -367,17 +367,20 @@
 
 	<!-- template 7 scripts -->
 	<script id="templateMarker" type="text/template7">
-		<div class="modal-dialog" role="document">
+		<div id="marker-container" class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">{{name}}</h5>
+				<div class="modal-header venue-image" style="background-image:url({{photo}})">
+					<!-- <img class="venue-image" src="{{photo}}" alt=""> -->
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<img src="{{photo}}" alt="">
-					<p>{{address}}</p>
+					<h5 class="modal-title">{{name}}</h5>
+					<p>{{address}} Auckland City</p>
+					{{#if website}}
+						<a href={{website}}>Website</a>
+					{{/if}}
 				</div>
 			</div>
 		</div>

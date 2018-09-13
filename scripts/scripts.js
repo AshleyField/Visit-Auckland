@@ -2,8 +2,8 @@
 $(function() {
 
     const version = '?v=20170901';
-    const clientid = '&client_id=NMXJZAHXRWHSYSLXYGNJC4032TRUV1BJMGJ5KGNKN3QXVSRI';
-    const clientSecret = '&client_secret=BQ1G5KHZAHTXNISQU4HDDXVNRYB4BL0AAKTLDTFXM0F10N10';
+    const clientid = '&client_id=ZVH1SRKWNN4ICTIOBYYVNU2CGV4XZ40LSUW3Q51WJFAO5TE5';
+    const clientSecret = '&client_secret=EXK3MJMQWIHXOHTLDPFA2IL0UBUWMHQ51O0FWNVL2OOXHTLB';
     const key = version + clientid + clientSecret;
 
     var iconFood = '../assets/images/lightbluepin.svg';
@@ -67,11 +67,11 @@ $(function() {
 
 
     getVenues('food',iconFood);
-    getVenues('drinks',iconDrinks);
-    getVenues('shops',iconShop);
-    getVenues('sights',iconSight);
+    // getVenues('drinks',iconDrinks);
+    // getVenues('shops',iconShop);
+    // getVenues('sights',iconSight);
 
-    getTrending();
+    // getTrending();
 
 
     
@@ -131,10 +131,10 @@ $(function() {
                             dataType: 'jsonp',
                             success:function(res) {
 
-                                if (res.meta.code !== '200') {
-                                    alert('Message from FourSquare : ' + res.meta.errorDetail);
-                                    return;
-                                }
+                                // if (res.meta.code !== '200') {
+                                //     alert('Message from FourSquare : ' + res.meta.errorDetail);
+                                //     return;
+                                // }
 
                                 // console.log(res);
                             }
@@ -146,10 +146,11 @@ $(function() {
                             dataType:'jsonp',
                             success:function(res) {
 
-                                if (res.meta.code !== '200') {
-                                    alert('Message from FourSquare : ' + res.meta.errorDetail);
-                                    return;
-                                }
+                                // if (res.meta.code !== '200') {
+                                //     alert('Message from FourSquare : ' + res.meta.errorDetail);
+                                //     return;
+                                // }
+                                console.log(res);
 
                                 let markerHTML     = $('#templateMarker').text();
                                 let markerTemplate = Template7(markerHTML).compile();
@@ -157,17 +158,21 @@ $(function() {
 
                                 var venue = res.response.venue;
 
+
                                 $('.modal-title').text(venue.name);
                                 var photo = venue.bestPhoto; //find where to go from dom inspection
-                                var source = photo.prefix+'100x100'+photo.suffix;
+                                var source = photo.prefix+'300x300'+photo.suffix;
                                 var contact = venue.contact.phone;
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
+                                var website = venue.url ? venue.url : false ;
+
 
                                 var output = markerTemplate({
                                     photo: source,
                                     name:venue.name,
                                     address:address,
+                                    website:website,
 
                                 });
                                 // console.log(output);
@@ -198,7 +203,7 @@ $(function() {
         dataType:'jsonp',
             success:function(res){
 
-                console.log(res);
+                // console.log(res);
 
    
             
