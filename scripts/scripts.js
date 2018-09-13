@@ -1,3 +1,8 @@
+var venueArray = [];
+// var filteredArray = [];
+var map;
+var markerLayer;
+var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
 
 $(function() {
 
@@ -56,120 +61,262 @@ $(function() {
 
     var center = {lat: -36.842770,lng: 174.766930};
 
-    var map = L.map('map', {scrollWheelZoom: false}).setView(center,17);
+    map = L.map('map', {scrollWheelZoom: false}).setView(center,17);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYXNoZXlmaWVsZCIsImEiOiJjamtrZXlvNnMwZTg3M3FwYzAxbGNqYTA4In0.AyMC7APOvh72_Q2evO5VTQ').addTo(map);
 
+    markerLayer = new L.LayerGroup().addTo(map);
     //Initalise foursquare
 
     let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644'
 
-    $.ajax({
-        url: exploreUrl,
-        dataType: 'jsonp',
-        success: function(res){
+    if(venueArray.length == 0){
 
-            var data = res.response.groups["0"].items;
+        console.log("Ajax request initiated")
 
-            var venues = _(data).map(function(item){
-                return {
-                    latlng: {lat: item.venue.location.lat, lng: item.venue.location.lng},
-                    name: item.venue.name,
-                    venueid: item.venue.id,
-                    category: item.venue.categories['0'].name
-                }
-            });
+        $.ajax({
+            url: exploreUrl,
+            dataType: 'jsonp',
+            success: function(res){
 
-            // console.log(data);
-            // console.log(venues);
+                console.log(res);
 
-            var icon = '';
+                var data = res.response.groups["0"].items;
 
-            var foundCategory;
+                var venues = _(data).map(function(item){
 
-            var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
+                    return {
+                        latlng: {lat: item.venue.location.lat, lng: item.venue.location.lng},
+                        name: item.venue.name,
+                        venueid: item.venue.id,
+                        category: item.venue.categories['0'].name
 
-            _(venues).each(function(venue){
-
-                var foundCategory = false;
-
-
-                if(venue.category == "Park"){
-                    icon = 'parkIcon';
-                    foundCategory = true;
-                }
-
-                else if (venue.category == "Hotel"){
-                    icon = 'hotelIcon';
-                    foundCategory = true;
-                }
-
-                else if(venue.category == "Gym"){
-                    icon = 'gymIcon';
-                    foundCategory = true;
-                }
-
-                else if (venue.category == "Cocktail Bar" || venue.category == "Brewery"){
-                    icon = 'barIcon';
-                    foundCategory = true;
-                }
-
-                else if (venue.category == "Coffee Shop" || venue.category == "Café"){
-                    icon = 'coffeeIcon';
-                    foundCategory = true;
-                }
-
-                else if (venue.category == "Dessert Shop" || venue.category == "Ice Cream Shop"){
-                    icon = 'dessertIcon';
-                    foundCategory = true;
-                }
-
-                else if (venue.category == "Burger Joint"){
-                    icon = 'burgerIcon';
-                    foundCategory = true;
-                }
-
-                else if (foundCategory == false){
-                    for(var i = 0; i < restaurantCategories.length; i++){
-                        if(venue.category == restaurantCategories[i]){
-                            icon = 'foodIcon';
-                            foundCategory = true;
-                        }
                     }
-                }
-
-                else if (foundCategory == false){
-                    icon = 'locationIcon';
-                    foundCategory = true;
-                }
-
-                console.log(icon);
-
-
-                let venueIcon = L.icon({
-                    iconUrl: '../assets/icons/' + icon + '.svg',
-                    iconSize: [30,30]
                 });
 
-                let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(map);
-                marker.venueid = venue.venueid
+                venueArray = venues;
 
-                marker.on('click', function(){
-                    var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
+                displayAllVenues();
+            }
 
-                    $.ajax({
-                        url: venueUrl,
-                        dataType: 'jsonp',
-                        success: function(res){
-                            console.log(res);
-                            console.log(res.response.venue.categories["0"].name);
-                        }
-                    })
-                });
-            })
-        }
-    })
+        })
+
+    }
+
+    $('.map-filter-row').on('click', function(){
+        markerLayer.clearLayers();
+
+        var clickedFilter = $(this).data('category');
+
+        console.log(clickedFilter);
+
+        displayFilteredVenue(clickedFilter)
+    });
 
 });
 
+function displayFilteredVenue(filter){
+    
+    var filteredArray = _(venueArray).filter(function(venue){
+
+        if(filter == "Restaurant"){
+
+            return restaurantCategories.indexOf(venue.category) != -1;
+        }
+
+        else {
+
+            return venue.category == filter;
+        }
+
+    });
+
+    displayVenues(filteredArray);
+
+
+
+}
+
+function displayAllVenues(){
+
+    console.log('Display Venues Called')
+
+    var icon = '';
+
+    var foundCategory;
+
+    var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
+
+    markerLayer.clearLayers();
+
+    _(venueArray).each(function(venue){
+
+        var foundCategory = false;
+
+
+        if(venue.category == "Park"){
+            icon = 'parkIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Hotel"){
+            icon = 'hotelIcon';
+            foundCategory = true;
+        }
+
+        else if(venue.category == "Gym"){
+            icon = 'gymIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Cocktail Bar" || venue.category == "Brewery"){
+            icon = 'barIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Coffee Shop" || venue.category == "Café"){
+            icon = 'coffeeIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Dessert Shop" || venue.category == "Ice Cream Shop"){
+            icon = 'dessertIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Burger Joint"){
+            icon = 'burgerIcon';
+            foundCategory = true;
+        }
+        else if (restaurantCategories.indexOf(venue.category) != -1 ){
+            icon = 'foodIcon';
+            foundCategory = true;
+        }
+        else {
+            icon = 'locationIcon';
+            foundCategory = true;
+        }
+
+        let venueIcon = L.icon({
+            iconUrl: '../assets/icons/' + icon + '.svg',
+            iconSize: [30,30]
+        });
+
+
+
+        let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
+        marker.venueid = venue.venueid
+
+        var popupContent = L.popup()
+                    .setLatLng(venue.latlng)
+                    .setContent('<h1>'+ venue.name +'</h1><p>Category: '+ venue.category +'</p>')
+                    .openOn(map);
+
+        marker.bindPopup(popupContent).openPopup();
+
+        // marker.on('click', function(){
+        //     var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
+
+        //     $.ajax({
+        //         url: venueUrl,
+        //         dataType: 'jsonp',
+        //         success: function(res){
+        //             console.log(res);
+        //             console.log(res.response.venue.categories["0"].name);
+        //         }
+        //     })
+        // });
+    })
+}
+
+
+function displayVenues(venues){
+
+    console.log('Display Venues Called')
+
+    var icon = '';
+
+    var foundCategory;
+
+    markerLayer.clearLayers();
+
+    _(venues).each(function(venue){
+
+        var foundCategory = false;
+
+
+        if(venue.category == "Park"){
+            icon = 'parkIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Hotel"){
+            icon = 'hotelIcon';
+            foundCategory = true;
+        }
+
+        else if(venue.category == "Gym"){
+            icon = 'gymIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Cocktail Bar" || venue.category == "Brewery"){
+            icon = 'barIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Coffee Shop" || venue.category == "Café"){
+            icon = 'coffeeIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Dessert Shop" || venue.category == "Ice Cream Shop"){
+            icon = 'dessertIcon';
+            foundCategory = true;
+        }
+
+        else if (venue.category == "Burger Joint"){
+            icon = 'burgerIcon';
+            foundCategory = true;
+        }
+        else if (restaurantCategories.indexOf(venue.category) != -1 ){
+            icon = 'foodIcon';
+            foundCategory = true;
+        }
+        else {
+            icon = 'locationIcon';
+            foundCategory = true;
+        }
+
+        let venueIcon = L.icon({
+            iconUrl: '../assets/icons/' + icon + '.svg',
+            iconSize: [30,30]
+        });
+
+
+
+        let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
+        marker.venueid = venue.venueid
+
+        var popupContent = L.popup()
+                    .setLatLng(venue.latlng)
+                    .setContent('<h1>'+ venue.name +'</h1><p>Category: '+ venue.category +'</p>')
+                    .openOn(map);
+
+        marker.bindPopup(popupContent).openPopup();
+
+        // marker.on('click', function(){
+        //     var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
+
+        //     $.ajax({
+        //         url: venueUrl,
+        //         dataType: 'jsonp',
+        //         success: function(res){
+        //             console.log(res);
+        //             console.log(res.response.venue.categories["0"].name);
+        //         }
+        //     })
+        // });
+    })
+}
 
