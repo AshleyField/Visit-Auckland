@@ -16,7 +16,7 @@
 
 	.heading{
 		// border: 1px red solid;
-		font-family: $secondaryFont;
+		font-family: $oswaldFont;
 		font-size: 1.5em;
 		width:100%;
 				
@@ -24,6 +24,7 @@
 			border-bottom: 3px $lightBlue solid;
 			display: inline-block;
 			line-height:1em;
+			letter-spacing: 0.1em;
 			padding-bottom:0.2em;
 		}
 
@@ -38,6 +39,7 @@
 		padding-bottom:2em;
 		width:80%;
 		font-family: $primaryFont;
+		font-style:italic;
 		// font-size: $bodyFontSize;
 		
 	}
