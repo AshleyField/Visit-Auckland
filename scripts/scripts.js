@@ -2,8 +2,8 @@
 $(function() {
 
     const version = '?v=20170901';
-    const clientid = '&client_id=ZVH1SRKWNN4ICTIOBYYVNU2CGV4XZ40LSUW3Q51WJFAO5TE5';
-    const clientSecret = '&client_secret=EXK3MJMQWIHXOHTLDPFA2IL0UBUWMHQ51O0FWNVL2OOXHTLB';
+    const clientid = '&client_id=4F1HTFHT0W5MM1U3JMQYAZQUUVB05AVXKQ1LYBE4L5NEK1UA';
+    const clientSecret = '&client_secret=P5UEW1L41ZMQRMCVL0GX4SBSZN2LLWO5U0BT1SQC4ZRVPB3J';
     const key = version + clientid + clientSecret;
 
     var iconFood = '../assets/images/lightbluepin.svg';
@@ -71,7 +71,7 @@ $(function() {
     // getVenues('shops',iconShop);
     // getVenues('sights',iconSight);
 
-    // getTrending();
+    getTrending();
 
 
     
@@ -88,13 +88,13 @@ $(function() {
             success:function(res){
                 var data = res.response.groups["0"].items;
 
-                console.log(data);
+                // console.log(data);
 
                 //  map data to a simpler venues format
 
                 var venues = _(data).map(function(item){ // this function is to transform each item into smaller pieces of data. these items/venues have alot of data 
                 //in the console. Also called mapping data
-
+                // console.log(item);
 
                     return {
                         latlng:{lat:item.venue.location.lat,lng:item.venue.location.lng},
@@ -165,14 +165,18 @@ $(function() {
                                 var contact = venue.contact.phone;
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
+                                var hours = venue.hours.timeframes["0"].open["0"].renderedTime;
+                                var days = venue.hours.timeframes["0"].days;
+                                // var hours = venue.popular.isOpen ? venue.popular.isOpen : false ;
                                 var website = venue.url ? venue.url : false ;
-
 
                                 var output = markerTemplate({
                                     photo: source,
                                     name:venue.name,
                                     address:address,
                                     website:website,
+                                    days:days,
+                                    hours:hours,
 
                                 });
                                 // console.log(output);
@@ -196,14 +200,37 @@ $(function() {
 
     function getTrending(){
 
-        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=10';
-
+        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
+        console.log(exploreUrl);
         $.ajax({
-        url:exploreUrl,
-        dataType:'jsonp',
+            url:exploreUrl,
+            dataType:'jsonp',
             success:function(res){
 
-                // console.log(res);
+                console.log(res);
+
+                let popularHTML = $('#templatePopular').text();
+                let popularTemplate = Template7(popularHTML).compile();
+
+                _(res.response.groups["0"].items).each(function(item){
+
+                    let venueid = item.venue.id;
+                    let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+                    $.ajax({
+                        url: venueUrl,
+                        success:function(res){
+                            
+                            let output = popularTemplate(res.response.venue);
+                            console.log(res.response.venue);
+                            $('.grid-bla').append(output);
+                             $grid.isotope('layout');
+                        }
+                    });
+
+
+                });
+
+                
 
    
             

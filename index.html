@@ -96,102 +96,16 @@
 					<div class="col-xs-12 col-md-6" id="grid-container">
 						<div class="grid-bla">
 							<div class="grid-sizer-bla"></div>
-							<div class="grid-item-bla">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla desktop-only">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla desktop-only">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla desktop-only">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla desktop-only">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-							<div class="grid-item-bla desktop-only">
-								<div class="grid-content size">
-									<div class="image" style="background-image:url(https://www.tuitours.org/wp-content/uploads/2015/07/Auckland-marina-e1511236954266.jpg)"></div>
-									<div class="pop-info">
-										<i class="fas fa-plus"></i>
-										<p>name</p>
-										<i class="fas fa-star"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						
+							
 
+						</div>
+					</div><!-- end of popular grid -->
+				</div><!-- end of row -->
+			</div><!-- end of container -->
+		</div><!-- end of popular -->
+
+		<!-- map section -->
 		<div class="map-area">
 			
 			<div class="right" id="map"></div>
@@ -199,8 +113,8 @@
 			<!-- marker popup -->
 			<div class="modal marker-container" id='venueModal' tabindex="-1" role="dialog">
 				
-			</div>
-			<!-- marker popup end -->
+			</div><!-- marker popup end -->
+			
 
 			<div class="filter">
 				<p>Filter:</p>
@@ -209,7 +123,8 @@
 				<a href=""><i class="fas fa-cocktail"></i></a>
 				<a href=""><i class="fas fa-map-marked-alt"></i></a>
 			</div>
-		</div>
+		</div><!-- end of map section -->
+		
 
 
 		<section class="upcoming-events">
@@ -366,6 +281,7 @@
 	</div>
 
 	<!-- template 7 scripts -->
+	<!-- script for marker -->
 	<script id="templateMarker" type="text/template7">
 		<div id="marker-container" class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -381,11 +297,31 @@
 					{{#if website}}
 						<a href={{website}}>Website</a>
 					{{/if}}
+					<p>Hours: {{days}} {{hours}}</p>
+					<!-- {{#if hours}}
+					<p>Open Now</p>
+					{{else}}
+					<p>Closed</p>
+					{{/if}} -->
+				</div>
+			</div>
+		</div>
+	</script> <!-- end of marker script -->
+
+	<!-- script for popular section -->
+	<script id="templatePopular" type="text/template7">
+
+		<div class="grid-item-bla">				
+			<div class="grid-content size">
+				<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
+				<div class="pop-info">
+					<i class="fas fa-plus"></i>
+					<p class="pop-name">{{name}}</p>
+					<i class="fas fa-star"></i>
 				</div>
 			</div>
 		</div>
 	</script>
-
 
 
 	<!-- jQuery -->
