@@ -10,9 +10,40 @@ $(function() {
     var iconDrinks = '../assets/images/darkbluepin.svg';
     var iconShop = '../assets/images/pinkpin.svg';
     var iconSight = '../assets/images/purplepin.svg';
+    var iconUser = '../assets/images/user.svg';
+
     
     let map;
     let center = [-36.8446152873055,174.76662397384644];
+
+
+    let userLatitude = 0;
+    let userLongitude = 0;
+
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+            userLatitude  = position.coords.latitude;
+            userLongitude = position.coords.longitude;
+
+            // Add marker to the map
+            console.log(userLongitude,userLatitude);
+
+            let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
+
+            let marker = L.marker({lat:userLatitude,lng:userLongitude},{icon:icon}).addTo(map);
+
+
+        });
+
+    } 
+    else { 
+        console.log('cannot access location');
+    }
+    
+
+
 
 
     // Open and close nav on mobile
@@ -164,7 +195,7 @@ $(function() {
                                 //     alert('Message from FourSquare : ' + res.meta.errorDetail);
                                 //     return;
                                 // }
-                                console.log(res);
+                                // console.log(res);
 
                                 let markerHTML     = $('#templateMarker').text();
                                 let markerTemplate = Template7(markerHTML).compile();
