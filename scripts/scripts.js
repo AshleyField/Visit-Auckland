@@ -148,14 +148,14 @@ $(function() {
 
     getTrending();
 
-    $('.fa-star').on('click', function(){
+    $('#grid-container').on('click','.fa-star', function(){
 
         console.log('Star Clicked');
 
         var clickedStar = $(this).data('star');
 
         if(clickedStar == "inactive"){
-            $(this).css('color', 'red')
+            $(this).css('color', '#FFD800')
                     .data('star', 'active');
         }
 
