@@ -134,6 +134,8 @@
 
 
 	.upcoming-events{
+		padding: 0 2em;
+		margin: 3em 0;
 
 	
 		.events{
@@ -156,6 +158,8 @@
 	}
 
 	.upcoming-events{
+
+		padding: 0 4em;
 	
 		.events{
 			
@@ -163,5 +167,13 @@
 			padding:1em;
 
 		}
+	}
+}
+
+@media only screen and (min-width : 100em) {
+
+	.upcoming-events{
+
+		padding: 0 7em;
 	}
 }

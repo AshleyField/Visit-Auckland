@@ -14,3 +14,41 @@
 	min-height: 100vh;
 	box-sizing: border-box;
 }
+
+.map-filter {
+	display: flex;
+	flex-wrap: wrap;
+
+	h1 {
+		flex: 1 0 90%;
+		margin-bottom: .5em;
+	}
+
+	&-row {
+		flex: 1 0 45%;
+	}
+}
+
+@media only screen and (min-width : 80em) {
+
+	.map-area {
+
+		padding: 0 2em;
+	}
+}
+
+@media only screen and (min-width : 80em) {
+
+	.map-area{
+
+		padding: 0 4em;
+	}
+}
+
+@media only screen and (min-width : 100em) {
+
+	.map-area {
+
+		padding: 0 7em;
+	}
+}

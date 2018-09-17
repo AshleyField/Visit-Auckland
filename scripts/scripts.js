@@ -4,6 +4,13 @@ var map;
 var markerLayer;
 var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
 
+//Initiate leaflet key
+
+var version = '?v=20170901';
+var clientid = '&client_id=1C3ZIZUJZDFCWZPWN1NS4F3RUBALGDNH5HUFLVSNKISZOABA';
+var clientSecret = '&client_secret=11SXOUY3WXTWN1HJJ00NIU22UCV2WRLW33DOLZWUNQVKLIHK';
+var key = version + clientid + clientSecret;
+
 $(function() {
 
     // Open and close nav on mobile
@@ -36,26 +43,18 @@ $(function() {
         e.preventDefault();
     });
 
-    //masonry grid for popular section
+    // masonry grid for popular section
 
     var $grid = $('.grid-bla').isotope({
-	  
-	  itemSelector: '.grid-item-bla',
-	  percentPosition: true,
-	  masonry: {
-	    //column width set in CSS
-	    columnWidth: '.grid-sizer-bla'
+      
+      itemSelector: '.grid-item-bla',
+      percentPosition: true,
+      masonry: {
+        //column width set in CSS
+        columnWidth: '.grid-sizer-bla'
 
-	  }
-	});
-
-    //Initiate leaflet key
-
-    const version = '?v=20170901';
-    const clientid = '&client_id=1C3ZIZUJZDFCWZPWN1NS4F3RUBALGDNH5HUFLVSNKISZOABA';
-    const clientSecret = '&client_secret=11SXOUY3WXTWN1HJJ00NIU22UCV2WRLW33DOLZWUNQVKLIHK';
-    const key = version + clientid + clientSecret;
-
+      }
+    });
 
     //Insert mapbox styles
 
@@ -79,8 +78,6 @@ $(function() {
             dataType: 'jsonp',
             success: function(res){
 
-                console.log(res);
-
                 var data = res.response.groups["0"].items;
 
                 var venues = _(data).map(function(item){
@@ -96,7 +93,7 @@ $(function() {
 
                 venueArray = venues;
 
-                displayAllVenues();
+                displayVenues(venueArray);
             }
 
         })
@@ -108,9 +105,64 @@ $(function() {
 
         var clickedFilter = $(this).data('category');
 
-        console.log(clickedFilter);
-
         displayFilteredVenue(clickedFilter)
+    });
+
+    function getTrending(){
+
+        console.log('Called Get Trending');
+
+        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
+
+        $.ajax({
+            url:exploreUrl,
+            dataType:'jsonp',
+            success:function(res){
+
+                let popularHTML = $('#templatePopular').text();
+                let popularTemplate = Template7(popularHTML).compile();
+
+                _(res.response.groups["0"].items).each(function(item){
+
+                    let venueid = item.venue.id;
+                    let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+                    $.ajax({
+                        url: venueUrl,
+                        success:function(res){
+                            
+                            let output = popularTemplate(res.response.venue);
+                            
+                            var gridItem = $(output);
+
+                            $grid.append(gridItem)
+                            .isotope('appended', gridItem);
+
+                        }
+                    });
+
+
+                });
+            }
+        });
+    }
+
+    getTrending();
+
+    $('.fa-star').on('click', function(){
+
+        console.log('Star Clicked');
+
+        var clickedStar = $(this).data('star');
+
+        if(clickedStar == "inactive"){
+            $(this).css('color', 'red')
+                    .data('star', 'active');
+        }
+
+        else {
+            $(this).css('color', '#212529')
+                    .data('star', 'inactive');
+        }
     });
 
 });
@@ -124,6 +176,18 @@ function displayFilteredVenue(filter){
             return restaurantCategories.indexOf(venue.category) != -1;
         }
 
+        else if (filter == "All"){
+            return venueArray;
+        }
+
+        else if (filter == "Cafe"){
+            return (venue.category == "Coffee Shop") || (venue.category == "Café");
+        }
+
+        else if (filter == "Bars"){
+            return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery')
+        }
+
         else {
 
             return venue.category == filter;
@@ -133,102 +197,7 @@ function displayFilteredVenue(filter){
 
     displayVenues(filteredArray);
 
-
-
 }
-
-function displayAllVenues(){
-
-    console.log('Display Venues Called')
-
-    var icon = '';
-
-    var foundCategory;
-
-    var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
-
-    markerLayer.clearLayers();
-
-    _(venueArray).each(function(venue){
-
-        var foundCategory = false;
-
-
-        if(venue.category == "Park"){
-            icon = 'parkIcon';
-            foundCategory = true;
-        }
-
-        else if (venue.category == "Hotel"){
-            icon = 'hotelIcon';
-            foundCategory = true;
-        }
-
-        else if(venue.category == "Gym"){
-            icon = 'gymIcon';
-            foundCategory = true;
-        }
-
-        else if (venue.category == "Cocktail Bar" || venue.category == "Brewery"){
-            icon = 'barIcon';
-            foundCategory = true;
-        }
-
-        else if (venue.category == "Coffee Shop" || venue.category == "Café"){
-            icon = 'coffeeIcon';
-            foundCategory = true;
-        }
-
-        else if (venue.category == "Dessert Shop" || venue.category == "Ice Cream Shop"){
-            icon = 'dessertIcon';
-            foundCategory = true;
-        }
-
-        else if (venue.category == "Burger Joint"){
-            icon = 'burgerIcon';
-            foundCategory = true;
-        }
-        else if (restaurantCategories.indexOf(venue.category) != -1 ){
-            icon = 'foodIcon';
-            foundCategory = true;
-        }
-        else {
-            icon = 'locationIcon';
-            foundCategory = true;
-        }
-
-        let venueIcon = L.icon({
-            iconUrl: '../assets/icons/' + icon + '.svg',
-            iconSize: [30,30]
-        });
-
-
-
-        let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
-        marker.venueid = venue.venueid
-
-        var popupContent = L.popup()
-                    .setLatLng(venue.latlng)
-                    .setContent('<h1>'+ venue.name +'</h1><p>Category: '+ venue.category +'</p>')
-                    .openOn(map);
-
-        marker.bindPopup(popupContent).openPopup();
-
-        // marker.on('click', function(){
-        //     var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
-
-        //     $.ajax({
-        //         url: venueUrl,
-        //         dataType: 'jsonp',
-        //         success: function(res){
-        //             console.log(res);
-        //             console.log(res.response.venue.categories["0"].name);
-        //         }
-        //     })
-        // });
-    })
-}
-
 
 function displayVenues(venues){
 
@@ -298,25 +267,31 @@ function displayVenues(venues){
         let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
         marker.venueid = venue.venueid
 
-        var popupContent = L.popup()
-                    .setLatLng(venue.latlng)
-                    .setContent('<h1>'+ venue.name +'</h1><p>Category: '+ venue.category +'</p>')
-                    .openOn(map);
+        marker.on('click', function(){
+            var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
 
-        marker.bindPopup(popupContent).openPopup();
+            $.ajax({
+                url: venueUrl,
+                dataType: 'jsonp',
+                success: function(res){
+                    console.log(res);
+                    console.log(res.response.venue.categories["0"].name);
 
-        // marker.on('click', function(){
-        //     var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
+                    var venuePhoto = res.response.venue.bestPhoto.prefix + '300x300' + res.response.venue.bestPhoto.suffix
 
-        //     $.ajax({
-        //         url: venueUrl,
-        //         dataType: 'jsonp',
-        //         success: function(res){
-        //             console.log(res);
-        //             console.log(res.response.venue.categories["0"].name);
-        //         }
-        //     })
-        // });
+                    var popupContent = L.popup()
+                        .setLatLng(venue.latlng)
+                        .setContent('<h1>'+ venue.name +'</h1>\
+                            <p>Category: '+ venue.category +'</p>\
+                            <img src="'+ venuePhoto +'">')
+                        .openOn(map);
+
+                        console.log(venuePhoto)
+
+                    marker.bindPopup(popupContent).openPopup();
+
+                }
+            })
+        });
     })
 }
-
