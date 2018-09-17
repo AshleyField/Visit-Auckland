@@ -2,8 +2,8 @@
 $(function() {
 
     const version = '?v=20170901';
-    const clientid = '&client_id=4F1HTFHT0W5MM1U3JMQYAZQUUVB05AVXKQ1LYBE4L5NEK1UA';
-    const clientSecret = '&client_secret=P5UEW1L41ZMQRMCVL0GX4SBSZN2LLWO5U0BT1SQC4ZRVPB3J';
+    const clientid = '&client_id=KAR4RSKFIVBU5BQIT2FPVIU0ME3LM0NJAQHT2DK4DJESTCMR';
+    const clientSecret = '&client_secret=KL4HQQ5LAPM5MBJSIWS0GDHXPD4VLKZWV3BJAWINUXK4ZXCF';
     const key = version + clientid + clientSecret;
 
     var iconFood = '../assets/images/lightbluepin.svg';
@@ -62,23 +62,37 @@ $(function() {
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
 
+    var foodGroup = L.layerGroup().addTo(map);
+    var shopGroup = L.layerGroup().addTo(map);
 
 
 
-
-    getVenues('food',iconFood);
+    getVenues('food',iconFood,foodGroup);
     // getVenues('drinks',iconDrinks);
-    // getVenues('shops',iconShop);
+    getVenues('shops',iconShop,shopGroup);
     // getVenues('sights',iconSight);
 
     getTrending();
 
 
+
+    // if already clicked and unclicked( remove layer from map)
+    $('.filter-icon.food').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(foodGroup)){
+            map.removeLayer(foodGroup)
+        }else{
+            map.addLayer(foodGroup)
+        }
+    })
+
+
+
     
 
-    function getVenues(section, icon) {
+    function getVenues(section, icon, layerGroup) {
 
-        // &limit=50 add this in after section+'if i want more markers
 
         var exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&section='+section+'&ll=-36.8446152873055,174.76662397384644';
 
@@ -119,7 +133,7 @@ $(function() {
 
                     });
                      
-                    let marker = L.marker(venue.latlng,{icon:foodIcon}).addTo(map);
+                    let marker = L.marker(venue.latlng,{icon:foodIcon}).addTo(layerGroup);
                     marker.venueid = venue.venueid;
 
                     marker.on('click',function(){
@@ -165,8 +179,19 @@ $(function() {
                                 var contact = venue.contact.phone;
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
-                                var hours = venue.hours.timeframes["0"].open["0"].renderedTime;
-                                var days = venue.hours.timeframes["0"].days;
+                                var price = venue.price.message;
+
+                                if(venue.hours){
+
+                                    var weekHours = venue.hours.timeframes["0"].open["0"].renderedTime;
+                                    var weekendHours = venue.hours.timeframes["1"].open["0"].renderedTime;
+                                    var weekDays = venue.hours.timeframes["0"].days; 
+                                    var weekendDays = venue.hours.timeframes["1"].days;   
+
+                                }else{
+                                    var hours = 'not available';
+                                }
+                                
                                 // var hours = venue.popular.isOpen ? venue.popular.isOpen : false ;
                                 var website = venue.url ? venue.url : false ;
 
@@ -175,8 +200,14 @@ $(function() {
                                     name:venue.name,
                                     address:address,
                                     website:website,
-                                    days:days,
+                                    weekDays:weekDays,
+                                    weekendDays:weekendDays,
+                                    weekHours:weekHours,
+                                    weekendHours:weekendHours,
+                                    price:price,
                                     hours:hours,
+                                    
+                                    
 
                                 });
                                 // console.log(output);
@@ -221,9 +252,12 @@ $(function() {
                         success:function(res){
                             
                             let output = popularTemplate(res.response.venue);
-                            console.log(res.response.venue);
-                            $('.grid-bla').append(output);
-                             $grid.isotope('layout');
+                            
+                            var gridItem = $(output);
+
+                            $grid.append(gridItem)
+                            .isotope('appended', gridItem);
+
                         }
                     });
 
@@ -238,7 +272,9 @@ $(function() {
 
         }); //ajax
 
-    }
+    }//get trending
+
+
 
 });
 

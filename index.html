@@ -118,10 +118,10 @@
 
 			<div class="filter">
 				<p>Filter:</p>
-				<a href=""><i class="fas fa-shopping-bag"></i></a>
-				<a href=""><i class="fas fa-utensils"></i></a>
-				<a href=""><i class="fas fa-cocktail"></i></a>
-				<a href=""><i class="fas fa-map-marked-alt"></i></a>
+				<a class="filter-icon shop" href=""><i class="fas fa-shopping-bag"></i></a>
+				<a class="filter-icon food" href=""><i class="fas fa-utensils"></i></a>
+				<a class="filter-icon shop" href=""><i class="fas fa-cocktail"></i></a>
+				<a class="filter-icon " href=""><i class="fas fa-map-marked-alt"></i></a>
 			</div>
 		</div><!-- end of map section -->
 		
@@ -297,12 +297,8 @@
 					{{#if website}}
 						<a href={{website}}>Website</a>
 					{{/if}}
-					<p>Hours: {{days}} {{hours}}</p>
-					<!-- {{#if hours}}
-					<p>Open Now</p>
-					{{else}}
-					<p>Closed</p>
-					{{/if}} -->
+					<p>Hours: {{hours}} {{weekDays}} {{weekHours}} {{weekendDays}} {{weekendHours}} </p>
+					<p>Price range: {{price}}</p>
 				</div>
 			</div>
 		</div>
