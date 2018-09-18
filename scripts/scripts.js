@@ -2,7 +2,7 @@ var venueArray = [];
 // var filteredArray = [];
 var map;
 var markerLayer;
-var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant"]
+var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"]
 
 //Initiate leaflet key
 
@@ -11,7 +11,12 @@ var clientid = '&client_id=1C3ZIZUJZDFCWZPWN1NS4F3RUBALGDNH5HUFLVSNKISZOABA';
 var clientSecret = '&client_secret=11SXOUY3WXTWN1HJJ00NIU22UCV2WRLW33DOLZWUNQVKLIHK';
 var key = version + clientid + clientSecret;
 
+var popupHTML = $('#templatePopup').text();
+var popupTemplate = Template7(popupHTML).compile();
+
 $(function() {
+
+    
 
     // Open and close nav on mobile
 
@@ -185,7 +190,7 @@ function displayFilteredVenue(filter){
         }
 
         else if (filter == "Bars"){
-            return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery')
+            return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery') || (venue.category == "Bar")
         }
 
         else {
@@ -229,7 +234,7 @@ function displayVenues(venues){
             foundCategory = true;
         }
 
-        else if (venue.category == "Cocktail Bar" || venue.category == "Brewery"){
+        else if (venue.category == "Cocktail Bar" || venue.category == "Brewery" || venue.category == "Bar"){
             icon = 'barIcon';
             foundCategory = true;
         }
@@ -277,16 +282,16 @@ function displayVenues(venues){
                     console.log(res);
                     console.log(res.response.venue.categories["0"].name);
 
-                    var venuePhoto = res.response.venue.bestPhoto.prefix + '300x300' + res.response.venue.bestPhoto.suffix
+                    var venuePhoto = res.response.venue.bestPhoto.prefix + '200x200' + res.response.venue.bestPhoto.suffix
+
+                    var data = {venuePhoto:venuePhoto,res:res};
+                    console.log(data);
+                    var output = popupTemplate(data)
 
                     var popupContent = L.popup()
                         .setLatLng(venue.latlng)
-                        .setContent('<h1>'+ venue.name +'</h1>\
-                            <p>Category: '+ venue.category +'</p>\
-                            <img src="'+ venuePhoto +'">')
+                        .setContent(output)
                         .openOn(map);
-
-                        console.log(venuePhoto)
 
                     marker.bindPopup(popupContent).openPopup();
 
