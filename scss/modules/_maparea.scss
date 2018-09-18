@@ -22,8 +22,8 @@
 .filter{
 
 	top: 90vh;
-	width: 370px;
-	height: 35px;
+	height: 40px;
+	width: 90vw;
 	font-size: 20px;
 	background-color: white;
 	position: absolute;
@@ -32,6 +32,8 @@
 	box-shadow: 3px 5px 10px #888888;
 	font-family: $oswaldFont;
 	display: flex;
+	border: black solid 2px;
+
 
 		&>p{
 			padding-top: 2px;
@@ -43,9 +45,42 @@
 			margin: 2px 0 0 45px; 
 		}
 
+		.shop{
+			color:$pink;
+		}
+
+		.food{
+			color:$lightBlue;
+		}
+
+		.sites{
+			color:$purple;
+		}
+
+		.drinks{
+			color:$darkBlue;
+		}
+
 
 }
 
+@media only screen and (min-width : 40em) {
+
+
+	.filter{
+		width: 370px;
+		background-color: white;
+		color: black;
+		left: 5vh;
+
+			&>a{
+				color: #fff;
+			}
+
+	}
+
+
+}
 
 
 /*for tablet - inclusive*/
@@ -59,8 +94,9 @@
 
 
 	.filter{
-		background-color: $lightBlue;
-		color: #fff;
+		width: 370px;
+		background-color: white;
+		color: black;
 		left: 5vh;
 
 			&>a{

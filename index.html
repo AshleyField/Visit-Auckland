@@ -287,7 +287,7 @@
 			<div class="modal-content">
 				<div class="modal-header venue-image" style="background-image:url({{photo}})">
 					<!-- <img class="venue-image" src="{{photo}}" alt=""> -->
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -334,6 +334,9 @@
 	<script src="scripts/template7.js"></script>
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
 	<script src="scripts/scripts.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDknEtmtQzCjjFGOAJiHVFKcBegAsUBUKc&callback=initMap"
+    async defer></script>
 
 </body>
 </html>

@@ -1,9 +1,10 @@
+var directionsService;
 
 $(function() {
 
     const version = '?v=20170901';
-    const clientid = '&client_id=KAR4RSKFIVBU5BQIT2FPVIU0ME3LM0NJAQHT2DK4DJESTCMR';
-    const clientSecret = '&client_secret=KL4HQQ5LAPM5MBJSIWS0GDHXPD4VLKZWV3BJAWINUXK4ZXCF';
+    const clientid = '&client_id=BHCL2XERKRSHS5S3ARKRQWSABLVY5CV1QWDMO1AFH4VD1RMB';
+    const clientSecret = '&client_secret=CSLZMEEVTKG3LYIBYE1QPJCZMOGXUYWXNRLLLCB5TGXZFPIL';
     const key = version + clientid + clientSecret;
 
     var iconFood = '../assets/images/lightbluepin.svg';
@@ -16,33 +17,9 @@ $(function() {
     let map;
     let center = [-36.8446152873055,174.76662397384644];
 
-
+    //start of directions
     let userLatitude = 0;
     let userLongitude = 0;
-
-
-    if (navigator.geolocation) {
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-            userLatitude  = position.coords.latitude;
-            userLongitude = position.coords.longitude;
-
-            // Add marker to the map
-            console.log(userLongitude,userLatitude);
-
-            let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
-
-            let marker = L.marker({lat:userLatitude,lng:userLongitude},{icon:icon}).addTo(map);
-
-
-        });
-
-    } 
-    else { 
-        console.log('cannot access location');
-    }
-    
-
 
 
 
@@ -67,7 +44,7 @@ $(function() {
                 .addClass('fas fa-bars');
 
         }
-    });
+    }); 
 
 
     
@@ -79,34 +56,41 @@ $(function() {
     // masonry grid for popular section
     var $grid = $('.grid-bla').isotope({
 	  
-	  itemSelector: '.grid-item-bla',
-	  percentPosition: true,
-	  masonry: {
+	   itemSelector: '.grid-item-bla',
+	   percentPosition: true,
+	   masonry: {
 	    //column width set in CSS
 	    columnWidth: '.grid-sizer-bla'
 
-	  }
+	   }
 	});
 
-
+    //leaflet - mapbox
     map = L.map('map',{scrollWheelZoom:false}).setView(center,17);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
 
+    //filter layers
     var foodGroup = L.layerGroup().addTo(map);
     var shopGroup = L.layerGroup().addTo(map);
+    var drinksGroup = L.layerGroup().addTo(map);
+    var sitesGroup = L.layerGroup().addTo(map);
 
 
 
-    getVenues('food',iconFood,foodGroup);
-    // getVenues('drinks',iconDrinks);
+    var directionGroup = L.layerGroup().addTo(map);
+
+
+
+    // getVenues('food',iconFood,foodGroup);
+    // getVenues('drinks',iconDrinks, drinksGroup);
     getVenues('shops',iconShop,shopGroup);
-    // getVenues('sights',iconSight);
+    getVenues('sights',iconSight, sitesGroup);
 
     getTrending();
 
 
-
+    //filter
     // if already clicked and unclicked( remove layer from map)
     $('.filter-icon.food').on('click',function(e){
         e.preventDefault();
@@ -118,10 +102,38 @@ $(function() {
         }
     })
 
+    $('.filter-icon.shop').on('click',function(e){
+        e.preventDefault();
 
+        if(map.hasLayer(shopGroup)){
+            map.removeLayer(shopGroup)
+        }else{
+            map.addLayer(shopGroup)
+        }
+    })
+
+    $('.filter-icon.drinks').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(drinksGroup)){
+            map.removeLayer(drinksGroup)
+        }else{
+            map.addLayer(drinksGroup)
+        }
+    })
+
+    $('.filter-icon.sites').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(sitesGroup)){
+            map.removeLayer(sitesGroup)
+        }else{
+            map.addLayer(sitesGroup)
+        }
+    })
 
     
-
+    //function to get venues on map
     function getVenues(section, icon, layerGroup) {
 
 
@@ -168,6 +180,8 @@ $(function() {
                     marker.venueid = venue.venueid;
 
                     marker.on('click',function(){
+
+                        var currentMarker = this;
                         let venueUrl = 'https://api.foursquare.com/v2/venues/'+this.venueid+key;
                         var website = '';
 
@@ -195,7 +209,7 @@ $(function() {
                                 //     alert('Message from FourSquare : ' + res.meta.errorDetail);
                                 //     return;
                                 // }
-                                // console.log(res);
+                                console.log(res);
 
                                 let markerHTML     = $('#templateMarker').text();
                                 let markerTemplate = Template7(markerHTML).compile();
@@ -206,11 +220,24 @@ $(function() {
 
                                 $('.modal-title').text(venue.name);
                                 var photo = venue.bestPhoto; //find where to go from dom inspection
-                                var source = photo.prefix+'300x300'+photo.suffix;
+
+                                if(photo){
+                                    var source = photo.prefix+'300x300'+photo.suffix;
+
+                                }else{
+                                    var source= '';
+                                }
+
                                 var contact = venue.contact.phone;
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
-                                var price = venue.price.message;
+
+                                if(venue.price){
+                                    var price = venue.price.message;  
+                                }else{
+                                    var price = 'not available';
+                                }
+                                
 
                                 if(venue.hours){
 
@@ -247,12 +274,62 @@ $(function() {
                                 $('.marker-container').append(output);
 
                                 $('#venueModal').modal('show');
-                            }
-                        });
+
+                                $('.directions').click(function(){
+                                    
+
+                                    //get directions
+
+                                    //getting uses position
+                                    if (navigator.geolocation) {
+
+                                        navigator.geolocation.getCurrentPosition(function(position) {
+                                            userLatitude  = position.coords.latitude;
+                                            userLongitude = position.coords.longitude;
+
+                                            // Add marker to the map
+                                            // console.log(userLongitude,userLatitude);
+
+                                            let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
+
+                                            var currentPosition = {lat:userLatitude,lng:userLongitude};
+                                            let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
 
 
-                    });
-                });
+                                             //create a request for directions
+                                            var request = {
+                                                    origin: currentPosition,
+                                                    destination: currentMarker.getLatLng(),
+                                                    travelMode: 'WALKING'
+                                                };
+                                            //ask directionsService to fulfill your request
+                                            directionsService.route(request,function(response,status){
+                                                if(status == 'OK'){
+                                                    var overview_path = response.routes["0"].overview_path;
+                                                    //display direction
+                                                    var path = _(overview_path).map(function(point){
+                                                        return {lat:point.lat(),lng:point.lng()}
+                                                    });
+                                                    var polyline = L.polyline(path, {color: 'red'});
+
+                                                    directionGroup.clearLayers();
+                                                    polyline.addTo(directionGroup);
+                                                   
+
+                                                }
+                                            });
+
+                                        });
+
+                                    } 
+                                    else { 
+                                        console.log('cannot access location');
+                                    }
+                                });//button on click
+                            }//success
+                        });//ajax   
+                    });//marker on click
+                });//venues loop
             
             } // success
 
@@ -260,6 +337,7 @@ $(function() {
 
     } //getVenues
 
+    //function to populate popular section
     function getTrending(){
 
         let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
@@ -289,11 +367,27 @@ $(function() {
                             $grid.append(gridItem)
                             .isotope('appended', gridItem);
 
-                        }
-                    });
+
+                            $('.fa-star').on('click', function(e) {
+
+                                if($(this).hasClass('liked')){
+                                    $(this).removeClass('liked');
+                                }else{
+                                  $(this).addClass('liked');  
+                                }
+  
+
+                            }); 
+
+                        }//success
 
 
-                });
+                    });//ajax
+
+
+                });//loop
+
+
 
                 
 
@@ -307,9 +401,16 @@ $(function() {
 
 
 
-});
+}); //ready function
 
- 
+function initMap(){
+
+
+    //get directions
+    //create directionsService
+    directionsService = new google.maps.DirectionsService;
+    
+}
 
 
 
