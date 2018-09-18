@@ -54,6 +54,10 @@ footer {
 	&:last-child {
 		border: none;
 	}
+
+	h1{
+		font-size:1em;
+	}
 }
 
 .footer-links {
@@ -181,8 +185,10 @@ footer {
 
 		.footer-page-links {
 			text-align: left;
-			font-family: $primaryFont;
+			// font-family: $primaryFont;
 			line-height: $bodyLineHeight;
+			font-size:0.8em;
+			font-family: "Roboto", sans-serif;
 		}
 	}
 
@@ -197,8 +203,10 @@ footer {
 		}
 
 		p{
-			font-family: $primaryFont;
+			// font-family: $primaryFont;
 			line-height: $bodyLineHeight;
+			font-size:0.8em;
+			font-family: "Roboto", sans-serif;
 
 
 		}
@@ -214,12 +222,14 @@ footer {
 		h2 {
 			font-family: $primaryFont;
 			line-height: $bodyLineHeight;
+			font-size:0.8em;
 			
 		}
 
 		.signupbox {
 			margin: 1em 0;
 			width: 100%;
+			font-size:0.8em;
 		}
 	}
 

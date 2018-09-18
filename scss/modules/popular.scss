@@ -27,7 +27,8 @@
 		}
 
 		p{
-			width:50%;
+			// width:50%;
+			max-width:30em;
 			font-style:italic;
 			padding-top: 0.5em;
 		}	
@@ -171,6 +172,10 @@
 
     	#pop-content{
 
+    		p{
+    			max-width:30em;
+    		}
+
     		.flex-box{
 
 				flex-wrap:wrap;
@@ -186,6 +191,7 @@
 
 			p{
 				padding: 1em 0 1em 0;
+				max-width:30em;
 
 			}
 
@@ -207,6 +213,7 @@
 
 		.popular-filter{
 			padding-top: 3em;
+			max-width:30em;
 
 
 			h5{

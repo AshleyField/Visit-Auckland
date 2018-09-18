@@ -32,34 +32,128 @@ $(function() {
         e.preventDefault();
     });
 
-    //masonry grid for popular section
-
+    // masonry grid for popular section
     var $grid = $('.grid-bla').isotope({
-	  
-	  itemSelector: '.grid-item-bla',
-	  percentPosition: true,
-	  masonry: {
-	    //column width set in CSS
-	    columnWidth: '.grid-sizer-bla'
+      
+      itemSelector: '.grid-item-bla',
+      percentPosition: true,
+      masonry: {
+        //column width set in CSS
+        columnWidth: '.grid-sizer-bla'
 
-	  }
-	});
+      }
+    });
+
+    $(function() {
+    
+    getTrending();
+    let userLatitude = 0;
+    let userLongitude = 0;
+
+    function getTrending(){
+
+            let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
+            console.log(exploreUrl);
+            $.ajax({
+                url:exploreUrl,
+                dataType:'jsonp',
+                success:function(res){
+
+                    console.log(res);
+
+                    let popularHTML = $('#templatePopular').text();
+                    let popularTemplate = Template7(popularHTML).compile();
+
+                    _(res.response.groups["0"].items).each(function(item){
+
+                        let venueid = item.venue.id;
+                        let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+                        $.ajax({
+                            url: venueUrl,
+                            success:function(res){
+                                
+                                let output = popularTemplate(res.response.venue);
+                                
+                                var gridItem = $(output);
+
+                                $grid.append(gridItem)
+                                .isotope('appended', gridItem);
+
+                            }
+                        });
+
+
+                    });
+
+                }
+            });
+        }
+    });
+
+    $("button").click(function(){
+                                    
+
+        //get directions
+
+        //getting users position
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                userLatitude  = position.coords.latitude;
+                userLongitude = position.coords.longitude;
+
+                // Add marker to the map
+                console.log(userLongitude,userLatitude);
+
+                let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
+
+                var currentPosition = {lat:userLatitude,lng:userLongitude};
+                let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
+
+
+                 //create a request for directions
+                 var request = {
+                    origin: currentPosition,
+                    destination: currentMarker.getLatLng(),
+                    travelMode: 'WALKING'
+                };
+                //ask directionsService to fulfill your request
+                directionsService.route(request,function(response,status){
+                    if(status == 'OK'){
+                        var overview_path = response.routes["0"].overview_path;
+                        //display direction
+                        var path = _(overview_path).map(function(point){
+                            return {lat:point.lat(),lng:point.lng()}
+                        });
+                        var polyline = L.polyline(path, {color: 'red'});
+                        map.addLayer(polyline);
+
+
+                            // if(map.hasLayer(polyline)){
+                            //     polyline.redraw();
+                            // }
+
+                        // .addTo(map);
+
+                    }
+                });
+
+            });
+
+        } 
+        else { 
+            console.log('cannot access location');
+        }
+    });//button on click
 });
 
-    // mapboxgl.accessToken = 'pk.eyJ1IjoicmFqaXYwNSIsImEiOiJjamtrZXpnMmg2NWZiM3JtbG4zNXF0cnZwIn0.hcHWauYXniub3gkiDYWFQw';
-    // const map = new mapboxgl.Map({
-    //     container: 'map',
-    //     style: 'mapbox://styles/rajiv05/cjlwzccyb42l82sqrsva48olw',
-    //     center: [174.767164, -36.851146],
-    //     zoom: 15.3
-    // });
 
 
 //Raj START Map Trial --------------------------------------------------------------
 
 const version = '?v=20170901';
-const clientid = '&client_id=YWZH5MR1ENQY5XKG1P4A4Q1AW0UJYGHBRLOG330IH35RO0C5';
-const clientSecret = '&client_secret=PUFZ2EQERAZJJ5HWDLCTGFUAAKKCCXRCQTFO3MFMSZZJ5435';
+const clientid = '&client_id=DAEVITOO0LDVKWQHKHHISOA4ZU31N2R4VVIALPEJSU2IEYRB';
+const clientSecret = '&client_secret=OBJ1ZRWZOIYNHHVMSLVQYNXEXWHNAVI4W2DYIQ3PL2B32EF5';
 const key = version + clientid + clientSecret;
 
 var food = '4d4b7105d754a06374d81259'
@@ -67,14 +161,20 @@ var drinks = '4bf58dd8d48988d11a941735'
 var hotels = '4bf58dd8d48988d1fa931735'
 var landmarks = '4c38df4de52ce0d596b336e1'
 
+
+
 let map;
 
-//-36.844720,174.766553
 $(function(){
 
     let center = [-36.8446152873055,174.76662397384644];
     map = L.map('map').setView(center,17);
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
+
+    var foodGroup = L.layerGroup().addTo(map);
+    var drinksGroup = L.layerGroup().addTo(map);
+    var hotelsGroup = L.layerGroup().addTo(map);
+    var landmarksGroup = L.layerGroup().addTo(map);
 
     //vicinity circle
     L.circle(center, {
@@ -91,25 +191,58 @@ $(function(){
     // this.map.on('click', () => { this.map.scrollWheelZoom.enable();});
     // this.map.on('mouseout', () => { this.map.scrollWheelZoom.disable();});
 
-    getVenues('-36.844720,174.766553',food,'scripts/food.svg');
-    getVenues('-36.844720,174.766553',drinks,'scripts/drinks.svg');
-    getVenues('-36.844720,174.766553',hotels,'scripts/hotels.svg');
-    getVenues('-36.844720,174.766553',landmarks,'scripts/attractions.svg');
+    getVenues('-36.844720,174.766553',food,'scripts/plus-food.svg',foodGroup);
+    getVenues('-36.844720,174.766553',drinks,'scripts/plus-drinks.svg',drinksGroup);
+    getVenues('-36.844720,174.766553',hotels,'scripts/plus-hotels.svg',hotelsGroup);
+    getVenues('-36.844720,174.766553',landmarks,'scripts/plus-landmarks.svg',landmarksGroup);
 
-    // var baseLayers = {};
-    // var overLayers = {
-    //     'venue': venueUrl
-    //     // 'Bus Stops' : busStopGroup,
-    //     // 'other' : 
-    // };
-    // L.control.layers(baseLayers,overLayers).addTo(map);
+    $('.filter-icon.food').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(foodGroup)){
+            map.removeLayer(foodGroup)
+        }else{
+            map.addLayer(foodGroup)
+        }
+    });
+
+    $('.filter-icon.drinks').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(drinksGroup)){
+            map.removeLayer(drinksGroup)
+        }else{
+            map.addLayer(drinksGroup)
+        }
+    });
+
+    $('.filter-icon.hotels').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(hotelsGroup)){
+            map.removeLayer(hotelsGroup)
+        }else{
+            map.addLayer(hotelsGroup)
+        }
+    });
+
+    $('.filter-icon.landmarks').on('click',function(e){
+        e.preventDefault();
+
+        if(map.hasLayer(landmarksGroup)){
+            map.removeLayer(landmarksGroup)
+        }else{
+            map.addLayer(landmarksGroup)
+        }
+    });
+
 
 
 });
 
 //Raj END Map Trial --------------------------------------------------------------
 
-function getVenues(ll,section,icon){
+function getVenues(ll,section,icon,layerGroup){
 
     //Explore venues -- foursquare api
 
@@ -141,9 +274,9 @@ function getVenues(ll,section,icon){
             _(venues).each(function(venue){
                 let venueIcon = L.icon({
                     iconUrl:icon,
-                    iconSize:[50,50]
+                    iconSize:[30,30]
                 })
-                let marker = L.marker(venue.latlng,{icon:venueIcon}).addTo(map);
+                let marker = L.marker(venue.latlng,{icon:venueIcon}).addTo(layerGroup);
 
                 marker.venueid = venue.venueid;
             
@@ -168,6 +301,8 @@ function getVenues(ll,section,icon){
 
                             }
                             
+                            // $('.modal-footer>.btn-primary').empty();
+                            // $(+url+).appendTo('.modal-footer>.btn-primary');
 
                             $('.modal-body>.left').empty();
                             $('<img src="'+source+'">').appendTo('.modal-body>.left');
@@ -199,6 +334,10 @@ function getVenues(ll,section,icon){
     });
 
 }
+
+
+
+
 
 
 

@@ -50,17 +50,19 @@
 
 				.address-heading{
 					margin-bottom:0em;
+					font-weight:bold;
 				}
 
 				.hours-heading{
 					margin-bottom:0em;
+					font-weight:bold;
 				}
 
 				p{
 					width:100%;
 					color:black;
 					font-family: $secondaryFont;
-					font-size:0.9em;
+					font-size:0.8em;
 					padding-left: 2em;
 					padding-right: 1em;
 					// border:1px red solid;
@@ -213,6 +215,22 @@
 			color: black;
 			// margin: 2px 0 0 45px; 
 			margin:auto;
+
+			.fa-utensils:hover{
+				color:$red-icon;
+			}
+
+			.fa-cocktail:hover{
+				color:$blue-icon;
+			}
+
+			.fa-hotel:hover{
+				color:$green-icon;
+			}
+
+			.fa-monument:hover{
+				color:$orange-icon;
+			}
 		}
 
 	}

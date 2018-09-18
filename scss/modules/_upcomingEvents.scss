@@ -16,16 +16,18 @@
 
 	.heading{
 		// border: 1px red solid;
-		font-family: $oswaldFont;
-		font-size: 1.5em;
+		// font-family: $oswaldFont;
+		// font-size: 1.5em;
 		width:100%;
 				
 		h1{
-			border-bottom: 3px $lightBlue solid;
+			font-family: $oswaldFont;
+			font-size:$mobileDisplayFontSize;
+			letter-spacing:$displayLetterSpacing;
+			text-transform:$displayTexttransform;
+			border-bottom: $lightBlue solid 3px;
+			padding-bottom: 5px;
 			display: inline-block;
-			line-height:1em;
-			letter-spacing: 0.1em;
-			padding-bottom:0.2em;
 		}
 
 	}
@@ -34,7 +36,7 @@
 
 	.info{
 		// border: 1px red solid;
-		font-size: 0.6em;
+		font-size: 1em;
 		padding-top:1em;
 		padding-bottom:2em;
 		width:80%;
@@ -140,7 +142,7 @@
 	
 		.events{
 			
-			flex: 1 0 50%;
+			flex: 1 0 40%;
 			padding:1em;
 
 		}
@@ -155,14 +157,23 @@
 
 	.heading{
 		height:0em;
+
+		.info{
+			// margin-bottom:0em;
+			// padding-bottom:0em;
+		}
 	}
 
 	.upcoming-events{
 	
 		.events{
 			
-			flex: 1 0 10%;
+			flex: 1 0 20%;
 			padding:1em;
+			margin-top:0em;
+			padding-top:0em;
+			margin-bottom:0em;
+			padding-bottom:0em;
 
 		}
 	}

@@ -22,23 +22,26 @@
 	}
 
 	.hero {
+		background-color:rgba(1, 1, 1, .2);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 90%;
+		width: 80%;
 		transform: translate(-50%,-50%);
 		z-index: 5;
 
 	}
 
 	.hero-inner {
-		margin: 1em;
+		margin: 8em;
 		color: #fff;
 
 		h1 {
+			width:100%;
+			margin:auto;
 			font-size: 2em;
 			letter-spacing: $displayLetterSpacing;
 			text-transform: uppercase;
@@ -95,7 +98,7 @@
 			}
 
 			h2 {
-				font-size: 2em;
+				font-size: 1.8em;
 			}
 
 			.hero-button {
@@ -114,5 +117,13 @@
 
 	.header {
 		background-image: url('../../assets/images/hero-image-desktop.jpeg');
+
+		.hero-inner{
+			h1{
+				width:90%;
+				margin:auto;
+				margin-bottom:1em;
+			}
+		}
 	}
 }
