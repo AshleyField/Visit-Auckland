@@ -7,12 +7,14 @@ var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaur
 //Initiate leaflet key
 
 var version = '?v=20170901';
-var clientid = '&client_id=1C3ZIZUJZDFCWZPWN1NS4F3RUBALGDNH5HUFLVSNKISZOABA';
-var clientSecret = '&client_secret=11SXOUY3WXTWN1HJJ00NIU22UCV2WRLW33DOLZWUNQVKLIHK';
+var clientid = '&client_id=Z0EWYLFS1P5YZ4FUTPBQGOW0N3OF1IAZZDHUIVUEVM4DYWPF';
+var clientSecret = '&client_secret=ODTZJEZYUJU4SYIUHCKQ2CBH4VWU4GXHX51ASTA0GJL2EE5L';
 var key = version + clientid + clientSecret;
 
 var popupHTML = $('#templatePopup').text();
 var popupTemplate = Template7(popupHTML).compile();
+
+var directionsService
 
 $(function() {
 
@@ -70,13 +72,14 @@ $(function() {
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYXNoZXlmaWVsZCIsImEiOiJjamtrZXlvNnMwZTg3M3FwYzAxbGNqYTA4In0.AyMC7APOvh72_Q2evO5VTQ').addTo(map);
 
     markerLayer = new L.LayerGroup().addTo(map);
+    directionGroup = new L.LayerGroup().addTo(map);
     //Initalise foursquare
 
     let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644'
 
     if(venueArray.length == 0){
 
-        console.log("Ajax request initiated")
+        console.log("Called initial Ajax request")
 
         $.ajax({
             url: exploreUrl,
@@ -170,6 +173,13 @@ $(function() {
         }
     });
 
+    $('.map-area').on('click', '.get-directions', function(){
+        var lat = $(this).data('lat');
+        var lng = $(this).data('lng');
+
+        getDirections(lat,lng)
+    });
+
 });
 
 function displayFilteredVenue(filter){
@@ -206,7 +216,7 @@ function displayFilteredVenue(filter){
 
 function displayVenues(venues){
 
-    console.log('Display Venues Called')
+    console.log('Called Display Venues')
 
     var icon = '';
 
@@ -279,13 +289,12 @@ function displayVenues(venues){
                 url: venueUrl,
                 dataType: 'jsonp',
                 success: function(res){
-                    console.log(res);
-                    console.log(res.response.venue.categories["0"].name);
+
+                    console.log(res)
 
                     var venuePhoto = res.response.venue.bestPhoto.prefix + '200x200' + res.response.venue.bestPhoto.suffix
 
                     var data = {venuePhoto:venuePhoto,res:res};
-                    console.log(data);
                     var output = popupTemplate(data)
 
                     var popupContent = L.popup()
@@ -299,4 +308,56 @@ function displayVenues(venues){
             })
         });
     })
+}
+
+function initMap(){
+    directionsService = new google.maps.DirectionsService;
+    //create a request for directions
+}
+
+function getDirections(lat,lng){
+
+    directionGroup.clearLayers();
+
+    var polyline
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+            userLatitude  = position.coords.latitude;
+            userLongitude = position.coords.longitude;
+
+            // Add user marker to the map
+
+            let icon = L.icon({iconUrl:'../assets/icons/youIcon.svg', iconSize:[30,30]});
+
+            var currentPosition = {lat:userLatitude,lng:userLongitude};
+            let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
+
+            var request = {
+              origin: currentPosition,
+              destination: {lat: lat, lng: lng},
+              travelMode: 'DRIVING'
+            };
+
+            //ask directionsService to fulfill your request
+            directionsService.route(request,function(response,status){
+
+                var path = response.routes["0"].overview_path;
+
+                var polyline = _(path).map(function(item){
+                    return {lat:item.lat(),lng:item.lng()};
+                });
+
+                L.polyline(polyline,{
+                    color:'tomato',
+                    weight:5
+                }).addTo(directionGroup);
+            });
+        });
+    }
+
+    else { 
+        console.log('cannot access location');
+    }
 }

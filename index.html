@@ -313,6 +313,12 @@
     		{{#if res.response.venue.url}}
     		<a href="{{res.response.venue.url}}">{{res.response.venue.url}}</a>
     		{{/if}}
+    		{{#if res.response.venue.contact.formattedPhone}}
+    		<a href="{{res.response.venue.contact.formattedPhone}}">{{res.response.venue.contact.formattedPhone}}</a>
+    		{{/if}}
+    		{{#if res.response.venue.hours.timeframes["0"]}}
+    		<p>{{res.response.venue.hours.timeframes["0"].days}} - {{res.response.venue.hours.timeframes["0"].open["0"].renderedTime}}</p>
+    		{{/if}}
     		<p class="get-directions" data-lat="{{res.response.venue.location.lat}}" data-lng="{{res.response.venue.location.lng}}">Get Directions to here</p>
     	</div>
 	</script>
@@ -347,6 +353,10 @@
 	<!-- Mapbox API -->
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
 	<script src="scripts/scripts.js"></script>
+	
+	<!-- Maps API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDknEtmtQzCjjFGOAJiHVFKcBegAsUBUKc&callback=initMap"
+    async defer></script>
 
 </body>
 </html>
