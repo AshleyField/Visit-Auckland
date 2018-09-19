@@ -3,8 +3,8 @@ var directionsService;
 $(function() {
 
     const version = '?v=20170901';
-    const clientid = '&client_id=BHCL2XERKRSHS5S3ARKRQWSABLVY5CV1QWDMO1AFH4VD1RMB';
-    const clientSecret = '&client_secret=CSLZMEEVTKG3LYIBYE1QPJCZMOGXUYWXNRLLLCB5TGXZFPIL';
+    const clientid = '&client_id=JSZDZLN4YU3VJOWPDOGG3AOCDII1OWE4OR5UX5JSCNMKOL5S';
+    const clientSecret = '&client_secret=4X2QQRK2PX1YZDSKJYYQFU1Y11GUNGRZUX0MJJZNYQQNLVZL';
     const key = version + clientid + clientSecret;
 
     var iconFood = '../assets/images/lightbluepin.svg';
@@ -89,6 +89,23 @@ $(function() {
 
     getTrending();
 
+    //this is called event delegation below. When the star is not loaded in time we can set the onclick event
+    //on the grid (as its always there) then the grid watches out for when the star is clicked on. This code wouldnt work in the trending function
+    //beacuse it was applying the code every time a grid item loaded - each item would have a different number of click events running at the same time, 
+    //so it would work on even numbers but not odd because it finihsed on removing the class. 
+    $('.grid-bla').on('click','.fa-star',function() {
+        
+        $(this).toggleClass('liked');
+
+    }); 
+
+    $('.grid-bla').on('click','[data-for]',function() {
+        var venueClass = $(this).data('for');
+        $('.new-info').hide();
+        $('.'+venueClass).show();
+        
+    }); // onclick button
+
 
     //filter
     // if already clicked and unclicked( remove layer from map)
@@ -145,7 +162,7 @@ $(function() {
             success:function(res){
                 var data = res.response.groups["0"].items;
 
-                // console.log(data);
+                console.log(res);
 
                 //  map data to a simpler venues format
 
@@ -340,6 +357,8 @@ $(function() {
     //function to populate popular section
     function getTrending(){
 
+        
+
         let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
         console.log(exploreUrl);
         $.ajax({
@@ -347,10 +366,13 @@ $(function() {
             dataType:'jsonp',
             success:function(res){
 
-                console.log(res);
+                // console.log(res);
 
                 let popularHTML = $('#templatePopular').text();
                 let popularTemplate = Template7(popularHTML).compile();
+
+                let infoHTML = $('#templateInfo').text();
+                let infoTemplate = Template7(infoHTML).compile();
 
                 _(res.response.groups["0"].items).each(function(item){
 
@@ -360,6 +382,7 @@ $(function() {
                         url: venueUrl,
                         success:function(res){
                             
+                            console.log(res);
                             let output = popularTemplate(res.response.venue);
                             
                             var gridItem = $(output);
@@ -367,17 +390,10 @@ $(function() {
                             $grid.append(gridItem)
                             .isotope('appended', gridItem);
 
-
-                            $('.fa-star').on('click', function(e) {
-
-                                if($(this).hasClass('liked')){
-                                    $(this).removeClass('liked');
-                                }else{
-                                  $(this).addClass('liked');  
-                                }
-  
-
-                            }); 
+                            let outputInfo = infoTemplate(res.response.venue);
+                                
+                            var templateInfo= $(outputInfo);
+                            $('.new-info-container').append(templateInfo);
 
                         }//success
 
@@ -386,16 +402,112 @@ $(function() {
 
 
                 });//loop
-
-
-
-                
-
    
             
             } // success
 
         }); //ajax
+
+        // $('.grid-bla').on('click','.fa-plus',function() {
+
+        //     $.ajax({
+        //         url:exploreUrl,
+        //         dataType:'jsonp',
+        //         success:function(res){
+
+        //             // console.log(res);
+
+        //             let infoHTML = $('#templateInfo').text();
+        //             let infoTemplate = Template7(infoHTML).compile();
+
+        //             _(res.response.groups["0"].items).each(function(item){
+
+        //                 let venueid = item.venue.id;
+        //                 let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+        //                 $.ajax({
+        //                     url: venueUrl,
+        //                     dataType:'jsonp',
+        //                     success:function(res){
+
+        //                         var venue = res.response.venue;
+
+
+        //                         $('.info-name').text(venue.name);
+        //                         // var photo = venue.bestPhoto; 
+
+        //                         // if(photo){
+        //                         //     var source = photo.prefix+'300x300'+photo.suffix;
+
+        //                         // }else{
+        //                         //     var source= '';
+        //                         // }
+
+        //                         var contact = venue.contact.phone;
+        //                         var address = venue.location.address;
+        //                         var category = venue.categories.name;
+
+        //                         if(venue.price){
+        //                             var price = venue.price.message;  
+        //                         }else{
+        //                             var price = 'not available';
+        //                         }
+                                
+
+        //                         if(venue.hours){
+
+        //                             var weekHours = venue.hours.timeframes["0"].open["0"].renderedTime;
+        //                             var weekendHours = venue.hours.timeframes["1"].open["0"].renderedTime;
+        //                             var weekDays = venue.hours.timeframes["0"].days; 
+        //                             var weekendDays = venue.hours.timeframes["1"].days;   
+
+        //                         }else{
+        //                             var hours = 'not available';
+        //                         }
+                                
+        //                         // var hours = venue.popular.isOpen ? venue.popular.isOpen : false ;
+        //                         var website = venue.url ? venue.url : false ;
+
+        //                         var output = infoTemplate({
+        //                             // photo: source,
+        //                             name:venue.name,
+        //                             address:address,
+        //                             website:website,
+        //                             weekDays:weekDays,
+        //                             weekendDays:weekendDays,
+        //                             weekHours:weekHours,
+        //                             weekendHours:weekendHours,
+        //                             price:price,
+        //                             hours:hours,
+                                    
+                                    
+
+        //                         });
+        //                         // console.log(output);
+
+        //                         $('.new-info').empty();
+        //                         $('.new-info').append(output);
+
+        //                         // $('#venueModal').modal('show');
+
+                                
+        //                         // console.log(res);
+        //                         // let output = infoTemplate(res.response.venue);
+                                
+        //                         // var templateInfo= $(output);
+
+        //                     }//success
+
+
+        //                 });//ajax
+
+
+        //             });//loop
+       
+                
+        //         } // success
+
+        //     }); //ajax
+        // });    
 
     }//get trending
 

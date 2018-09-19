@@ -3,7 +3,7 @@
 
 			margin: 20vh auto;
 			width:230px;
-			outline: $darkBlue solid 2px;
+			outline: $darkBlue solid 3px;
 			
 
 			.modal-content{
@@ -13,6 +13,10 @@
 
 				.modal-body{
 					overflow-wrap:break-word;
+
+					.link{
+					margin-bottom: 3em;
+					}
 				}
 			}
 

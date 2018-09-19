@@ -3,6 +3,10 @@
 
 .popular{
 
+	.new-info{
+		display:none;
+	}
+
 	padding:1em 0 1em 0;
 
 
@@ -15,11 +19,20 @@
 	}
 
 	.liked{
-		color:green;
+		color:$lightBlue;
 	}
 
 
 	#pop-content{
+
+		h5{
+			margin-top:3em;
+			font-size:2em;
+			border-bottom: 3px $purple solid;
+			display:inline-block;
+			letter-spacing:$displayLetterSpacing;
+			text-transform: uppercase;
+		}
 
 
 
@@ -195,7 +208,7 @@
 
     .popular {
 		
-		min-height:100vh;
+		min-height:80vh;
     	padding-top:1.5em;
     	padding-bottom:1.5em;
 
@@ -216,7 +229,7 @@
 			}
 
 			p{
-				padding: 1em 0 1em 0;
+				// padding: 1em 0 1em 0;
 
 			}
 
@@ -250,12 +263,6 @@
         .grid-bla{
 
 
-        	.pop-info{
-
-        		i:hover{
-					color:$lightBlue;
-        		}
-        	}
 
         	.grid-item-bla{
 
