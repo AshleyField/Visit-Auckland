@@ -99,13 +99,18 @@ $(function() {
 
     }); 
 
-    $('.grid-bla').on('click','[data-for]',function() {
-        var venueClass = $(this).data('for');
-        $('.new-info').hide();
-        $('.'+venueClass).show();
-        
-    }); // onclick button
+    //function to add extra info for popular venues
 
+    if(window.outerWidth > 425) {
+
+        $('.grid-bla').on('click','[data-for]',function() {
+            var venueClass = $(this).data('for');
+            $('.new-info').hide();
+            $('.'+venueClass).show();
+            
+        }); // onclick button
+        
+    }
 
     //filter
     // if already clicked and unclicked( remove layer from map)
