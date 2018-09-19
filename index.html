@@ -50,17 +50,19 @@
 				</div>
 
 				<ul class="navigation mobile-nav" data-nav="close">
-					<li><a href="/" class="active">Home</a></li>
-					<li><a href="staff.html"  data-to=".staff-profiles">Meet the team</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
+					<li><a href="/" data-to="home" class="active">Home</a></li>
+					<li><a href=""  data-to=".popular">Popular Places</a></li>
+					<li><a href="" data-to=".map-area">Map</a></li>
+					<li><a href="" data-to=".events">Events</a></li>
+					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal" data-to="login">Login</a></li>
 				</ul>
 
 				<ul class="navigation desktop-nav" data-nav="close">
-					<li><a href="/" class="active">Home</a></li>
-					<li><a href="staff.html"  data-to=".staff-profiles">Meet the team</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
+					<li><a href="/" data-to="home" class="active">Home</a></li>
+					<li><a href="" data-to=".popular">Popular Places</a></li>
+					<li><a href="" data-to=".map-area">Map</a></li>
+					<li><a href="" data-to=".events">Events</a></li>
+					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal" data-to="login">Login</a></li>
 				</ul>
 			</nav>
 			
@@ -195,9 +197,10 @@
 				<div class="footer-links footer-row">
 					<h1>Quick Links</h1>
 					<ul class="footer-page-links">
-						<li class="hover">Home</li>
-						<li class="hover">Meet the team</li>
-						<li class="hover">Contact</li>
+						<li class="hover" data-to="home">Home</li>
+						<li class="hover" data-to=".popular">Popular</li>
+						<li class="hover" data-to=".map-area">Map</li>
+						<li class="hover" data-to=".events">Events</li>
 					</ul>
 
 				</div>
@@ -316,8 +319,11 @@
     		{{#if res.response.venue.contact.formattedPhone}}
     		<a href="{{res.response.venue.contact.formattedPhone}}">{{res.response.venue.contact.formattedPhone}}</a>
     		{{/if}}
-    		{{#if res.response.venue.hours.timeframes["0"]}}
+    		{{#if res.response.venue.hours}}
     		<p>{{res.response.venue.hours.timeframes["0"].days}} - {{res.response.venue.hours.timeframes["0"].open["0"].renderedTime}}</p>
+    		{{#if res.response.venue.hours.timeframes["1"]}}
+    		<p>{{res.response.venue.hours.timeframes["1"].days}} - {{res.response.venue.hours.timeframes["1"].open["0"].renderedTime}}</p>
+    		{{/if}}
     		{{/if}}
     		<p class="get-directions" data-lat="{{res.response.venue.location.lat}}" data-lng="{{res.response.venue.location.lng}}">Get Directions to here</p>
     	</div>

@@ -180,7 +180,45 @@ $(function() {
         getDirections(lat,lng)
     });
 
+    //On click of a navigation menu item scroll to the correct section
+
+    $('nav a').on('click', function(e){
+        e.preventDefault();
+       let toLocation = $(this).data('to');
+       smoothScroll(toLocation);
+        
+    });
+
+    //On click of hero map button smooth scroll to map
+
+    $('.hero-button').on('click', function(e){
+        e.preventDefault()
+        smoothScroll('.map-area')
+    })
+    
+    //On click of footer links smooth scroll
+
+    $('.footer-page-links li').on('click', function(){
+        let toLocation = $(this).data('to');
+
+        smoothScroll(toLocation);
+    })
 });
+
+function smoothScroll(dataTo){
+    if((dataTo != "home") && (dataTo != "login")){
+        $('html, body').animate({
+            scrollTop: $(dataTo).offset().top
+        }, 800, function(){
+
+            console.log('scrolled');
+        });
+    }
+
+    else if(dataTo == "home"){
+        window.location.replace("/")
+    }
+}
 
 function displayFilteredVenue(filter){
     
