@@ -91,7 +91,7 @@
 								<h5>Filter:</h5>
 								<ul class="flex-box">
 									<li><i class="fas fa-shopping-bag"></i></li>
-									<li><i class="fas fa-utensils"></i></li>
+									<li data-filter="Café"><i class="fas fa-utensils"></i></li>
 									<li><i class="fas fa-glass-martini"></i></li>
 									<li><i class="fas fa-map-marked-alt"></i></li>
 								</ul>
@@ -295,7 +295,7 @@
 	<!-- script for popular section -->
 	<script id="templatePopular" type="text/template7">
 
-		<div class="grid-item-bla">				
+		<div class="grid-item-bla" data-category="{{categories['0'].name}}">				
 			<div class="grid-content size">
 				<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
 				<div class="pop-info">

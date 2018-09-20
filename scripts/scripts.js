@@ -1,24 +1,31 @@
+//Create a global array for venues
 var venueArray = [];
-// var filteredArray = [];
+
+//Global map vairable
 var map;
+
+//Gloval marker layer vairable
 var markerLayer;
+
+//Global array for filtering the restaurat category
 var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"]
 
-//Initiate leaflet key
-
+//Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=Z0EWYLFS1P5YZ4FUTPBQGOW0N3OF1IAZZDHUIVUEVM4DYWPF';
-var clientSecret = '&client_secret=ODTZJEZYUJU4SYIUHCKQ2CBH4VWU4GXHX51ASTA0GJL2EE5L';
+var clientid = '&client_id=JHRWMJORB0NT2B1SVIAWAT5UUKGL1SPEGSH1P5SSPLL513JH';
+var clientSecret = '&client_secret=O0JUJBTFDBLZY2AEGGTBTP312032WGNOVHVTK2PTCZRM05HH';
 var key = version + clientid + clientSecret;
 
+//Define Template7 for map tooltip popup
 var popupHTML = $('#templatePopup').text();
 var popupTemplate = Template7(popupHTML).compile();
 
+//Global Google Maps DirectionService vairable
 var directionsService
 
-$(function() {
+var $grid;
 
-    
+$(function() {
 
     // Open and close nav on mobile
 
@@ -50,30 +57,32 @@ $(function() {
         e.preventDefault();
     });
 
-    // masonry grid for popular section
+    //Masonry grid for popular section
 
-    var $grid = $('.grid-bla').isotope({
+    $grid = $('.grid-bla').isotope({
       
       itemSelector: '.grid-item-bla',
       percentPosition: true,
       masonry: {
-        //column width set in CSS
+        //Column width set in CSS
         columnWidth: '.grid-sizer-bla'
 
       }
     });
 
-    //Insert mapbox styles
-
+    //Define center of map and initial zoom
     var center = {lat: -36.842770,lng: 174.766930};
 
     map = L.map('map', {scrollWheelZoom: false}).setView(center,17);
 
+    //Insert mapbox styles
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYXNoZXlmaWVsZCIsImEiOiJjamtrZXlvNnMwZTg3M3FwYzAxbGNqYTA4In0.AyMC7APOvh72_Q2evO5VTQ').addTo(map);
 
+    //Create layer groups to add items to
     markerLayer = new L.LayerGroup().addTo(map);
     directionGroup = new L.LayerGroup().addTo(map);
-    //Initalise foursquare
+
+    //Initalise foursquare and store all data in venueArray
 
     let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644'
 
@@ -84,7 +93,7 @@ $(function() {
         $.ajax({
             url: exploreUrl,
             dataType: 'jsonp',
-            success: function(res){
+            success: function(res){ //If the request is sucessful loop through the data and insert into the venueArray
 
                 var data = res.response.groups["0"].items;
 
@@ -102,6 +111,8 @@ $(function() {
                 venueArray = venues;
 
                 displayVenues(venueArray);
+
+                getTrending(venueArray);
             }
 
         })
@@ -115,46 +126,6 @@ $(function() {
 
         displayFilteredVenue(clickedFilter)
     });
-
-    function getTrending(){
-
-        console.log('Called Get Trending');
-
-        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
-
-        $.ajax({
-            url:exploreUrl,
-            dataType:'jsonp',
-            success:function(res){
-
-                let popularHTML = $('#templatePopular').text();
-                let popularTemplate = Template7(popularHTML).compile();
-
-                _(res.response.groups["0"].items).each(function(item){
-
-                    let venueid = item.venue.id;
-                    let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
-                    $.ajax({
-                        url: venueUrl,
-                        success:function(res){
-                            
-                            let output = popularTemplate(res.response.venue);
-                            
-                            var gridItem = $(output);
-
-                            $grid.append(gridItem)
-                            .isotope('appended', gridItem);
-
-                        }
-                    });
-
-
-                });
-            }
-        });
-    }
-
-    getTrending();
 
     $('#grid-container').on('click','.fa-star', function(){
 
@@ -204,6 +175,40 @@ $(function() {
         smoothScroll(toLocation);
     })
 });
+
+function getTrending(venueArray){
+
+    console.log('Called Get Trending');
+
+    let popularHTML = $('#templatePopular').text();
+    let popularTemplate = Template7(popularHTML).compile();
+
+    _(venueArray).each(function(item,i){
+        if(i<50){
+
+        
+            let venueid = item.venueid;
+            let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+            $.ajax({
+                url: venueUrl,
+                success:function(res){
+                    
+                    let output = popularTemplate(res.response.venue);
+                    
+                    var gridItem = $(output);
+
+                    $grid.append(gridItem)
+                    .isotope('appended', gridItem);
+
+                    $grid.isotope({
+                        filter: ':nth-child(-n+10)'
+                    });
+
+                }
+            });
+        }
+    });
+}
 
 function smoothScroll(dataTo){
     if((dataTo != "home") && (dataTo != "login")){
