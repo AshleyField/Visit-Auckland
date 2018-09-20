@@ -5,6 +5,7 @@
 	font-family: $oswaldFont;
 	position: relative;
 	min-height: 100vh;
+	z-index:1;
 
 	#map{
 		position: absolute;
@@ -32,12 +33,13 @@
 	box-shadow: 3px 5px 10px #888888;
 	font-family: $oswaldFont;
 	display: flex;
-	border: black solid 2px;
+	border: $darkBlue solid 2px;
 
 
 		&>p{
 			padding-top: 2px;
 			padding-left: 20px;
+			color: $darkBlue;
 		}
 
 		&>a{

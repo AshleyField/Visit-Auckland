@@ -1,7 +1,7 @@
 // ooter
 
 footer {
-	background-color: #151516;
+	background-color: $darkBlue;
 	padding: 1em;
 	font-family: 'Lato', sans-serif;
 
@@ -104,7 +104,7 @@ footer {
 	}
 
 	.signupbox {
-		background-color: #696969;
+		background-color: #fff;
 		width: 80%;
 		height: 2.5em;
 		border-radius: 5px;
@@ -115,7 +115,7 @@ footer {
 		max-width: 25em;
 
 		p {
-			color: #fff;
+			color: $darkBlue;
 			line-height: 2.5em;
 			margin-left: 1em;
 		}
