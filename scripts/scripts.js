@@ -12,8 +12,8 @@ var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaur
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=JHRWMJORB0NT2B1SVIAWAT5UUKGL1SPEGSH1P5SSPLL513JH';
-var clientSecret = '&client_secret=O0JUJBTFDBLZY2AEGGTBTP312032WGNOVHVTK2PTCZRM05HH';
+var clientid = '&client_id=5AO3HF14OFCVUIDQU3C0VCPNRYCMLA1ZYVES1OLOGSADZ321';
+var clientSecret = '&client_secret=WUNW3U3I4ZMQEZBGS4ZSQRNFKVFTYX4B2NS3NLEGM2DIW1SD';
 var key = version + clientid + clientSecret;
 
 //Define Template7 for map tooltip popup
@@ -184,16 +184,34 @@ function getTrending(venueArray){
     let popularTemplate = Template7(popularHTML).compile();
 
     _(venueArray).each(function(item,i){
+
         if(i<50){
 
-        
             let venueid = item.venueid;
             let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+
             $.ajax({
                 url: venueUrl,
                 success:function(res){
-                    
-                    let output = popularTemplate(res.response.venue);
+
+
+                    let category = res.response.venue.categories["0"].name;
+
+                    let venueCategory;
+
+                    if((category == "Café") || category == "Coffee Shop"){
+                        venueCategory = 'Cafe';
+                    }
+
+                    else if (restaurantCategories.indexOf(category) != -1 ){
+                        venueCategory = 'Restaurant'
+                    }
+
+                    else {
+                        venueCategory = 'defaultLocation'
+                    }
+
+                    let output = popularTemplate(res.response.venue,venueCategory);
                     
                     var gridItem = $(output);
 
