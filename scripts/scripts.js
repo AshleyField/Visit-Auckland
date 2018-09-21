@@ -12,8 +12,8 @@ var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaur
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=5AO3HF14OFCVUIDQU3C0VCPNRYCMLA1ZYVES1OLOGSADZ321';
-var clientSecret = '&client_secret=WUNW3U3I4ZMQEZBGS4ZSQRNFKVFTYX4B2NS3NLEGM2DIW1SD';
+var clientid = '&client_id=SJR4N5YPPC5G1OC3BSD4RDX31XLRGF55U521OYHA255V4HPT';
+var clientSecret = '&client_secret=MX5S0LYI0ZD5P2EZ3S2UVNX3MTNYLJBYTXAG4CBOJECDQMBL';
 var key = version + clientid + clientSecret;
 
 //Define Template7 for map tooltip popup
@@ -68,6 +68,17 @@ $(function() {
         columnWidth: '.grid-sizer-bla'
 
       }
+    });
+
+    $('.popular-filter li').on('click', function(){
+
+        let selector = $(this).data('filter');
+
+        $grid.isotope({
+            filter: selector
+        });
+
+        return false;
     });
 
     //Define center of map and initial zoom
@@ -176,6 +187,8 @@ $(function() {
     })
 });
 
+//Initiates AJAX request on each of the explored venues and outputs informtion into the popular section.
+
 function getTrending(venueArray){
 
     console.log('Called Get Trending');
@@ -194,24 +207,50 @@ function getTrending(venueArray){
                 url: venueUrl,
                 success:function(res){
 
+                    //venueCategory is used for isotope sorting, the type of venue is outputted as a class ot the object in template7.
 
-                    let category = res.response.venue.categories["0"].name;
+                    var venueCategory;
 
-                    let venueCategory;
+                    var category = res.response.venue.categories["0"].name;
 
-                    if((category == "Café") || category == "Coffee Shop"){
-                        venueCategory = 'Cafe';
+                    if(category == "Café" || category == "Coffee Shop"){
+                        venueCategory = 'cafe';
                     }
 
                     else if (restaurantCategories.indexOf(category) != -1 ){
-                        venueCategory = 'Restaurant'
+                        venueCategory = 'restaurant'
+                    }
+
+                    else if(category == "Park"){
+                       venueCategory = 'park';
+                    }
+
+                    else if (category == "Hotel"){
+                        venueCategory = 'hotel';
+                    }
+
+                    else if(category == "Gym"){
+                        venueCategory = 'gym';
+                    }
+
+                    else if (category == "Cocktail Bar" || category == "Brewery" || category == "Bar"){
+                        venueCategory = 'drinks';
+                    }
+                    else if (category == "Dessert Shop" || category == "Ice Cream Shop"){
+                        venueCategory = 'cesserts';
+                    }
+
+                    else if (category == "Burger Joint"){
+                        venueCategory = 'burgers'
                     }
 
                     else {
                         venueCategory = 'defaultLocation'
                     }
 
-                    let output = popularTemplate(res.response.venue,venueCategory);
+                    res.response.venue.category = venueCategory;
+
+                    let output = popularTemplate(res.response.venue);
                     
                     var gridItem = $(output);
 
