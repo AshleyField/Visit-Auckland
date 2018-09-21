@@ -29,6 +29,18 @@ nav {
 	display: none;
 }
 
+.flex-container{
+		
+		display:flex;
+		flex-wrap:wrap;
+		justify-content: space-around;
+
+			.flex-li{
+				flex: 0 0 50%;
+
+			}
+	}
+
 .mobile-nav {
 	list-style-type: none;
 	text-align: center;
@@ -40,17 +52,7 @@ nav {
 	opacity: 0;
 
 
-	.flex-container{
-		
-		display:flex;
-		flex-wrap:wrap;
-		justify-content: space-around;
-
-			.flex-li{
-				flex: 0 0 50%;
-
-			}
-	}
+	
 
 
 	li {
@@ -73,7 +75,7 @@ nav {
 	}
 
 	.active {
-		color: $pink;
+		color: $lightBlue;
 		font-weight: 700;
 	}
 }
@@ -89,7 +91,7 @@ nav {
 }
 
 .nav-open {
-	height: 12em !important;
+	height: 7em !important;
 	margin-top: 1.5em;
 	opacity: 1;
 	margin: 0 auto;
@@ -164,7 +166,7 @@ nav {
 			}
 
 			.active {
-				color: $pink;
+				color: $lightBlue;
 				font-weight: 700;
 			}
 		}

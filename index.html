@@ -39,14 +39,12 @@
 					<i class="fas fa-bars"></i>
 				</div>
 
-				<ul class="navigation mobile-nav" data-nav="close">
-					<div class="flex-container">
-						<li><a href="/" class="active flex-li" data-to=".header">Home</a></li>
-						<li><a href="staff.html" class="flex-li" data-to=".popular">Popular</a></li>
-						<li><a href="" class="flex-li" data-to=".map-area">Map</a></li>
-						<li><a href="" class="flex-li" data-to=".upcoming-events">Events</a></li>
-						<li><a href="" class="login-button flex-li" data-target="#loginModal" data-toggle="modal">Login</a></li>
-					</div>
+				<ul class="navigation mobile-nav flex-container" data-nav="close">
+					<li><a href="/" class="active flex-li" data-to=".header">Home</a></li>
+					<li><a href="staff.html" class="flex-li" data-to=".popular">Popular</a></li>
+					<li><a href="" class="flex-li" data-to=".map-area">Map</a></li>
+					<li><a href="" class="flex-li" data-to=".upcoming-events">Events</a></li>
+					<li><a href="" class="login-button flex-li" data-target="#loginModal" data-toggle="modal">Login</a></li>
 				</ul>
 
 				<ul class="navigation desktop-nav" data-nav="close">
@@ -108,11 +106,7 @@
 		<div class="map-area">
 			
 			<div class="right" id="map"></div>
-
-			<!-- marker popup -->
-			<div class="modal marker-container" id='venueModal' tabindex="-1" role="dialog">
-				
-			</div><!-- marker popup end -->
+			
 
 			<div class="filter">
 				<p>Filter:</p>
@@ -237,7 +231,7 @@
 								<h1>Login</h1>
 							</div>
 							<div class="login-fields">
-								<form action="">
+								<form>
 									<div class="form-row">
 										<input type="text" name="Username" placeholder="Username">
 									</div>
@@ -269,6 +263,11 @@
 				</div>
 			</div>
 		</div><!-- end of login modal -->
+
+		<!-- marker modal -->
+		<div class="modal marker-container" id='venueModal' tabindex="-1" role="dialog">
+				
+		</div><!-- marker popup end -->
 
 	</div><!-- end of wrapper -->
 
@@ -305,7 +304,7 @@
 			<div class="grid-content size" data-for="venue{{id}}">
 				<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
 				<div class="pop-info">
-					<i class="fas fa-plus"></i>
+					<i class="fas fa-plus" data-plus="unclicked"></i>
 					<p class="pop-name">{{name}}</p>
 					<i class="fas fa-star"></i>
 				</div>

@@ -14,6 +14,16 @@
 				.modal-body{
 					overflow-wrap:break-word;
 
+					a{
+						color:$lightBlue;
+					}
+
+					button{
+						background-color: $darkBlue;
+						color:white;
+						border:none;
+					}
+
 					.link{
 					margin-bottom: 3em;
 					}
@@ -30,9 +40,27 @@
 
 				&.modal-header{
 					border-radius:0;
+
 				}
 
 			}
 
 		}	
 
+@media only screen and (min-width : 60em) {
+
+	#marker-container{
+
+		.modal-content{
+
+			.modal-body{
+
+				button:hover{
+					@include boxShadow;
+				}
+			}
+
+		}
+	}
+
+}

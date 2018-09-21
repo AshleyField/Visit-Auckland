@@ -4,8 +4,8 @@ $(function() {
 
     // foursquare variables
     const version = '?v=20170901';
-    const clientid = '&client_id=20MGJAFUOU0TEKLCYGTFSVWVKE12YOSFV5UCGZIKHQCH0MDI';
-    const clientSecret = '&client_secret=TX4TIIQC1Q4B4KZKOMETGLIBNP50SXYUAC521C0V3BNXNRT4';
+    const clientid = '&client_id=I4T5YCBPQBF1JPJTLXJGCPUSXMVHA1M0IVUCXL2F5W2W24EO';
+    const clientSecret = '&client_secret=TPDL20X3O3JGLNXMUSUL44BXRKB2AJ2JUZ5COJDTW43LY2YQ';
     const key = version + clientid + clientSecret;
 
     //icons
@@ -33,7 +33,7 @@ $(function() {
 
         if (navData == 'close') {
             $('.navigation').addClass('nav-open')
-                .data('nav', 'open')
+                .data('nav', 'open');
 
             $('.bars>i').first().removeClass('fas fa-bars')
                 .addClass('fas fa-times');
@@ -46,6 +46,7 @@ $(function() {
 
         }
     }); 
+
 
 
     //login
@@ -69,10 +70,10 @@ $(function() {
 
     //menu highlight 
 
-    var offset1 = $('.header').offset().top;
-    var offset2 = $('.popular').offset().top;
-    var offset3 = $('.map-area').offset().top;
-    var offset4 = $('.upcoming-events').offset().top;
+    var offset1 = $('.header').offset().top - 100;
+    var offset2 = $('.popular').offset().top -100;
+    var offset3 = $('.map-area').offset().top -100;
+    var offset4 = $('.upcoming-events').offset().top -100;
 
     $(document).on('scroll',function(){
         var iScrollTop = $(document).scrollTop();
@@ -80,19 +81,19 @@ $(function() {
         var activeLi;
 
         if(iScrollTop>=offset1 && iScrollTop<offset2){
-            activeLi = $('.desktop-nav>li>:nth-child(1)');
+            activeLi = $('.desktop-nav>li:nth-child(1)>a');
         }
         if(iScrollTop>=offset2 && iScrollTop<offset3){
-            activeLi = $('.desktop-nav>li>:nth-child(2)');
+            activeLi = $('.desktop-nav>li:nth-child(2)>a');
         }
         if(iScrollTop>=offset3 && iScrollTop<offset4){
-            activeLi = $('.desktop-nav>li:nth-child(3)');
+            activeLi = $('.desktop-nav>li:nth-child(3)>a');
         }
         if(iScrollTop>=offset4){
-            activeLi = $('.desktop-nav>li:nth-child(4)');
+            activeLi = $('.desktop-nav>li:nth-child(4)>a');
         }
         activeLi.addClass('active');
-        $('.desktop-nav>li').not(activeLi)
+        $('.desktop-nav>li>a').not(activeLi)
                                     .removeClass('active');
 
         console.log(offset1);
@@ -126,7 +127,7 @@ $(function() {
         var sTarget = $(this).data('to');
         var targetOffsetTop = $(sTarget).offset().top;
 
-        $('html,body').animate({scrollTop:targetOffsetTop},1000);
+        $('html,body').animate({scrollTop:targetOffsetTop - 70},1000);
 
     });
 
@@ -174,6 +175,16 @@ $(function() {
             $('.'+venueClass).show();
             
         }); // onclick button
+
+            // highlight pop grid item
+
+        $('.grid-bla').on('click','.fa-plus',function() {
+
+            var activeDiv;
+
+            $(this).parent().addClass('hello');
+
+        }); 
         
     }
 
@@ -183,41 +194,56 @@ $(function() {
         e.preventDefault();
 
         if(map.hasLayer(foodGroup)){
-            map.removeLayer(foodGroup)
+
+            map.removeLayer(foodGroup);
+
         }else{
-            map.addLayer(foodGroup)
+
+            map.addLayer(foodGroup);
         }
-    })
+
+    });
 
     $('.filter-icon.shop').on('click',function(e){
         e.preventDefault();
 
         if(map.hasLayer(shopGroup)){
-            map.removeLayer(shopGroup)
+
+            map.removeLayer(shopGroup);
+
         }else{
-            map.addLayer(shopGroup)
+
+            map.addLayer(shopGroup);
         }
-    })
+
+    });
 
     $('.filter-icon.drinks').on('click',function(e){
         e.preventDefault();
 
         if(map.hasLayer(drinksGroup)){
-            map.removeLayer(drinksGroup)
+
+            map.removeLayer(drinksGroup);
+
         }else{
-            map.addLayer(drinksGroup)
+
+            map.addLayer(drinksGroup);
         }
-    })
+
+    });
 
     $('.filter-icon.sites').on('click',function(e){
         e.preventDefault();
 
         if(map.hasLayer(sitesGroup)){
-            map.removeLayer(sitesGroup)
+
+            map.removeLayer(sitesGroup);
+
         }else{
-            map.addLayer(sitesGroup)
+
+            map.addLayer(sitesGroup);
         }
-    })
+    });
 
     
     //function to get venues on map
@@ -267,7 +293,7 @@ $(function() {
 
                         var currentMarker = this;
                         let venueUrl = 'https://api.foursquare.com/v2/venues/'+this.venueid+key;
-                        var website = '';
+
 
                         $.ajax({
                             url: 'https://api.foursquare.com/v2/venues/'+this.venueid+'/links'+key,
@@ -302,7 +328,6 @@ $(function() {
                                     var source= '';
                                 }
 
-                                var contact = venue.contact.phone;
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
 
