@@ -176,11 +176,12 @@ $(function() {
             
         }); // onclick button
 
-            // highlight pop grid item
+        // highlight popular grid item
 
         $('.grid-bla').on('click','.fa-plus',function() {
 
-            var activeDiv;
+            $('.fa-plus').parent().removeClass('hello');
+
 
             $(this).parent().addClass('hello');
 
