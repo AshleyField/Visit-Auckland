@@ -12,8 +12,8 @@ var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaur
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=SJR4N5YPPC5G1OC3BSD4RDX31XLRGF55U521OYHA255V4HPT';
-var clientSecret = '&client_secret=MX5S0LYI0ZD5P2EZ3S2UVNX3MTNYLJBYTXAG4CBOJECDQMBL';
+var clientid = '&client_id=GUWDIWKZ0JWUAHB1RAEM2ZDST3BOO3IV5LGJ2BNTT540QUVY';
+var clientSecret = '&client_secret=A4IHZVSLZPUVZ35RXN4WKWCJA0UQZV4Y3WAA41PD2JQF1DNH';
 var key = version + clientid + clientSecret;
 
 //Define Template7 for map tooltip popup
@@ -78,8 +78,24 @@ $(function() {
             filter: selector
         });
 
-        return false;
+        return false; 
     });
+
+    $grid.on( 'arrangeComplete',
+      function( event, filteredItems ) {
+        // console.log( 'Isotope arrange completed on ' +
+          // filteredItems.length + ' items' );
+            console.log(filteredItems);
+            _(filteredItems).each(function(item,i){
+                if(i<10){
+                    $(item.element).show(); 
+                }else{
+                    $(item.element).hide();
+                }
+                
+            });
+      }
+    );
 
     //Define center of map and initial zoom
     var center = {lat: -36.842770,lng: 174.766930};
@@ -185,6 +201,28 @@ $(function() {
 
         smoothScroll(toLocation);
     })
+
+    // Make navigation fixed when scrolling past
+
+    var navOffset = $('nav').offset();
+
+    //Fixed Menu
+    $(document).on('scroll', function(){
+
+        var scrollTop = $(document).scrollTop();
+
+        if(scrollTop > navOffset.top){
+
+            $('nav').addClass('fixed');
+
+        }
+
+        else{
+
+            $('nav').removeClass('fixed');
+
+        }
+    });
 });
 
 //Initiates AJAX request on each of the explored venues and outputs informtion into the popular section.
@@ -271,11 +309,7 @@ function smoothScroll(dataTo){
     if((dataTo != "home") && (dataTo != "login")){
         $('html, body').animate({
             scrollTop: $(dataTo).offset().top
-        }, 800, function(){
-
-            console.log('scrolled');
-        });
-    }
+        }, 800 )}
 
     else if(dataTo == "home"){
         window.location.replace("/")

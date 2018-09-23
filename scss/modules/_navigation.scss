@@ -1,5 +1,9 @@
 //-- Navigation --
 
+.wrapper {
+	position: relative;
+}
+
 nav {
 	width: 100%;
 	position: relative;
@@ -81,6 +85,13 @@ nav {
 	z-index: 100;
 }
 
+.fixed {
+	position: fixed !important;
+	z-index: 999 !important;
+    top:0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+}
 /*tablet */
 
 @media only screen and (min-width : 60em) {
