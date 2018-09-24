@@ -1,6 +1,6 @@
 //Create a global array for venues & bus stops
 var venueArray = [];
-var busStopArray = []
+var busStopArray = [];
 
 //Global map vairable
 var map;
@@ -10,7 +10,7 @@ var markerLayer;
 var busStopLayer;
 
 //Global array for filtering the restaurat category
-var restaurantCategories = ["Burger Joint", "Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"]
+var restaurantCategories = ["Burger Joint", "Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"];
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
@@ -23,7 +23,7 @@ var popupHTML = $('#templatePopup').text();
 var popupTemplate = Template7(popupHTML).compile();
 
 //Global Google Maps DirectionService vairable
-var directionsService
+var directionsService;
 
 var $grid;
 
@@ -39,7 +39,7 @@ $(function() {
 
         if (navData == 'close') {
             $('.navigation').addClass('nav-open')
-                .data('nav', 'open')
+                .data('nav', 'open');
 
             $('.bars>i').first().removeClass('fas fa-bars')
                 .addClass('fas fa-times');
@@ -114,11 +114,11 @@ $(function() {
 
     //Initalise foursquare and store all data in venueArray
 
-    let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644'
+    let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644';
 
     if(venueArray.length == 0){
 
-        console.log("Called initial Ajax request")
+        console.log("Called initial Ajax request");
 
         $.ajax({
             url: exploreUrl,
@@ -134,8 +134,7 @@ $(function() {
                         name: item.venue.name,
                         venueid: item.venue.id,
                         category: item.venue.categories['0'].name
-
-                    }
+                    };
                 });
 
                 venueArray = venues;
@@ -144,9 +143,7 @@ $(function() {
 
                 getTrending(venueArray);
             }
-
-        })
-
+        });
     }
 
     $('.map-filter-row').on('click', function(){
@@ -154,7 +151,7 @@ $(function() {
 
         var clickedFilter = $(this).data('category');
 
-        displayFilteredVenue(clickedFilter)
+        displayFilteredVenue(clickedFilter);
     });
 
     $('#grid-container').on('click','.fa-star', function(){
@@ -178,7 +175,7 @@ $(function() {
         var lat = $(this).data('lat');
         var lng = $(this).data('lng');
 
-        getDirections(lat,lng)
+        getDirections(lat,lng);
     });
 
     //On click of a navigation menu item scroll to the correct section
@@ -193,9 +190,9 @@ $(function() {
     //On click of hero map button smooth scroll to map
 
     $('.hero-button').on('click', function(e){
-        e.preventDefault()
-        smoothScroll('.map-area')
-    })
+        e.preventDefault();
+        smoothScroll('.map-area');
+    });
     
     //On click of footer links smooth scroll
 
@@ -203,7 +200,7 @@ $(function() {
         let toLocation = $(this).data('to');
 
         smoothScroll(toLocation);
-    })
+    });
 
     // Make navigation fixed when scrolling past
 
@@ -275,7 +272,7 @@ function getTrending(venueArray){
                     }
 
                     else if (restaurantCategories.indexOf(category) != -1 ){
-                        venueCategory = 'restaurant'
+                        venueCategory = 'restaurant';
                     }
 
                     else if(category == "Park"){
@@ -298,11 +295,11 @@ function getTrending(venueArray){
                     }
 
                     else if (category == "Burger Joint"){
-                        venueCategory = 'burgers'
+                        venueCategory = 'burgers';
                     }
 
                     else {
-                        venueCategory = 'defaultLocation'
+                        venueCategory = 'defaultLocation';
                     }
 
                     res.response.venue.category = venueCategory;
@@ -311,8 +308,7 @@ function getTrending(venueArray){
                     
                     var gridItem = $(output);
 
-                    $grid.append(gridItem)
-                    .isotope('appended', gridItem);
+                    $grid.append(gridItem).isotope('appended', gridItem);
 
                     $grid.isotope({
                         filter: ':nth-child(-n+10)'
@@ -328,10 +324,11 @@ function smoothScroll(dataTo){
     if((dataTo != "home") && (dataTo != "login")){
         $('html, body').animate({
             scrollTop: $(dataTo).offset().top
-        }, 800 )}
+        }, 800 )
+    }
 
     else if(dataTo == "home"){
-        window.location.replace("/")
+        window.location.replace("/");
     }
 }
 
@@ -361,7 +358,7 @@ function displayFilteredVenue(filter){
             }
 
             else if (filter == "Bars"){
-                return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery') || (venue.category == "Bar")
+                return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery') || (venue.category == "Bar");
             }
 
             else {
@@ -378,7 +375,7 @@ function displayFilteredVenue(filter){
 
 function displayVenues(venues){
 
-    console.log('Called Display Venues')
+    console.log('Called Display Venues');
 
     var icon = '';
 
@@ -438,7 +435,7 @@ function displayVenues(venues){
 
 
         let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
-        marker.venueid = venue.venueid
+        marker.venueid = venue.venueid;
 
         marker.on('click', function(){
             var venueUrl = 'https://api.foursquare.com/v2/venues/'+ this.venueid + key;
@@ -448,12 +445,10 @@ function displayVenues(venues){
                 dataType: 'jsonp',
                 success: function(res){
 
-                    console.log(res)
-
-                    var venuePhoto = res.response.venue.bestPhoto.prefix + '200x200' + res.response.venue.bestPhoto.suffix
+                    var venuePhoto = res.response.venue.bestPhoto.prefix + '200x200' + res.response.venue.bestPhoto.suffix;
 
                     var data = {venuePhoto:venuePhoto,res:res};
-                    var output = popupTemplate(data)
+                    var output = popupTemplate(data);
 
                     var popupContent = L.popup()
                         .setLatLng(venue.latlng)
@@ -463,9 +458,9 @@ function displayVenues(venues){
                     marker.bindPopup(popupContent).openPopup();
 
                 }
-            })
+            });
         });
-    })
+    });
 }
 
 function initMap(){
@@ -477,7 +472,7 @@ function getDirections(lat,lng){
 
     directionGroup.clearLayers();
 
-    var polyline
+    var polyline;
 
     if (navigator.geolocation) {
 
@@ -531,6 +526,5 @@ function outputBusStops(){
 
         let marker = L.marker({lat: busStop.stop_lat, lng: busStop.stop_lon}, {icon: venueIcon}).addTo(busStopLayer);
         marker.busStopID = busStop.stop_code;
-    })
-
+    });
 }
