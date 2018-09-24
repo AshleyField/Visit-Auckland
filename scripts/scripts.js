@@ -147,8 +147,8 @@ $(function() {
     var directionGroup = L.layerGroup().addTo(map);
 
 
-    // getVenues('food',iconFood,foodGroup);
-    // getVenues('drinks',iconDrinks, drinksGroup);
+    getVenues('food',iconFood,foodGroup);
+    getVenues('drinks',iconDrinks, drinksGroup);
     getVenues('shops',iconShop,shopGroup);
     getVenues('sights',iconSight, sitesGroup);
 
