@@ -96,9 +96,6 @@ $(function() {
         $('.desktop-nav>li>a').not(activeLi)
                                     .removeClass('active');
 
-        console.log(offset1);
-
-
 
     });
 
@@ -182,7 +179,6 @@ $(function() {
 
             $('.fa-plus').parent().removeClass('hello');
 
-
             $(this).parent().addClass('hello');
 
         }); 
@@ -259,8 +255,6 @@ $(function() {
             success:function(res){
                 var data = res.response.groups["0"].items;
 
-                console.log(res);
-
                 //  map data to a simpler venues format
 
                 var venues = _(data).map(function(item){ // this function is to transform each item into smaller pieces of data. these items/venues have alot of data 
@@ -310,8 +304,6 @@ $(function() {
                             dataType:'jsonp',
                             success:function(res) {
 
-                                console.log(res);
-
                                 let markerHTML     = $('#templateMarker').text();
                                 let markerTemplate = Template7(markerHTML).compile();
 
@@ -322,31 +314,29 @@ $(function() {
                                 $('.modal-title').text(venue.name);
                                 var photo = venue.bestPhoto; 
 
-                                if(photo){
-                                    var source = photo.prefix+'300x300'+photo.suffix;
-
-                                }else{
-                                    var source= '';
+                                var source = '';
+                                if (photo) {
+                                    source = photo.prefix+'300x300'+photo.suffix;
                                 }
+                          
 
                                 var address = venue.location.address;
                                 var category = venue.categories.name;
 
-                                if(venue.price){
+                                var price = 'not available';
+                                if (venue.price) {
                                     var price = venue.price.message;  
-                                }else{
-                                    var price = 'not available';
-                                }
+                                } 
                                 
 
-                                if(venue.hours){
+                                if (venue.hours) {
 
                                     var weekHours = venue.hours.timeframes["0"].open["0"].renderedTime;
                                     var weekendHours = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].open["0"].renderedTime : '';
                                     var weekDays = venue.hours.timeframes["0"].days; 
                                     var weekendDays = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].days : '';   
 
-                                }else{
+                                } else {
                                     var hours = 'not available';
                                 }
                                 
@@ -364,9 +354,6 @@ $(function() {
                                     weekendHours:weekendHours,
                                     price:price,
                                     hours:hours,
-                                    
-                                    
-
                                 });
 
 
@@ -390,7 +377,8 @@ $(function() {
                                             let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
 
                                             var currentPosition = {lat:userLatitude,lng:userLongitude};
-                                            let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
+                                            
+                                            L.marker(currentPosition,{icon:icon}).addTo(map);
 
 
                                              //create a request for directions
@@ -399,13 +387,14 @@ $(function() {
                                                     destination: currentMarker.getLatLng(),
                                                     travelMode: 'WALKING'
                                                 };
+
                                             //ask directionsService to fulfill your request
                                             directionsService.route(request,function(response,status){
                                                 if(status == 'OK'){
                                                     var overview_path = response.routes["0"].overview_path;
                                                     //display direction
                                                     var path = _(overview_path).map(function(point){
-                                                        return {lat:point.lat(),lng:point.lng()}
+                                                        return {lat:point.lat(),lng:point.lng()};
                                                     });
                                                     var polyline = L.polyline(path, {color: '#0B132B'});
 
@@ -419,7 +408,7 @@ $(function() {
 
                                     } 
                                     else { 
-                                        console.log('cannot access location');
+                                        alert('cannot access location');
                                     }
 
                                 });//button on click
@@ -442,13 +431,11 @@ $(function() {
     function getTrending(){
 
         let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
-        console.log(exploreUrl);
+
         $.ajax({
             url:exploreUrl,
             dataType:'jsonp',
             success:function(res){
-
-                // console.log(res);
 
                 let popularHTML = $('#templatePopular').text();
                 let popularTemplate = Template7(popularHTML).compile();
@@ -464,7 +451,6 @@ $(function() {
                         url: venueUrl,
                         success:function(res){
                             
-                            console.log(res);
                             let output = popularTemplate(res.response.venue);
                             
                             var gridItem = $(output);
