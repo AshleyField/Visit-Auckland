@@ -7,6 +7,8 @@
 	width: 100%;
 	padding: 1em;
 	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
 }
 
 #map{
@@ -21,11 +23,40 @@
 
 	h1 {
 		flex: 1 0 90%;
-		margin-bottom: .5em;
+		font-family: $oswaldFont;
+		font-size:$mobileDisplayFontSize;
+		letter-spacing:$displayLetterSpacing;
+		text-transform:$displayTexttransform;
+		border-bottom: $lightBlue solid 3px;
+		padding-bottom: 5px;
+		display: inline-block;
+
+	}
+
+	&-inner {
+		flex: 1 0 90%;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
 	}
 
 	&-row {
-		flex: 1 0 45%;
+		flex: 1 0 30%;
+		align-self: center;
+		padding: .5em;
+		text-align: center;
+	}
+
+	.filter-title {
+		flex: 1 0 90%;
+		text-align: center;
+		margin: 1em;
+
+		span {
+			text-transform: uppercase;
+			font-size: 1.5em;
+			border-bottom: 1px $darkBlue solid;
+		}
 	}
 }
 
@@ -62,11 +93,17 @@
 }
 
 
-@media only screen and (min-width : 80em) {
+@media only screen and (min-width : 60em) {
 
 	.map-area {
 
 		padding: 0 2em;
+	}
+
+	.map-filter {
+		&-row {
+			flex: 1 0 15%;
+		}
 	}
 }
 
@@ -76,6 +113,10 @@
 
 		padding: 0 4em;
 	}
+
+	.map-filter-inner {
+		padding: 0 10em;
+	}
 }
 
 @media only screen and (min-width : 100em) {
@@ -83,5 +124,9 @@
 	.map-area {
 
 		padding: 0 7em;
+	}
+
+	.map-filter-inner {
+		padding: 0 15em;
 	}
 }

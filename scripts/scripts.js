@@ -1,14 +1,16 @@
-//Create a global array for venues
+//Create a global array for venues & bus stops
 var venueArray = [];
+var busStopArray = []
 
 //Global map vairable
 var map;
 
 //Gloval marker layer vairable
 var markerLayer;
+var busStopLayer;
 
 //Global array for filtering the restaurat category
-var restaurantCategories = ["Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"]
+var restaurantCategories = ["Burger Joint", "Indian Restaurant", "Food Court", "Japanese Restaurant", "Australian Restaurant", "Pizza Place", "Vegetarian / Vegan Restaurant", "Restaurant", "Steakhouse", "Vietnamese Restaurant", "Seafood Restaurant", "Mexican Restaurant", "Asian Restaurant", "Sushi Restaurant", "Middle Eastern Restaurant", "Noodle House", "Cajun / Creole Restaurant", "French Restaurant", "Italian Restaurant", "Modern European Restaurant"]
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
@@ -108,6 +110,7 @@ $(function() {
     //Create layer groups to add items to
     markerLayer = new L.LayerGroup().addTo(map);
     directionGroup = new L.LayerGroup().addTo(map);
+    busStopLayer = new L.LayerGroup().addTo(map);
 
     //Initalise foursquare and store all data in venueArray
 
@@ -223,6 +226,22 @@ $(function() {
 
         }
     });
+
+    $.ajax({
+        url: "https://api.at.govt.nz/v2/gtfs/stops/geosearch?lat=-36.845744&lng=174.766994&distance=500",
+        beforeSend: function(xhrObj){
+            // Request headers
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","728d707ab4804878bf03aed5bc9cc873");
+        },
+
+        success:function(res){
+
+            busStopArray = res.response;
+
+            outputBusStops();
+        }
+    });
+
 });
 
 //Initiates AJAX request on each of the explored venues and outputs informtion into the popular section.
@@ -317,34 +336,43 @@ function smoothScroll(dataTo){
 }
 
 function displayFilteredVenue(filter){
-    
-    var filteredArray = _(venueArray).filter(function(venue){
 
-        if(filter == "Restaurant"){
+    busStopLayer.clearLayers();
 
-            return restaurantCategories.indexOf(venue.category) != -1;
-        }
+    if(filter == "Bus"){
+        outputBusStops();
+    }
 
-        else if (filter == "All"){
-            return venueArray;
-        }
+    else if (filter == "All"){
+        displayVenues(venueArray);
+        outputBusStops();
+    }
 
-        else if (filter == "Cafe"){
-            return (venue.category == "Coffee Shop") || (venue.category == "Café");
-        }
+    else {
+        var filteredArray = _(venueArray).filter(function(venue){
 
-        else if (filter == "Bars"){
-            return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery') || (venue.category == "Bar")
-        }
+            if(filter == "Restaurant"){
 
-        else {
+                return restaurantCategories.indexOf(venue.category) != -1;
+            }
 
-            return venue.category == filter;
-        }
+            else if (filter == "Cafe"){
+                return (venue.category == "Coffee Shop") || (venue.category == "Café");
+            }
 
-    });
+            else if (filter == "Bars"){
+                return (venue.category == "Cocktail Bar") || (venue.category == 'Brewery') || (venue.category == "Bar")
+            }
 
-    displayVenues(filteredArray);
+            else {
+
+                return venue.category == filter;
+            }
+
+        });
+
+        displayVenues(filteredArray);
+    }
 
 }
 
@@ -392,11 +420,7 @@ function displayVenues(venues){
             icon = 'dessertIcon';
             foundCategory = true;
         }
-
-        else if (venue.category == "Burger Joint"){
-            icon = 'burgerIcon';
-            foundCategory = true;
-        }
+        
         else if (restaurantCategories.indexOf(venue.category) != -1 ){
             icon = 'foodIcon';
             foundCategory = true;
@@ -408,7 +432,7 @@ function displayVenues(venues){
 
         let venueIcon = L.icon({
             iconUrl: '../assets/icons/' + icon + '.svg',
-            iconSize: [30,30]
+            iconSize: [20,20]
         });
 
 
@@ -494,4 +518,19 @@ function getDirections(lat,lng){
     else { 
         console.log('cannot access location');
     }
+}
+
+function outputBusStops(){
+
+    _(busStopArray).each(function(busStop){
+
+        let venueIcon = L.icon({
+            iconUrl: '../assets/icons/bus.svg',
+            iconSize: [15,15]
+        });
+
+        let marker = L.marker({lat: busStop.stop_lat, lng: busStop.stop_lon}, {icon: venueIcon}).addTo(busStopLayer);
+        marker.busStopID = busStop.stop_code;
+    })
+
 }

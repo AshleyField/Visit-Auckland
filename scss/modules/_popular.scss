@@ -1,7 +1,7 @@
 /*All devices and mobile phone*/
 
 #grid-container {
-	height: 65em;
+	height: 100vh;
 	overflow: hidden;
 	position: relative;
 
@@ -14,8 +14,9 @@
   			left:0;
   			width:100%;
   			z-index:20;
-  			background-image: linear-gradient(top, rgba(255,255,255,0) 10% ,rgba(255,255,255,1) 50%);
+  			background-image: linear-gradient(rgba(255,255,255,0) 10% ,rgba(255,255,255,1) 50%);
   			pointer-events: none;
+  			z-index: 1;
 		}
 }
 
