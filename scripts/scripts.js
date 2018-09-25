@@ -14,8 +14,8 @@ var restaurantCategories = ["Burger Joint", "Indian Restaurant", "Food Court", "
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=GUWDIWKZ0JWUAHB1RAEM2ZDST3BOO3IV5LGJ2BNTT540QUVY';
-var clientSecret = '&client_secret=A4IHZVSLZPUVZ35RXN4WKWCJA0UQZV4Y3WAA41PD2JQF1DNH';
+var clientid = '&client_id=0JAUKKKVPNVWEFUH1XVPAGLBLLTYL3MI3CPRGALPHLRVO1U5';
+var clientSecret = '&client_secret=VAJETYDC2GMLTT15Y0G5VUZB4TJGKPBVBCG3IEU2YZWSNYD3';
 var key = version + clientid + clientSecret;
 
 //Define Template7 for map tooltip popup
@@ -85,9 +85,7 @@ $(function() {
 
     $grid.on( 'arrangeComplete',
       function( event, filteredItems ) {
-        // console.log( 'Isotope arrange completed on ' +
-          // filteredItems.length + ' items' );
-            console.log(filteredItems);
+        
             _(filteredItems).each(function(item,i){
                 if(i<10){
                     $(item.element).show(); 
@@ -117,8 +115,6 @@ $(function() {
     let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+ key +'&limit=100&ll=-36.8446152873055,174.76662397384644';
 
     if(venueArray.length == 0){
-
-        console.log("Called initial Ajax request");
 
         $.ajax({
             url: exploreUrl,
@@ -155,8 +151,6 @@ $(function() {
     });
 
     $('#grid-container').on('click','.fa-star', function(){
-
-        console.log('Star Clicked');
 
         var clickedStar = $(this).data('star');
 
@@ -244,8 +238,6 @@ $(function() {
 //Initiates AJAX request on each of the explored venues and outputs informtion into the popular section.
 
 function getTrending(venueArray){
-
-    console.log('Called Get Trending');
 
     let popularHTML = $('#templatePopular').text();
     let popularTemplate = Template7(popularHTML).compile();
@@ -375,8 +367,6 @@ function displayFilteredVenue(filter){
 
 function displayVenues(venues){
 
-    console.log('Called Display Venues');
-
     var icon = '';
 
     var foundCategory;
@@ -428,7 +418,7 @@ function displayVenues(venues){
         }
 
         let venueIcon = L.icon({
-            iconUrl: '../assets/icons/' + icon + '.svg',
+            iconUrl: 'assets/icons/' + icon + '.svg',
             iconSize: [20,20]
         });
 
@@ -482,7 +472,7 @@ function getDirections(lat,lng){
 
             // Add user marker to the map
 
-            let icon = L.icon({iconUrl:'../assets/icons/youIcon.svg', iconSize:[30,30]});
+            let icon = L.icon({iconUrl:'assets/icons/youIcon.svg', iconSize:[30,30]});
 
             var currentPosition = {lat:userLatitude,lng:userLongitude};
             let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
@@ -520,7 +510,7 @@ function outputBusStops(){
     _(busStopArray).each(function(busStop){
 
         let venueIcon = L.icon({
-            iconUrl: '../assets/icons/bus.svg',
+            iconUrl: 'assets/icons/bus.svg',
             iconSize: [15,15]
         });
 
