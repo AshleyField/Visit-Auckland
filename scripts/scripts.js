@@ -14,8 +14,8 @@ var restaurantCategories = ["Burger Joint", "Indian Restaurant", "Food Court", "
 
 //Initiate leaflet key globally
 var version = '?v=20170901';
-var clientid = '&client_id=0JAUKKKVPNVWEFUH1XVPAGLBLLTYL3MI3CPRGALPHLRVO1U5';
-var clientSecret = '&client_secret=VAJETYDC2GMLTT15Y0G5VUZB4TJGKPBVBCG3IEU2YZWSNYD3';
+var clientid = '&client_id=3CHDN52TALDRNQOILFYUQIJNFUCWEGEPSY2XSPMBM2QAIQT2';
+var clientSecret = '&client_secret=ZQONLR01YBAUSH5K3WD31NZCFW4LBSAZTENXYJD43JX1PDHX';
 var key = version + clientid + clientSecret;
 
 //Define Template7 for map tooltip popup
@@ -85,7 +85,7 @@ $(function() {
 
     $grid.on( 'arrangeComplete',
       function( event, filteredItems ) {
-        
+
             _(filteredItems).each(function(item,i){
                 if(i<10){
                     $(item.element).show(); 
@@ -141,6 +141,8 @@ $(function() {
             }
         });
     }
+
+    //When user clicks a filter on the map run the filter venue function.
 
     $('.map-filter-row').on('click', function(){
         markerLayer.clearLayers();
@@ -217,6 +219,8 @@ $(function() {
 
         }
     });
+
+    //Create AT API and store in an array.
 
     $.ajax({
         url: "https://api.at.govt.nz/v2/gtfs/stops/geosearch?lat=-36.845744&lng=174.766994&distance=500",
@@ -324,6 +328,7 @@ function smoothScroll(dataTo){
     }
 }
 
+//filter icons on the map based of what a user clicks on
 function displayFilteredVenue(filter){
 
     busStopLayer.clearLayers();
@@ -360,6 +365,7 @@ function displayFilteredVenue(filter){
 
         });
 
+        //Run the display venues function with a filtered array passed which is the filter the user has clicked.
         displayVenues(filteredArray);
     }
 
@@ -373,10 +379,11 @@ function displayVenues(venues){
 
     markerLayer.clearLayers();
 
+    //Loop through venues and check to see what category it falls under and output the correct icon.
+
     _(venues).each(function(venue){
 
         var foundCategory = false;
-
 
         if(venue.category == "Park"){
             icon = 'parkIcon';
@@ -422,7 +429,7 @@ function displayVenues(venues){
             iconSize: [20,20]
         });
 
-
+        //Add marker to marker layer group
 
         let marker = L.marker(venue.latlng, {icon: venueIcon}).addTo(markerLayer);
         marker.venueid = venue.venueid;
@@ -505,6 +512,7 @@ function getDirections(lat,lng){
     }
 }
 
+//Function to output bus stop markers onto the map
 function outputBusStops(){
 
     _(busStopArray).each(function(busStop){
@@ -513,6 +521,8 @@ function outputBusStops(){
             iconUrl: 'assets/icons/bus.svg',
             iconSize: [15,15]
         });
+
+        //Add marker to the bus stop layer group
 
         let marker = L.marker({lat: busStop.stop_lat, lng: busStop.stop_lon}, {icon: venueIcon}).addTo(busStopLayer);
         marker.busStopID = busStop.stop_code;
