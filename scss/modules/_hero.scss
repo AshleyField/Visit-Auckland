@@ -1,6 +1,6 @@
 .header {
 	height: 100vh;
-	background-image: url('../../assets/images/hero-image-mobile.jpeg');
+	background-image: url('../assets/images/hero-image-mobile.jpeg');
 	background-position: center;
 	background-size: cover;
 	position: relative;
@@ -122,6 +122,6 @@
 @media only screen and (min-width : 60em) {
 
 	.header {
-		background-image: url('../../assets/images/hero-image-desktop.jpeg');
+		background-image: url('../assets/images/hero-image-desktop.jpeg');
 	}
 }

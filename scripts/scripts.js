@@ -9,11 +9,11 @@ $(function() {
     const key = version + clientid + clientSecret;
 
     //icons
-    var iconFood = '../assets/images/lightbluepin.svg';
-    var iconDrinks = '../assets/images/darkbluepin.svg';
-    var iconShop = '../assets/images/pinkpin.svg';
-    var iconSight = '../assets/images/purplepin.svg';
-    var iconUser = '../assets/images/user.svg';
+    var iconFood = 'assets/images/lightbluepin.svg';
+    var iconDrinks = 'assets/images/darkbluepin.svg';
+    var iconShop = 'assets/images/pinkpin.svg';
+    var iconSight = 'assets/images/purplepin.svg';
+    var iconUser = 'assets/images/user.svg';
 
     
     let map;
@@ -323,7 +323,7 @@ $(function() {
                                 var address = venue.location.address;
 
                                 var price = 'not available';
-                                
+
                                 if (venue.price) {
 
                                     price = venue.price.message;  
