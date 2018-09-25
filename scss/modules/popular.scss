@@ -1,7 +1,9 @@
 /*All devices and mobile phone*/
 
 .popular{
-
+	// position:relative;
+	// z-index:1000;
+	background-color:white;
 	padding:1em 0 1em 0;
 
 	.popular-filter{
@@ -169,6 +171,13 @@
 
     	padding-top:1.5em;
     	padding-bottom:1.5em;
+    	margin:4em;
+
+    	.container-fluid{
+    		// margin:auto;
+    		padding-left:2em;
+    		padding-right:2em;
+    	}
 
     	#pop-content{
 

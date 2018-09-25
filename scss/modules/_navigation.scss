@@ -52,7 +52,7 @@ nav {
 		a {
 			text-decoration: none;
 			color: #fff;
-			@include textShadow;
+			// @include textShadow;
 		}
 	}
 
@@ -143,7 +143,7 @@ nav {
 					text-decoration: none;
 					color: #fff;
 					font-weight: 300;
-					@include textShadow;
+					// @include textShadow;
 				}
 			}
 

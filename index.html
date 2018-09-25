@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Visit Auckland | Home</title>
+	<!-- plugins -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 	<!-- Viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,289 +38,332 @@
 
 </head>
 <body id="index">
-	<div class="wrapper">
+	<div id="scroll">
+		<div class="wrapper">
 
-		<div class="header">
-			<nav>
+<!-- Header section START -->
+			<div class="header">
+				<nav>
 
-				<div class="logo">
-					<a href="index.html">
-						<img src="assets/images/visit-auckland-logo-white.png" alt="">
-					</a>
-				</div>
-
-				<div class="bars">
-					<i class="fas fa-bars"></i>
-				</div>
-
-				<ul class="navigation mobile-nav" data-nav="close">
-					<li><a href="/" class="active">Home</a></li>
-					<li><a href="staff.html"  data-to=".staff-profiles">Meet the team</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
-				</ul>
-
-				<ul class="navigation desktop-nav" data-nav="close">
-					<li><a href="/" class="active">Home</a></li>
-					<li><a href="staff.html"  data-to=".staff-profiles">Meet the team</a></li>
-					<li><a href="">Contact</a></li>
-					<li><a href="" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
-				</ul>
-			</nav>
-			
-			<div class="hero">
-
-				<div class="hero-inner">
-					<h1>We help you find awesome places</h1>
-					<h2>Navigate Auckland like a pro!</h2>
-					<div class="hero-button">
-						<a href="">Go To Map</a>
+					<div class="logo">
+						<a href="index.html">
+							<img src="assets/logo/logo-update-white.png" alt="" href="#">
+						</a>
 					</div>
-				</div>
-				
-			</div>
-		</div>
- <!-- popular section -->
-		<div class="popular">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12 col-md-6" id=pop-content>
-						<h1>Popular</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit doloribus quod sit.</p>
-						<div class="popular-filter">
-							<div class="flex-box">
-								<h5>Filter:</h5>
-								<ul class="flex-box">
-									<li><i class="fas fa-shopping-bag"></i></li>
-									<li><i class="fas fa-utensils"></i></li>
-									<li><i class="fas fa-glass-martini"></i></li>
-									<li><i class="fas fa-map-marked-alt"></i></li>
-								</ul>
-							</div>
-						</div>
+
+					<div class="bars">
+						<i class="fas fa-bars"></i>
 					</div>
-					<!-- popular grid -->
-					<div class="col-xs-12 col-md-6" id="grid-container">
-						<div class="grid-bla">
-							<div class="grid-sizer-bla"></div>
-						</div>
-					</div><!-- end of popular grid -->
-				</div><!-- end of row -->
-			</div><!-- end of container -->
-		</div><!-- end of popular -->
 
-
-		<div class="map-area">
-			<div id="map"></div>
-
-				<div class="modal" id="venueModal" tabindex="-1" role="dialog">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title">Modal title</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				        
-				        <div class="left"></div>
-				        <div class="right"></div>
-				      </div>
-				      <div class="modal-footer">
-				        <!-- <button type="button" class="btn btn-primary">Website</button> -->
-				        <a href="{{response.venue.shortUrl}}" target="_blank" class="btn btn-primary">Website</a>
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-
-				<div class="form-filter-area">
-					<form id="search-form">
-						<input type="text" class="form-control" id="keyword" placeholder="search">
-						<button type="submit"><i class="fas fa-search"></i></button>
-					</form>
-
-					<div class="filter">
-						<p>Filter:</p>
-						<a class="filter-icon food" href=""><i class="fas fa-utensils"></i></a>
-						<a class="filter-icon drinks" href=""><i class="fas fa-cocktail"></i></a>
-						<a class="filter-icon hotels" href=""><i class="fas fa-hotel"></i></a>
-						<a class="filter-icon landmarks" href=""><i class="fas fa-monument"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<section class="upcoming-events">
-			<div class="heading">
-				<h1>UPCOMING EVENTS</h1>
-				<div class="info">
-					<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
-				</div>
-			</div>
-
-			<!-- <div class="info">
-				<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
-			</div> -->
-
-			<div class="events">
-				<img class="upcoming-events-images" src="assets/images/music-final.jpg" alt="">
-				<div class="details">
-					<i class="left fas fa-plus"></i>
-					<!-- <i class="left fas fa-plus-circle"></i> -->
-					<i class="right fas fa-link"></i>
-					<!-- <i class="right fas fa-plus-circle"></i> -->
-					<h2 class="upcoming-events-h2">Heading</h2>
-					<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-				</div>
-			</div>
-
-			<div class="events">
-				<img class="upcoming-events-images" src="assets/images/food-final.jpg" alt="">
-				<div class="details">
-					<i class="left fas fa-plus"></i>
-					<!-- <i class="left fas fa-plus-circle"></i> -->
-					<i class="right fas fa-link"></i>
-					<!-- <i class="right fas fa-plus-circle"></i> -->
-					<h2 class="upcoming-events-h2">Heading</h2>
-					<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-				</div>
-			</div>
-
-			<div class="events">
-				<img class="upcoming-events-images" src="assets/images/open-final.jpg" alt="">
-				<div class="details">
-					<i class="left fas fa-plus"></i>
-					<!-- <i class="left fas fa-plus-circle"></i> -->
-					<i class="right fas fa-link"></i>
-					<!-- <i class="right fas fa-plus-circle"></i> -->
-					<h2 class="upcoming-events-h2">Heading</h2>
-					<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-				</div>
-			</div>	
-		</section>
-
-		<footer>
-			<div class="footer-container">
-				<div class="logo-address footer-row">
-					<img src="assets/images/visit-auckland-logo-white.png" alt="">
-					<p>3 City Road, Grafton, Auckland</p>
-				</div>
-				<div class="footer-links footer-row">
-					<h1>Quick Links</h1>
-					<ul class="footer-page-links">
-						<li class="hover">Home</li>
-						<li class="hover">Meet the team</li>
-						<li class="hover">Contact</li>
+					<ul class="navigation mobile-nav pure-menu-list" data-nav="close">
+						<li class="pure-menu-item active high"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
+						<li class="pure-menu-item"><a href="#"  data-to=".section2" class="pure-menu-link">Popular</a></li>
+						<li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
+						<li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
+						<li class="pure-menu-item low"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
 					</ul>
 
-				</div>
+					<div class="pure-menu pure-menu-horizontal">
+						<ul class="navigation desktop-nav pure-menu-list" data-nav="close">
+							<li class="pure-menu-item active"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
+							<li class="pure-menu-item"><a href="#"  data-to=".section2" class="pure-menu-link">Popular</a></li>
+							<li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
+							<li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
+							<li class="pure-menu-item"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
+						</ul>
+					</div>
+				
+				</nav>
+				
+				<section class="section1">
+					<div class="hero">
 
-				<div class="footer-social footer-row">
-					<h1>Follow Us</h1>
-					<div class="social-row">
-						<i class="fab fa-facebook-square"></i>
-						<p class="hover">Facebook</p>
-					</div>
-					<div class="social-row">
-						<i class="fab fa-instagram"></i>
-						<p class="hover">Instagram</p>
-					</div>
-					<div class="social-row">
-						<i class="fab fa-twitter-square"></i>
-						<p class="hover">Twitter</p>
-					</div>
-					<div class="social-row">
-						<i class="fab fa-youtube-square"></i>
-						<p class="hover">YouTube</p>
-					</div>
-				</div>
-
-				<div class="footer-signup footer-row">
-					<h1>Subscribe to our newsletter</h1>
-					<h2>We will send you weekly emails with what were doing</h2>
-					<div class="signupbox">
-						<div class="input-area">
-							<p>E-mail</p>
+						<div class="hero-inner">
+							<h1>At Visit Auckland</h1> <h2>we help you find awesome places</h2>
+							<h3>Navigate Auckland like a pro!</h3>
+							<div class="hero-button">
+								<a href="">Go To Map</a>
+							</div>
 						</div>
-						<div class="submit-box">
-							<i class="fas fa-sign-in-alt"></i>
-						</div>
+						
 					</div>
-				</div>
-
-
+				</section>
 			</div>
-		</footer>
+<!-- Header section END-->
 
-		<div class="modal" tabindex="-1" role="dialog" id="loginModal">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-body">
-		      	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      	<div class="login-area">
-		      		<div class="login-title">
-		      			<h1>Login</h1>
-		      		</div>
-		      		<div class="login-fields">
-		      			<form action="">
-		      				<div class="form-row">
-			      				<input type="text" name="Username" placeholder="Username">
-		      				</div>
-		      				<div class="form-row">
-			      				<input type="text" name="Passsword" placeholder="Password">	
-		      				</div>
-		      				<div class="form-row">
-		      					<input type="submit" value="Submit" id="submit">
-		      				</div>
-		      				
-		      			</form>
-
-		      			<div class="social-title">
-		      				<h1>Or...</h1>
-		      			</div>
-
-						<div class="social">
-							<div class="social-row"> 
-								<i class="fab fa-facebook-f"></i>
-								<p>Sign in with Facebook</p>
-							</div>
-
-							<div class="social-row"> 
-								<i class="fab fa-google"></i>
-								<p>Sign in with Google</p>
+<!-- popular section START -->
+	 	<section class="section2">
+			<div class="popular">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 col-md-6" id=pop-content>
+							<h1>Popular</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit doloribus quod sit.</p>
+							<div class="popular-filter">
+								<div class="flex-box">
+									<h5>Filter:</h5>
+									<ul class="flex-box">
+										<li><i class="fas fa-utensils"></i></li>
+										<li><i class="fas fa-cocktail"></i></li>
+										<li><i class="fas fa-hotel"></i></li>
+										<li><i class="fas fa-ticket-alt"></i></li>
+									</ul>
+								</div>
 							</div>
 						</div>
+						<!-- popular grid -->
+						<div class="col-xs-12 col-md-6" id="grid-container">
+							<div class="grid-bla">
+								<div class="grid-sizer-bla"></div>
+							</div>
+						</div><!-- end of popular grid -->
+					</div><!-- end of row -->
+				</div><!-- end of container -->
+			</div><!-- end of popular -->
+		</section>
+<!-- popular section END -->
 
-		      		</div>
-		      	</div>
-		      </div>
-		    </div>
-		  </div>
+<!-- Map section START -->
+		<section class="section3">
+			<div class="map-area">
+				<div id="map"></div>
+
+					<div class="modal" id="venueModal" tabindex="-1" role="dialog">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title">Modal title</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        
+					        <div class="left"></div>
+					        <div class="right"></div>
+					      </div>
+					      <div class="modal-footer">
+					        <a href="https://www.google.com/maps/dir/Current+Location/174.76662397384644,-36.8446152873055" target="_blank" class="btn btn-primary2 get-directions">Directions</a>
+					        <a href="#" target="_blank" class="btn btn-primary website-url">Website</a>
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="form-filter-area">
+						<form id="search-form">
+							<input type="text" class="form-control" id="keyword" placeholder="search    (doesn't work)">
+							<button type="submit"><i class="fas fa-search"></i></button>
+						</form>
+
+						<div class="filter">
+							<p>Filter:</p>
+							<a class="filter-icon food" href="">
+								<i class="fas fa-utensils">
+									<p>Food</p>
+								</i>
+							</a>
+							<a class="filter-icon drinks" href="">
+								<i class="fas fa-cocktail">
+									<p>Drink</p>
+								</i>
+							</a>
+							<a class="filter-icon hotels" href="">
+								<i class="fas fa-hotel">
+									<p>Hotels</p>
+								</i>
+							</a>
+							<a class="filter-icon landmarks" href="">
+								<i class="fas fa-ticket-alt"></i>
+									<p>Entertainment</p>
+								</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+<!-- Map section END -->
+
+<!-- Upcoming events section START -->
+		<section class="section4">
+			<section class="upcoming-events">
+				<div class="heading">
+					<h1>UPCOMING EVENTS</h1>
+					<div class="info">
+						<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
+					</div>
+				</div>
+
+				<!-- <div class="info">
+					<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
+				</div> -->
+
+				<div class="events">
+					<img class="upcoming-events-images" src="assets/images/music-final.jpg" alt="">
+					<div class="details">
+						<i class="left fas fa-plus"></i>
+						<!-- <i class="left fas fa-plus-circle"></i> -->
+						<i class="right fas fa-link"></i>
+						<!-- <i class="right fas fa-plus-circle"></i> -->
+						<h2 class="upcoming-events-h2">Heading</h2>
+						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+
+				<div class="events">
+					<img class="upcoming-events-images" src="assets/images/food-final.jpg" alt="">
+					<div class="details">
+						<i class="left fas fa-plus"></i>
+						<!-- <i class="left fas fa-plus-circle"></i> -->
+						<i class="right fas fa-link"></i>
+						<!-- <i class="right fas fa-plus-circle"></i> -->
+						<h2 class="upcoming-events-h2">Heading</h2>
+						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+
+				<div class="events">
+					<img class="upcoming-events-images" src="assets/images/open-final.jpg" alt="">
+					<div class="details">
+						<i class="left fas fa-plus"></i>
+						<!-- <i class="left fas fa-plus-circle"></i> -->
+						<i class="right fas fa-link"></i>
+						<!-- <i class="right fas fa-plus-circle"></i> -->
+						<h2 class="upcoming-events-h2">Heading</h2>
+						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>	
+			</section>
+		</section>
+<!-- Upcoming events section END -->
+
+<!-- Footer section START -->
+			<footer>
+				<div class="footer-container">
+					<div class="logo-address footer-row">
+						<!-- <h2>Visit Auckland</h2> -->
+						<img src="assets/logo/logo-update-white.png" alt="">
+						<p>3 City Road, Grafton, Auckland</p>
+					</div>
+					<div class="footer-links footer-row">
+						<h1>Quick Links</h1>
+						<ul class="footer-page-links">
+							<li class="hover">Home</li>
+							<li class="hover">Meet the team</li>
+							<li class="hover">Contact</li>
+						</ul>
+
+					</div>
+
+					<div class="footer-social footer-row">
+						<h1>Follow Us</h1>
+						<div class="social-row">
+							<i class="fab fa-facebook-square"></i>
+							<p class="hover">Facebook</p>
+						</div>
+						<div class="social-row">
+							<i class="fab fa-instagram"></i>
+							<p class="hover">Instagram</p>
+						</div>
+						<div class="social-row">
+							<i class="fab fa-twitter-square"></i>
+							<p class="hover">Twitter</p>
+						</div>
+						<div class="social-row">
+							<i class="fab fa-youtube-square"></i>
+							<p class="hover">YouTube</p>
+						</div>
+					</div>
+
+					<div class="footer-signup footer-row">
+						<h1>Subscribe to our newsletter</h1>
+						<h2>We will send you weekly emails with what were doing</h2>
+						<div class="signupbox">
+							<div class="input-area">
+								<p>E-mail</p>
+							</div>
+							<div class="submit-box">
+								<i class="fas fa-sign-in-alt"></i>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</footer>
+<!-- Footer section END -->
+
+<!-- Login section START -->
+			<div class="modal" tabindex="-1" role="dialog" id="loginModal">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      	<div class="login-area">
+			      		<div class="login-title">
+			      			<h1>Login</h1>
+			      		</div>
+			      		<div class="login-fields">
+			      			<form action="">
+			      				<div class="form-row">
+				      				<input type="text" name="Username" placeholder="Username">
+			      				</div>
+			      				<div class="form-row">
+				      				<input type="text" name="Passsword" placeholder="Password">	
+			      				</div>
+			      				<div class="form-row">
+			      					<input type="submit" value="Submit" id="submit">
+			      				</div>
+			      				
+			      			</form>
+
+			      			<div class="social-title">
+			      				<h1>Or</h1>
+			      			</div>
+
+							<div class="social">
+								<div class="social-row"> 
+									<i class="fab fa-facebook-f"></i>
+									<p>Sign in</p>
+								</div>
+
+								<div class="social-row"> 
+									<i class="fab fa-google"></i>
+									<p>Sign in</p>
+								</div>
+							</div>
+
+			      		</div>
+			      	</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<!-- Login section END -->
+
 		</div>
-
 	</div>
 
-	<!-- jQuery -->
+<!-- jQuery -->
 
-			<!-- script for popular section -->
-		<script id="templatePopular" type="text/template7">
-
-			<div class="grid-item-bla">				
-				<div class="grid-content size">
-					<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
-					<div class="pop-info">
-						<i class="fas fa-plus"></i>
-						<p class="pop-name">{{name}}</p>
-						<i class="fas fa-star"></i>
-					</div>
+<!-- script for popular section START -->
+	<script id="templatePopular" type="text/template7">
+		<div class="grid-item-bla">				
+			<div class="grid-content size">
+				<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
+				<div class="pop-info">
+					<i class="fas fa-plus"></i>
+					<p class="pop-name">{{name}}</p>
+					<i class="fas fa-star"></i>
 				</div>
 			</div>
-		</script>
+		</div>
+	</script>
+<!-- script for popular section START -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -337,7 +382,11 @@
 	<script src="scripts/underscore.js"></script>
 	<script src="scripts/template7.js"></script>
 
+
+	<!-- <script src="scripts/anime.js"></script> -->
 	<script src="scripts/scripts.js"></script>
+
+
 
 </body>
 </html>

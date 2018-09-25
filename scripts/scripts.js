@@ -3,7 +3,7 @@
 
 $(function() {
 
-    // Open and close nav on mobile
+    // Open and close nav on mobile ------------------------------
     $('.bars').on('click', function(e) {
 
         var navData = $('.navigation').data('nav');
@@ -12,7 +12,7 @@ $(function() {
 
         if (navData == 'close') {
             $('.navigation').addClass('nav-open')
-                .data('nav', 'open')
+                .data('nav', 'open');
 
             $('.bars>i').first().removeClass('fas fa-bars')
                 .addClass('fas fa-times');
@@ -32,7 +32,9 @@ $(function() {
         e.preventDefault();
     });
 
-    // masonry grid for popular section
+    //-----------------------------------------------------------
+
+    // masonry grid for popular section -------------------------
     var $grid = $('.grid-bla').isotope({
       
       itemSelector: '.grid-item-bla',
@@ -43,132 +45,152 @@ $(function() {
 
       }
     });
+    //-----------------------------------------------------------
+
+    //-----------------------------------------------------------
 
     $(function() {
     
     getTrending();
-    let userLatitude = 0;
-    let userLongitude = 0;
 
     function getTrending(){
+        let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
+        console.log(exploreUrl);
+        $.ajax({
+            url:exploreUrl,
+            dataType:'jsonp',
+            success:function(res){
+                let popularHTML = $('#templatePopular').text();
+                let popularTemplate = Template7(popularHTML).compile();
 
-            let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&ll=-36.8446152873055,174.76662397384644&limit=9';
-            console.log(exploreUrl);
-            $.ajax({
-                url:exploreUrl,
-                dataType:'jsonp',
-                success:function(res){
+                _(res.response.groups["0"].items).each(function(item){
 
-                    console.log(res);
+                    let venueid = item.venue.id;
+                    let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
+                    $.ajax({
+                        url: venueUrl,
+                        success:function(res){
+                            
+                            let output = popularTemplate(res.response.venue);
+                            
+                            var gridItem = $(output);
 
-                    let popularHTML = $('#templatePopular').text();
-                    let popularTemplate = Template7(popularHTML).compile();
-
-                    _(res.response.groups["0"].items).each(function(item){
-
-                        let venueid = item.venue.id;
-                        let venueUrl = 'https://api.foursquare.com/v2/venues/'+venueid+key;
-                        $.ajax({
-                            url: venueUrl,
-                            success:function(res){
-                                
-                                let output = popularTemplate(res.response.venue);
-                                
-                                var gridItem = $(output);
-
-                                $grid.append(gridItem)
-                                .isotope('appended', gridItem);
-
-                            }
-                        });
-
-
+                            $grid.append(gridItem)
+                            .isotope('appended', gridItem);
+                        }
                     });
+                });
+            }
+        });
+    }
+    });
 
-                }
-            });
+    //--------------------------------------------------------------------------
+
+    // var offset1 = $('.section1').offset().top;
+    var offset2 = $('.section2').offset().top;
+    var offset3 = $('.section3').offset().top;
+    var offset4 = $('.section4').offset().top;
+
+    //sticky menu---------------------------------------------------------------
+
+    var menuOffset = $('.pure-menu-horizontal').offset();
+    $(document).on('scroll',function(){
+
+        var iScrollTop = $(document).scrollTop();
+   
+
+        if(iScrollTop > menuOffset.top){
+            //fix it
+            $('.pure-menu-horizontal').addClass('fixed');
+        }else{
+            //unfix it
+            $('.pure-menu-horizontal').removeClass('fixed');
+
+        }
+
+        if(iScrollTop > offset2 + -100){
+
+            $('.pure-menu-horizontal').addClass('background-fixed');
+        }else{
+            $('.pure-menu-horizontal').removeClass('background-fixed');
+        }
+
+        if(iScrollTop > offset2 + -0){
+
+            $('.fa-bars').addClass('bars-fixed');
+        }else{
+            $('.fa-bars').removeClass('bars-fixed');
         }
     });
 
-    $("button").click(function(){
-                                    
+    //-------------------------------------------------------------------------
 
-        //get directions
+    //Sections scrolling highlight---------------------------------------------
+    $(document).on('scroll',function(){
+        var iScrollTop = $(document).scrollTop();
 
-        //getting users position
-        if (navigator.geolocation) {
+        var activeLi;
 
-            navigator.geolocation.getCurrentPosition(function(position) {
-                userLatitude  = position.coords.latitude;
-                userLongitude = position.coords.longitude;
-
-                // Add marker to the map
-                console.log(userLongitude,userLatitude);
-
-                let icon = L.icon({iconUrl:iconUser, iconSize:[60,60]});
-
-                var currentPosition = {lat:userLatitude,lng:userLongitude};
-                let marker = L.marker(currentPosition,{icon:icon}).addTo(map);
-
-
-                 //create a request for directions
-                 var request = {
-                    origin: currentPosition,
-                    destination: currentMarker.getLatLng(),
-                    travelMode: 'WALKING'
-                };
-                //ask directionsService to fulfill your request
-                directionsService.route(request,function(response,status){
-                    if(status == 'OK'){
-                        var overview_path = response.routes["0"].overview_path;
-                        //display direction
-                        var path = _(overview_path).map(function(point){
-                            return {lat:point.lat(),lng:point.lng()}
-                        });
-                        var polyline = L.polyline(path, {color: 'red'});
-                        map.addLayer(polyline);
-
-
-                            // if(map.hasLayer(polyline)){
-                            //     polyline.redraw();
-                            // }
-
-                        // .addTo(map);
-
-                    }
-                });
-
-            });
-
-        } 
-        else { 
-            console.log('cannot access location');
+        var iScrollTopWithAdjustment = iScrollTop + 100;
+        
+        if(iScrollTopWithAdjustment<offset2){
+            activeLi = $('.pure-menu-list>li:nth-child(1)');
         }
-    });//button on click
+
+        if(iScrollTopWithAdjustment>=offset2 && iScrollTopWithAdjustment<offset3){
+            activeLi = $('.pure-menu-list>li:nth-child(2)');
+        }
+
+        if(iScrollTopWithAdjustment>=offset3 && iScrollTopWithAdjustment<offset4){
+            activeLi = $('.pure-menu-list>li:nth-child(3)');
+        }
+
+        if(iScrollTopWithAdjustment>=offset4){
+            activeLi = $('.pure-menu-list>li:nth-child(4)');
+        }
+
+        activeLi.addClass('active');
+        $('.pure-menu-list>li').not(activeLi).removeClass('active');
+    });
+    //-------------------------------------------------------------------------
+
+    //smooth scrolling---------------------------------------------------------
+
+    $('a[data-to]').on('click',function(e){
+        e.preventDefault();
+
+        var sTarget = $(this).data('to');
+        var targetOffsetTop = $(sTarget).offset().top;
+
+        $('html,body').animate({scrollTop:targetOffsetTop},1000);
+    });
+
+    $('h1.animated').addClass('invisible');
+
+    //-------------------------------------------------------------------------
 });
 
-
-
-//Raj START Map Trial --------------------------------------------------------------
+//Raj Map START --------------------------------------------------------------
 
 const version = '?v=20170901';
-const clientid = '&client_id=DAEVITOO0LDVKWQHKHHISOA4ZU31N2R4VVIALPEJSU2IEYRB';
-const clientSecret = '&client_secret=OBJ1ZRWZOIYNHHVMSLVQYNXEXWHNAVI4W2DYIQ3PL2B32EF5';
+const clientid = '&client_id=5W02W0U2ZV23NGGFCSJW2YTREHDK5AQ5NG13SPW2OTOL2A1S';
+const clientSecret = '&client_secret=OTL15PWBNFM2TCBSCNE3XVSC4GNDALSVFVH124CS51R1JYQT';
 const key = version + clientid + clientSecret;
 
-var food = '4d4b7105d754a06374d81259'
-var drinks = '4bf58dd8d48988d11a941735'
-var hotels = '4bf58dd8d48988d1fa931735'
-var landmarks = '4c38df4de52ce0d596b336e1'
-
-
+var food = '4d4b7105d754a06374d81259';
+var drinks = '4bf58dd8d48988d11a941735';
+var hotels = '4bf58dd8d48988d1fa931735';
+var landmarks = '4d4b7104d754a06370d81259';
 
 let map;
 
 $(function(){
 
     let center = [-36.8446152873055,174.76662397384644];
-    map = L.map('map').setView(center,17);
+    map = L.map('map',{
+        scrollWheelZoom:false,
+    }).setView(center,17);
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGhhbHl4OTAiLCJhIjoiY2o2YjdrZHRlMWJmYjJybDd2cW1rYnVnNSJ9.j_DQLfixHfhioVjH6qmqkw').addTo(map);
 
     var foodGroup = L.layerGroup().addTo(map);
@@ -178,18 +200,11 @@ $(function(){
 
     //vicinity circle
     L.circle(center, {
-                        radius: 600,
-                        color: 'transparent',
-                        weight:1,
-                        fill:'grey'
-                    }).addTo(map);
-
-
-
-    // stop mouse scroll over map when scrolling through website -----------------------
-    // map.scrollWheelZoom.disable();
-    // this.map.on('click', () => { this.map.scrollWheelZoom.enable();});
-    // this.map.on('mouseout', () => { this.map.scrollWheelZoom.disable();});
+        radius: 600,
+        color: 'transparent',
+        weight:1,
+        fill:'grey'
+    }).addTo(map);
 
     getVenues('-36.844720,174.766553',food,'scripts/plus-food.svg',foodGroup);
     getVenues('-36.844720,174.766553',drinks,'scripts/plus-drinks.svg',drinksGroup);
@@ -200,9 +215,9 @@ $(function(){
         e.preventDefault();
 
         if(map.hasLayer(foodGroup)){
-            map.removeLayer(foodGroup)
+            map.removeLayer(foodGroup);
         }else{
-            map.addLayer(foodGroup)
+            map.addLayer(foodGroup);
         }
     });
 
@@ -210,9 +225,9 @@ $(function(){
         e.preventDefault();
 
         if(map.hasLayer(drinksGroup)){
-            map.removeLayer(drinksGroup)
+            map.removeLayer(drinksGroup);
         }else{
-            map.addLayer(drinksGroup)
+            map.addLayer(drinksGroup);
         }
     });
 
@@ -220,9 +235,9 @@ $(function(){
         e.preventDefault();
 
         if(map.hasLayer(hotelsGroup)){
-            map.removeLayer(hotelsGroup)
+            map.removeLayer(hotelsGroup);
         }else{
-            map.addLayer(hotelsGroup)
+            map.addLayer(hotelsGroup);
         }
     });
 
@@ -230,34 +245,26 @@ $(function(){
         e.preventDefault();
 
         if(map.hasLayer(landmarksGroup)){
-            map.removeLayer(landmarksGroup)
+            map.removeLayer(landmarksGroup);
         }else{
-            map.addLayer(landmarksGroup)
+            map.addLayer(landmarksGroup);
         }
     });
-
-
-
 });
-
-//Raj END Map Trial --------------------------------------------------------------
 
 function getVenues(ll,section,icon,layerGroup){
 
     //Explore venues -- foursquare api
 
-    // let exploreUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&section='+section+'&limit=20&radius=500&ll='+ll;
     let searchUrl = 'https://api.foursquare.com/v2/venues/explore'+key+'&categoryId='+section+'&limit=20&radius=500&ll='+ll;
 
-    console.log(searchUrl)
+    console.log(searchUrl);
 
     $.ajax({
         url:searchUrl,
         datatype:'jsonp',
         success: function(res){
             var data = res.response.groups["0"].items;
-
-            // console.log(res);
 
             var venues = _(data).map(function(item){
 
@@ -269,28 +276,24 @@ function getVenues(ll,section,icon,layerGroup){
                 };
 
             });
-            console.log(venues);
 
             _(venues).each(function(venue){
                 let venueIcon = L.icon({
                     iconUrl:icon,
                     iconSize:[30,30]
-                })
+                });
                 let marker = L.marker(venue.latlng,{icon:venueIcon}).addTo(layerGroup);
 
                 marker.venueid = venue.venueid;
             
                 marker.on('click',function(){
                     var venueUrl = 'https://api.foursquare.com/v2/venues/'+
-                    this.venueid+key
+                    this.venueid+key;
 
                     $.ajax({
                         url:venueUrl,
                         dataType:'jsonp',
                         success:function(res){
-
-                            console.log(res);
-
                             var venue = res.response.venue;
                             // $('.modal-body').text(venue.location);
                             $('.modal-title').text(venue.name);
@@ -300,17 +303,13 @@ function getVenues(ll,section,icon,layerGroup){
                                 var source = photo.prefix+'230x200'+photo.suffix;
 
                             }
-                            
-                            // $('.modal-footer>.btn-primary').empty();
-                            // $(+url+).appendTo('.modal-footer>.btn-primary');
 
                             $('.modal-body>.left').empty();
                             $('<img src="'+source+'">').appendTo('.modal-body>.left');
                             $('.modal-body>.right').empty();
                             if(venue.location.address){
                                 $('<p class="address-heading">Address:</p>').appendTo('.modal-body>.right');
-                                $('<p>'+venue.location.address+', '+venue.location.city+', '+venue.location.country+'</p>').appendTo('.modal-body>.right');
-                                
+                                $('<p>'+venue.location.address+', '+venue.location.city+', '+venue.location.country+'</p>').appendTo('.modal-body>.right');                               
                             }
 
                             if(venue.hours){
@@ -322,18 +321,26 @@ function getVenues(ll,section,icon,layerGroup){
                             }else{
                                  $('<p>No information. Visit Website for more details</p>').appendTo('.modal-body>.right');
                             }
-                           
+
+                            var directionsUrl = 'https://www.google.com/maps/dir/Current+Location/'+venue.location.lat+','+venue.location.lng;
+                            $('.get-directions').attr('href',directionsUrl);               
+
+                            if(venue.url){
+                                $('.website-url').attr('href',venue.url);
+                            }
                             $('#venueModal').modal('show');
                         }
-                    });
-
-                    
+                    });  
                 });
             });
         }
-    });
-
+    });    
 }
+
+//Raj END Map Trial --------------------------------------------------------------
+
+
+
 
 
 

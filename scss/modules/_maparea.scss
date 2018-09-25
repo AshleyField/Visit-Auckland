@@ -1,37 +1,13 @@
 /*All devices and mobile phone*/
 
-.bus-stop{
-	background-color: salmon;
-	border-radius: 5px;
-	display: flex;
-
-	>div:nth-child(1){
-		flex: 0 0 30px;
-		height: 30px;
-		background-image:url(bus.svg);
-		background-size:contain;
-
-	}
-
-	>div:nth-child(2){
-		flex: 1 0 0;
-		font-size: 10px;
-		color:white;
-
-	}
-}
-
-
-
-
-.custom-popup{
-	border:thin salmon solid;
-}
-
 // popup styling ------------------
 
+
 .modal-dialog{
-	margin-top:0.5em;
+	margin-top:1.5em;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:1em;
 
 
 	.modal-content{
@@ -44,11 +20,16 @@
 		.modal-body{
 			color:black;
 			// border:1px red solid;
-			display:flex;
+			display:block;
+
+			.left img{
+				width:100%;
+			}
 
 			.right{
 
 				.address-heading{
+					padding-top:3em;
 					margin-bottom:0em;
 					font-weight:bold;
 				}
@@ -80,6 +61,18 @@
 				font-size:0.8em;
 				font-weight:100;
 
+				&.btn-primary2{
+					background-color:black;
+					border-color:black;
+					color:white;
+					width:235%;
+
+					&:hover{
+						background-color: $purple;
+						border-color:$purple;
+					}
+				}
+
 				&.btn-primary{
 					background-color:black;
 					border-color:black;
@@ -106,8 +99,10 @@
 	font-family: $oswaldFont;
 	position: relative;
 	min-height: 100vh;
+	margin:auto;
 
 	#map{
+		z-index: 1;
 		position: absolute;
 		background-color:transparent;
 		top: 0;
@@ -134,7 +129,7 @@
 	justify-content: center;
 
 	#search-form{
-		z-index: 1000;
+		z-index: 1;
 		position: absolute;
 		top: 6vh;
 		width:60%;
@@ -189,11 +184,12 @@
 	}
 
 	.filter{
-		z-index: 1000;
+		z-index: 1;
 		// border: 1px red solid;
-		top: 90vh;
+		// margin-top:90vh;
+		top: 88vh;
 		width: 80%;
-		height: 3em;
+		height: 4em;
 		font-size: 15px;
 		background-color: white;
 		border:2px black solid;
@@ -204,14 +200,13 @@
 		font-family: $primaryFont;
 		display: flex;
 
-
 		p{
 			// padding-top: 2px;
 			// padding-left: 20px;
 			margin:auto;
 		}
 
-		a{
+		.filter-icon{
 			color: black;
 			// margin: 2px 0 0 45px; 
 			margin:auto;
@@ -228,8 +223,15 @@
 				color:$green-icon;
 			}
 
-			.fa-monument:hover{
+			.fa-ticket-alt:hover{
 				color:$orange-icon;
+			}
+
+			p{
+				font-family: $primaryFont;
+				font-size:0.8em;
+				font-weight:100;
+				padding-top:0.5em;
 			}
 		}
 
@@ -323,7 +325,32 @@
 
 	.modal-dialog{
 		margin-top:30vh;
+		// margin-left:auto;
+		// margin-right:auto;
 		// border:10px black solid;
+
+		.modal-body{
+			// width:none;
+			
+			.left{
+				width:49%;
+				float:left;
+				// flex:flex-wrap;
+
+			}
+
+			.right{
+				margin-top:0em;
+				width:50%;
+				float:right;
+
+				.address-heading{
+					padding-top:0em;
+				}
+
+			}
+
+		}
 	}
 
 	

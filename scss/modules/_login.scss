@@ -2,18 +2,25 @@
 
 #loginModal {
 	.modal-dialog {
-		max-width: 800px;
+		max-width: 98%;
+		
+		margin:auto;
+
 
 		.modal-content{
 			border-radius:0;
-			height:90vh;
+			height:95vh;
+			// margin:auto;
+			margin-left:-0.5em;
+			margin-top:4%;
+			// width:98%;
 		}
 	}
 }
 
 .login-area {
 	padding: 2em 1em;
-	padding-bottom: 6em;
+	// padding-bottom: 6em;
 
 	.login-title {
 		h1 {
@@ -21,7 +28,7 @@
 			font-family: $oswaldFont;
 			text-transform: uppercase;
 			letter-spacing: $displayLetterSpacing;
-			margin: 1em;
+			margin: 0.5em;
 		}
 	}
 
@@ -39,7 +46,7 @@
 			&:before {
 				content: '';
 				height: 2px;
-				width: 1.5em;
+				width: 2em;
 				background-color: $darkBlue;
 				position: absolute;
 				top: .6em;
@@ -50,7 +57,7 @@
 			&:after {
 				content: '';
 				height: 2px;
-				width: 1.5em;
+				width: 2em;
 				background-color: $darkBlue;
 				position: absolute;
 				top: .6em;
@@ -155,23 +162,30 @@
 }
 
 @media only screen and (min-width : 60em) {
-	.login-area{
-		padding: 2em 6em;
-		padding-bottom: 6em;
+	
+	#loginModal {
+		height: 100%;
+		margin-top:-2%;
 
-		.social-title {
-			h1 {
+		.login-area{
+			padding: 2em 6em;
 
-				&:before {
-					width: 4em;
-					left: 5em;
-				}
+			.social-title {
+				h1 {
 
-				&:after {
-					width: 4em;
-					right: 5em;
+					&:before {
+						width: 4em;
+						left: 5em;
+					}
+
+					&:after {
+						width: 4em;
+						right: 5em;
+					}
 				}
 			}
 		}
 	}
+
+	
 }
