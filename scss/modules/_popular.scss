@@ -6,18 +6,18 @@
 	position: relative;
 
 	&:before{
-			content:"";
-			display: block;
-  			height:5em;
-  			position:absolute;
-  			bottom:0;
-  			left:0;
-  			width:100%;
-  			z-index:20;
-  			background-image: linear-gradient(rgba(255,255,255,0) 10% ,rgba(255,255,255,1) 50%);
-  			pointer-events: none;
-  			z-index: 1;
-		}
+		content:"";
+		display: block;
+		height:5em;
+		position:absolute;
+		bottom:0;
+		left:0;
+		width:100%;
+		z-index:20;
+		background-image: linear-gradient(rgba(255,255,255,0) 10% ,rgba(255,255,255,1) 50%);
+		pointer-events: none;
+		z-index: 1;
+	}
 }
 
 .popular{
@@ -27,9 +27,16 @@
 	.popular-filter{
 		padding-top: 1em;
 
-		h5{
-			font-size: 0.9em;
+		.flex-box {
+			flex-wrap: wrap;
+
+			h5{
+				font-size: 0.9em;
+				margin-bottom: 1em;
+				flex: 1 0 90%;
+			}
 		}
+		
 	}
 
 
@@ -62,6 +69,22 @@
 			padding-left: 0;
 			list-style-type:none;
 			justify-content:space-around;
+			text-align: center;
+
+			li {
+				flex: 1 0 20%;
+
+				i {
+					transition: .3s ease all;
+				}
+
+				p {
+					width: 100%;
+					font-size: 1em;
+					font-weight: 400;
+					transition: .5s ease all;
+				}
+			}
 
 		}
 
@@ -231,11 +254,11 @@
 		.popular-filter{
 			padding-top: 3em;
 
-
 			h5{
+				font-size: 0.9em;
+				flex: 1 0 90%;
+				padding-bottom: .75em;
 				border-bottom: $lightBlue solid 2px;
-				padding-bottom: 0.5em;
-
 			}
 		}	
         
