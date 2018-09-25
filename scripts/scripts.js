@@ -321,23 +321,30 @@ $(function() {
                           
 
                                 var address = venue.location.address;
-                                var category = venue.categories.name;
 
                                 var price = 'not available';
+                                
                                 if (venue.price) {
-                                    var price = venue.price.message;  
+
+                                    price = venue.price.message;  
                                 } 
                                 
+                                var hours = '';
+                                var weekHours = '';
+                                var weekendHours = '';
+                                var weekDays = '';
+                                var weekendDays = '';
 
                                 if (venue.hours) {
 
-                                    var weekHours = venue.hours.timeframes["0"].open["0"].renderedTime;
-                                    var weekendHours = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].open["0"].renderedTime : '';
-                                    var weekDays = venue.hours.timeframes["0"].days; 
-                                    var weekendDays = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].days : '';   
+                                    weekHours = venue.hours.timeframes["0"].open["0"].renderedTime;
+                                    weekendHours = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].open["0"].renderedTime : '';
+                                    weekDays = venue.hours.timeframes["0"].days; 
+                                    weekendDays = venue.hours.timeframes["1"] ? venue.hours.timeframes["1"].days : '';   
 
                                 } else {
-                                    var hours = 'not available';
+
+                                    hours = 'not available';
                                 }
                                 
 
@@ -514,7 +521,7 @@ $(function() {
 //google init map function
 function initMap(){
 
-    directionsService = new google.maps.DirectionsService;
+    directionsService = new google.maps.DirectionsService();
     
 }
 
