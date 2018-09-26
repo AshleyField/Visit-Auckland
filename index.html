@@ -1,392 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Visit Auckland | Home</title>
-	<!-- plugins -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <meta charset="UTF-8">
+    <title>Visit Auckland | Home</title>
+    <!-- plugins -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
-	<!-- Viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	
-	<!-- Font Awesome (Icons) -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,600" rel="stylesheet">
 
-	<!-- Map -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+    <!-- Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
 
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-	
-	<!-- Favicons -->
-	<!-- <link rel="icon" type="image/png" href="assets/images/favicon-16x16.png" sizes="16x16">
+    <!-- Favicons -->
+    <!-- <link rel="icon" type="image/png" href="assets/images/favicon-16x16.png" sizes="16x16">
 	<link rel="icon" type="image/png" href="assets/images/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="assets/images/favicon-96x96.png" sizes="96x96"> -->
 
-	<!-- Styles -->
-	<link rel="stylesheet" href="css/style.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body id="index">
-	<div id="scroll">
-		<div class="wrapper">
+    <div id="scroll">
+        <div class="wrapper">
 
-<!-- Header section START -->
-			<div class="header">
-				<nav>
+            <!-- Header section START -->
+            <div class="header">
+                <nav>
 
-					<div class="logo">
-						<a href="index.html">
-							<img src="assets/logo/logo-update-white.png" alt="" href="#">
-						</a>
-					</div>
+                    <div class="logo">
+                        <a href="index.html"><img src="assets/logo/logo-update-white.png" alt=""></a>
+                    </div>
 
-					<div class="bars">
-						<i class="fas fa-bars"></i>
-					</div>
+                    <div class="bars">
+                        <i class="fas fa-bars"></i>
+                    </div>
+					
+					<div class="nav-body">
+	                    <ul class="navigation mobile-nav pure-menu-list" data-nav="close">
+	                        <li class="pure-menu-item active high"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
+	                        <li class="pure-menu-item"><a href="#" data-to=".section2" class="pure-menu-link">Popular</a></li>
+	                        <li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
+	                        <li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
+	                        <li class="pure-menu-item low"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
+	                    </ul>
+                    </div>
 
-					<ul class="navigation mobile-nav pure-menu-list" data-nav="close">
-						<li class="pure-menu-item active high"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
-						<li class="pure-menu-item"><a href="#"  data-to=".section2" class="pure-menu-link">Popular</a></li>
-						<li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
-						<li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
-						<li class="pure-menu-item low"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
-					</ul>
+                    <div class="pure-menu pure-menu-horizontal">
+                        <ul class="navigation desktop-nav pure-menu-list" data-nav="close">
+                            <li class="pure-menu-item active"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
+                            <li class="pure-menu-item"><a href="#" data-to=".section2" class="pure-menu-link">Popular</a></li>
+                            <li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
+                            <li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
+                            <li class="pure-menu-item"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
+                        </ul>
+                    </div>
 
-					<div class="pure-menu pure-menu-horizontal">
-						<ul class="navigation desktop-nav pure-menu-list" data-nav="close">
-							<li class="pure-menu-item active"><a href="#" data-to=".header" class="pure-menu-link">Home</a></li>
-							<li class="pure-menu-item"><a href="#"  data-to=".section2" class="pure-menu-link">Popular</a></li>
-							<li class="pure-menu-item"><a href="#" data-to=".section3" class="pure-menu-link">Map</a></li>
-							<li class="pure-menu-item"><a href="#" data-to=".section4" class="pure-menu-link">Upcoming Events</a></li>
-							<li class="pure-menu-item"><a href="#" class="login-button" data-target="#loginModal" data-toggle="modal">Login</a></li>
-						</ul>
-					</div>
-				
-				</nav>
-				
-				<section class="section1">
-					<div class="hero">
+                </nav>
 
-						<div class="hero-inner">
-							<h1>At Visit Auckland</h1> <h2>we help you find awesome places</h2>
-							<h3>Navigate Auckland like a pro!</h3>
-							<div class="hero-button">
-								<a href="">Go To Map</a>
-							</div>
-						</div>
-						
-					</div>
-				</section>
-			</div>
-<!-- Header section END-->
+                <section class="section1">
+                    <div class="hero">
 
-<!-- popular section START -->
-	 	<section class="section2">
-			<div class="popular">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12 col-md-6" id=pop-content>
-							<h1>Popular</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit doloribus quod sit.</p>
-							<div class="popular-filter">
-								<div class="flex-box">
-									<h5>Filter:</h5>
-									<ul class="flex-box">
-										<li><i class="fas fa-utensils"></i></li>
-										<li><i class="fas fa-cocktail"></i></li>
-										<li><i class="fas fa-hotel"></i></li>
-										<li><i class="fas fa-ticket-alt"></i></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- popular grid -->
-						<div class="col-xs-12 col-md-6" id="grid-container">
-							<div class="grid-bla">
-								<div class="grid-sizer-bla"></div>
-							</div>
-						</div><!-- end of popular grid -->
-					</div><!-- end of row -->
-				</div><!-- end of container -->
-			</div><!-- end of popular -->
-		</section>
-<!-- popular section END -->
+                        <div class="hero-inner">
+                            <h4>At Visit Auckland</h4>
+                            <h2>we help you find awesome places</h2>
+                            <h3>Navigate Auckland like a pro!</h3>
+                            <div class="hero-button">
+                                <a href="">Go To Map</a>
+                            </div>
+                        </div>
 
-<!-- Map section START -->
-		<section class="section3">
-			<div class="map-area">
-				<div id="map"></div>
+                    </div>
+                </section>
+            </div>
+            <!-- Header section END-->
 
-					<div class="modal" id="venueModal" tabindex="-1" role="dialog">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title">Modal title</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        
-					        <div class="left"></div>
-					        <div class="right"></div>
-					      </div>
-					      <div class="modal-footer">
-					        <a href="https://www.google.com/maps/dir/Current+Location/174.76662397384644,-36.8446152873055" target="_blank" class="btn btn-primary2 get-directions">Directions</a>
-					        <a href="#" target="_blank" class="btn btn-primary website-url">Website</a>
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
+            <!-- popular section START -->
+            <section class="section2">
+                <div class="popular">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6" id=pop-content>
+                                <h2>Popular</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit doloribus quod sit.</p>
+                                <div class="popular-filter">
+                                    <div class="flex-box">
+                                        <h5>Filter:</h5>
+                                        <ul class="flex-box">
+                                            <li><i class="fas fa-utensils"></i></li>
+                                            <li><i class="fas fa-cocktail"></i></li>
+                                            <li><i class="fas fa-hotel"></i></li>
+                                            <li><i class="fas fa-landmark"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- popular grid -->
+                            <div class="col-xs-12 col-md-6" id="grid-container">
+                                <div class="grid-bla">
+                                    <div class="grid-sizer-bla"></div>
+                                </div>
+                            </div>
+                            <!-- end of popular grid -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of container -->
+                </div>
+                <!-- end of popular -->
+            </section>
+            <!-- popular section END -->
 
-					<div class="form-filter-area">
-						<form id="search-form">
-							<input type="text" class="form-control" id="keyword" placeholder="search    (doesn't work)">
-							<button type="submit"><i class="fas fa-search"></i></button>
-						</form>
+            <!-- Map section START -->
+            <section class="section3">
+                <div class="map-area">
+                    <div id="map"></div>
 
-						<div class="filter">
-							<p>Filter:</p>
-							<a class="filter-icon food" href="">
-								<i class="fas fa-utensils">
-									<p>Food</p>
-								</i>
-							</a>
-							<a class="filter-icon drinks" href="">
-								<i class="fas fa-cocktail">
-									<p>Drink</p>
-								</i>
-							</a>
-							<a class="filter-icon hotels" href="">
-								<i class="fas fa-hotel">
-									<p>Hotels</p>
-								</i>
-							</a>
-							<a class="filter-icon landmarks" href="">
-								<i class="fas fa-ticket-alt"></i>
-									<p>Entertainment</p>
-								</i>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-<!-- Map section END -->
+                    <div class="modal" id="venueModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
 
-<!-- Upcoming events section START -->
-		<section class="section4">
-			<section class="upcoming-events">
-				<div class="heading">
-					<h1>UPCOMING EVENTS</h1>
-					<div class="info">
+                                    <div class="left"></div>
+                                    <div class="right"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="https://www.google.com/maps/dir/Current+Location/174.76662397384644,-36.8446152873055" target="_blank" class="btn btn-primary2 get-directions">Directions</a>
+                                    <a href="#" target="_blank" class="btn btn-primary website-url">Website</a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-filter-area">
+                        <form id="search-form">
+                            <input type="text" class="form-control" id="keyword" placeholder="search    (doesn't work)">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+
+                        <div class="filter">
+                            <p>Filter:</p>
+                            <a class="filter-icon food" href="">
+                                <i class="fas fa-utensils"></i>
+                                <p>Food</p>
+                            </a>
+                            <a class="filter-icon drinks" href="">
+                                <i class="fas fa-cocktail"></i>
+                                <p>Drink</p>
+                            </a>
+                            <a class="filter-icon hotels" href="">
+                                <i class="fas fa-hotel"></i>
+                                <p>Hotels</p>
+                            </a>
+                            <a class="filter-icon landmarks" href="">
+                                <i class="fas fa-landmark"></i>
+                                <p>Entertainment</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Map section END -->
+
+            <!-- Upcoming events section START -->
+            <section class="section4">
+                <h3>Upcoming Events Section</h3>
+                <section class="upcoming-events">
+                    <div class="heading">
+                        <h2>UPCOMING EVENTS</h2>
+                        <div class="info">
+                            <p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="info">
 						<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
-					</div>
-				</div>
+					</div> -->
 
-				<!-- <div class="info">
-					<p class="info-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus veniam numquam totam. Deserunt, omnis, esse!</p>
-				</div> -->
+                    <div class="events">
+                        <img class="upcoming-events-images" src="assets/images/music-final.jpg" alt="">
+                        <div class="details">
+                            <i class="left fas fa-plus"></i>
+                            <!-- <i class="left fas fa-plus-circle"></i> -->
+                            <i class="right fas fa-link"></i>
+                            <!-- <i class="right fas fa-plus-circle"></i> -->
+                            <h2 class="upcoming-events-h2">Heading</h2>
+                            <p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
 
-				<div class="events">
-					<img class="upcoming-events-images" src="assets/images/music-final.jpg" alt="">
-					<div class="details">
-						<i class="left fas fa-plus"></i>
-						<!-- <i class="left fas fa-plus-circle"></i> -->
-						<i class="right fas fa-link"></i>
-						<!-- <i class="right fas fa-plus-circle"></i> -->
-						<h2 class="upcoming-events-h2">Heading</h2>
-						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-					</div>
-				</div>
+                    <div class="events">
+                        <img class="upcoming-events-images" src="assets/images/food-final.jpg" alt="">
+                        <div class="details">
+                            <i class="left fas fa-plus"></i>
+                            <!-- <i class="left fas fa-plus-circle"></i> -->
+                            <i class="right fas fa-link"></i>
+                            <!-- <i class="right fas fa-plus-circle"></i> -->
+                            <h2 class="upcoming-events-h2">Heading</h2>
+                            <p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
 
-				<div class="events">
-					<img class="upcoming-events-images" src="assets/images/food-final.jpg" alt="">
-					<div class="details">
-						<i class="left fas fa-plus"></i>
-						<!-- <i class="left fas fa-plus-circle"></i> -->
-						<i class="right fas fa-link"></i>
-						<!-- <i class="right fas fa-plus-circle"></i> -->
-						<h2 class="upcoming-events-h2">Heading</h2>
-						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-					</div>
-				</div>
+                    <div class="events">
+                        <img class="upcoming-events-images" src="assets/images/open-final.jpg" alt="">
+                        <div class="details">
+                            <i class="left fas fa-plus"></i>
+                            <!-- <i class="left fas fa-plus-circle"></i> -->
+                            <i class="right fas fa-link"></i>
+                            <!-- <i class="right fas fa-plus-circle"></i> -->
+                            <h2 class="upcoming-events-h2">Heading</h2>
+                            <p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <!-- Upcoming events section END -->
 
-				<div class="events">
-					<img class="upcoming-events-images" src="assets/images/open-final.jpg" alt="">
-					<div class="details">
-						<i class="left fas fa-plus"></i>
-						<!-- <i class="left fas fa-plus-circle"></i> -->
-						<i class="right fas fa-link"></i>
-						<!-- <i class="right fas fa-plus-circle"></i> -->
-						<h2 class="upcoming-events-h2">Heading</h2>
-						<p class="upcoming-events-p">Lorem ipsum dolor sit amet.</p>
-					</div>
-				</div>	
-			</section>
-		</section>
-<!-- Upcoming events section END -->
+            <!-- Footer section START -->
+            <footer>
+                <div class="footer-container">
+                    <div class="logo-address footer-row">
+                        <!-- <h2>Visit Auckland</h2> -->
+                        <img src="assets/logo/logo-update-white.png" alt="">
+                        <p>3 City Road, Grafton, Auckland</p>
+                    </div>
+                    <div class="footer-links footer-row">
+                        <h1>Quick Links</h1>
+                        <ul class="footer-page-links">
+                            <li class="hover">Home</li>
+                            <li class="hover">Meet the team</li>
+                            <li class="hover">Contact</li>
+                        </ul>
 
-<!-- Footer section START -->
-			<footer>
-				<div class="footer-container">
-					<div class="logo-address footer-row">
-						<!-- <h2>Visit Auckland</h2> -->
-						<img src="assets/logo/logo-update-white.png" alt="">
-						<p>3 City Road, Grafton, Auckland</p>
-					</div>
-					<div class="footer-links footer-row">
-						<h1>Quick Links</h1>
-						<ul class="footer-page-links">
-							<li class="hover">Home</li>
-							<li class="hover">Meet the team</li>
-							<li class="hover">Contact</li>
-						</ul>
+                    </div>
 
-					</div>
+                    <div class="footer-social footer-row">
+                        <h1>Follow Us</h1>
+                        <div class="social-row">
+                            <i class="fab fa-facebook-square"></i>
+                            <p class="hover">Facebook</p>
+                        </div>
+                        <div class="social-row">
+                            <i class="fab fa-instagram"></i>
+                            <p class="hover">Instagram</p>
+                        </div>
+                        <div class="social-row">
+                            <i class="fab fa-twitter-square"></i>
+                            <p class="hover">Twitter</p>
+                        </div>
+                        <div class="social-row">
+                            <i class="fab fa-youtube-square"></i>
+                            <p class="hover">YouTube</p>
+                        </div>
+                    </div>
 
-					<div class="footer-social footer-row">
-						<h1>Follow Us</h1>
-						<div class="social-row">
-							<i class="fab fa-facebook-square"></i>
-							<p class="hover">Facebook</p>
-						</div>
-						<div class="social-row">
-							<i class="fab fa-instagram"></i>
-							<p class="hover">Instagram</p>
-						</div>
-						<div class="social-row">
-							<i class="fab fa-twitter-square"></i>
-							<p class="hover">Twitter</p>
-						</div>
-						<div class="social-row">
-							<i class="fab fa-youtube-square"></i>
-							<p class="hover">YouTube</p>
-						</div>
-					</div>
+                    <div class="footer-signup footer-row">
+                        <h1>Subscribe to our newsletter</h1>
+                        <h2>We will send you weekly emails with what were doing</h2>
+                        <div class="signupbox">
+                            <div class="input-area">
+                                <p>E-mail</p>
+                            </div>
+                            <div class="submit-box">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                        </div>
+                    </div>
 
-					<div class="footer-signup footer-row">
-						<h1>Subscribe to our newsletter</h1>
-						<h2>We will send you weekly emails with what were doing</h2>
-						<div class="signupbox">
-							<div class="input-area">
-								<p>E-mail</p>
-							</div>
-							<div class="submit-box">
-								<i class="fas fa-sign-in-alt"></i>
-							</div>
-						</div>
-					</div>
+                </div>
+            </footer>
+            <!-- Footer section END -->
 
+            <!-- Login section START -->
+            <div class="modal" tabindex="-1" role="dialog" id="loginModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="login-area">
+                                <div class="login-title">
+                                    <h1>Login</h1>
+                                </div>
+                                <div class="login-fields">
+                                    <form action="#">
+                                        <div class="form-row">
+                                            <input type="text" name="Username" placeholder="Username">
+                                        </div>
+                                        <div class="form-row">
+                                            <input type="text" name="Passsword" placeholder="Password">
+                                        </div>
+                                        <div class="form-row">
+                                            <input type="submit" value="Submit" id="submit">
+                                        </div>
 
-				</div>
-			</footer>
-<!-- Footer section END -->
+                                    </form>
 
-<!-- Login section START -->
-			<div class="modal" tabindex="-1" role="dialog" id="loginModal">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-body">
-			      	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      	<div class="login-area">
-			      		<div class="login-title">
-			      			<h1>Login</h1>
-			      		</div>
-			      		<div class="login-fields">
-			      			<form action="">
-			      				<div class="form-row">
-				      				<input type="text" name="Username" placeholder="Username">
-			      				</div>
-			      				<div class="form-row">
-				      				<input type="text" name="Passsword" placeholder="Password">	
-			      				</div>
-			      				<div class="form-row">
-			      					<input type="submit" value="Submit" id="submit">
-			      				</div>
-			      				
-			      			</form>
+                                    <div class="social-title">
+                                        <h1>Or</h1>
+                                    </div>
 
-			      			<div class="social-title">
-			      				<h1>Or</h1>
-			      			</div>
+                                    <div class="social">
+                                        <div class="social-row">
+                                            <i class="fab fa-facebook-f"></i>
+                                            <p>Sign in</p>
+                                        </div>
 
-							<div class="social">
-								<div class="social-row"> 
-									<i class="fab fa-facebook-f"></i>
-									<p>Sign in</p>
-								</div>
+                                        <div class="social-row">
+                                            <i class="fab fa-google"></i>
+                                            <p>Sign in</p>
+                                        </div>
+                                    </div>
 
-								<div class="social-row"> 
-									<i class="fab fa-google"></i>
-									<p>Sign in</p>
-								</div>
-							</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Login section END -->
 
-			      		</div>
-			      	</div>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-<!-- Login section END -->
+        </div>
+    </div>
 
-		</div>
-	</div>
+    <!-- jQuery -->
 
-<!-- jQuery -->
+    <!-- script for popular section START -->
+    <script id="templatePopular" type="text/template7">
+        <div class="grid-item-bla">
+            <div class="grid-content size">
+                <div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
+                <div class="pop-info">
+                    <i class="fas fa-plus"></i>
+                    <p class="pop-name">{{name}}</p>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!-- script for popular section START -->
 
-<!-- script for popular section START -->
-	<script id="templatePopular" type="text/template7">
-		<div class="grid-item-bla">				
-			<div class="grid-content size">
-				<div class="image" style="background-image:url({{bestPhoto.prefix}}300x300{{bestPhoto.suffix}})"></div>
-				<div class="pop-info">
-					<i class="fas fa-plus"></i>
-					<p class="pop-name">{{name}}</p>
-					<i class="fas fa-star"></i>
-				</div>
-			</div>
-		</div>
-	</script>
-<!-- script for popular section START -->
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	
-	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-   crossorigin=""></script>
-   	<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-
-
-	<script src="scripts/isotope.pkgd.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-	<script src="scripts/underscore.js"></script>
-	<script src="scripts/template7.js"></script>
-
-
-	<!-- <script src="scripts/anime.js"></script> -->
-	<script src="scripts/scripts.js"></script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+    <script src="scripts/isotope.pkgd.js"></script>
+    <script src="scripts/underscore.js"></script>
+    <script src="scripts/template7.js"></script>
+    <script src="scripts/scripts.js"></script>
 
 </body>
+
 </html>

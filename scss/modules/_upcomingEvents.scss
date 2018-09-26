@@ -1,6 +1,8 @@
 /*All devices and mobile phone*/
 
-
+h3{
+	display:none;
+}
 .upcoming-events{
 	// border: 1px red solid;
 	min-height: 100vh;
@@ -19,8 +21,9 @@
 		// font-family: $oswaldFont;
 		// font-size: 1.5em;
 		width:100%;
+		margin-top:3%;
 				
-		h1{
+		h2{
 			margin-top:0.5em;
 			font-family: $oswaldFont;
 			font-size:$mobileDisplayFontSize;

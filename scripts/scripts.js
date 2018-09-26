@@ -132,7 +132,7 @@ $(function() {
 
         var activeLi;
 
-        var iScrollTopWithAdjustment = iScrollTop + 100;
+        var iScrollTopWithAdjustment = iScrollTop + 10;
         
         if(iScrollTopWithAdjustment<offset2){
             activeLi = $('.pure-menu-list>li:nth-child(1)');
@@ -142,11 +142,11 @@ $(function() {
             activeLi = $('.pure-menu-list>li:nth-child(2)');
         }
 
-        if(iScrollTopWithAdjustment>=offset3 && iScrollTopWithAdjustment<offset4){
+        if(iScrollTopWithAdjustment>=offset3 && iScrollTopWithAdjustment<(offset4)){
             activeLi = $('.pure-menu-list>li:nth-child(3)');
         }
 
-        if(iScrollTopWithAdjustment>=offset4){
+        if(iScrollTopWithAdjustment>= (offset4)){
             activeLi = $('.pure-menu-list>li:nth-child(4)');
         }
 
@@ -174,8 +174,8 @@ $(function() {
 //Raj Map START --------------------------------------------------------------
 
 const version = '?v=20170901';
-const clientid = '&client_id=5W02W0U2ZV23NGGFCSJW2YTREHDK5AQ5NG13SPW2OTOL2A1S';
-const clientSecret = '&client_secret=OTL15PWBNFM2TCBSCNE3XVSC4GNDALSVFVH124CS51R1JYQT';
+const clientid = '&client_id=H2QZGKM3QVJB2PCW1JREIEJJMRBL1QXZOYIYWGRFDABW4E4Y';
+const clientSecret = '&client_secret=GYCB1CW24L0HLFKGOFIHCKOLYZQPVI3ZKDLKE5O3QHCTWGI2';
 const key = version + clientid + clientSecret;
 
 var food = '4d4b7105d754a06374d81259';

@@ -39,7 +39,7 @@
 			top:0;
 			min-left: 85%;
 			// max-left:100%;
-			z-index: 30000;
+			z-index: 300000;
 			color:white;
 			// background-color:white;
 			width:1.5em;
@@ -54,28 +54,40 @@
 		// border-radius:2em;
 	}
 
-	.mobile-nav{
-		z-index: 90000;
-		position: fixed;
-		margin-top:-3.75em;
-		// height:100vh;
-		width:95%;
-		left:2.5%;
 
-		.high{
-			margin-top:50%;
-			// padding-bottom:4em;
+	.nav-body{
+		// margin-top:50%;
+		// padding-bottom:4em;
+		width: 20em;
+
+		.mobile-nav{
+			z-index: 90000;
+			position: fixed;
+			margin-top:-3.75em;
+			// height:100vh;
+			width:95%;
+			left:2.5%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
-		
 	}
-
+	
 	.nav-open{
-		height: 95vh !important;
+		height: 95% !important;
 		// height:100vh;
 		// psition:relative;
 		background-color:white;
 		z-index: 9000;
+
+		display:flex;
+		flex-wrap:wrap;
+		align-content:center;
+
+		li{
+			flex: 1 0 90%;
+		}
 
 		a{
 			color:black;
@@ -86,11 +98,13 @@
 		color:black;
 		padding-right:0.5em;
 		padding-top:1em;
+		z-index: 10000;
+		// border:1px red solid;
 	}
 
 	.hero {
 		background-color:rgba(1, 1, 1, .2);
-		// display: flex;
+		display: flex;
 		justify-content: center;
 		align-items: center;
 		position: absolute;
@@ -101,7 +115,12 @@
 		// max-height:80%;
 		// transform: translate(-50%,-50%);
 		z-index: 1;
-		overflow:hidden;
+		// overflow:hidden;
+		// margin-top:20%;
+		height:80%;
+
+
+
 
 	}
 
@@ -111,7 +130,7 @@
 		// z-index: 5;
 		overflow:hidden;
 
-		h1 {
+		h4 {
 			width:100%;
 			// padding-top:2em;
 			// margin:auto;
@@ -185,7 +204,7 @@
 
 			padding: 2em 2em 2em 2em;
 
-			h1 {
+			h4 {
 				max-width:100%;
 				font-size: 2em;
 				// margin-bottom: 1em;
@@ -228,7 +247,7 @@
 			// height:100%;
 			margin: 1em 6em 1em 6em;
 
-			h1 {
+			h4 {
 				max-width:100%;
 				font-size: 2em;
 				// margin-bottom: 1em;
@@ -319,7 +338,7 @@
 				// height:100%;
 				// margin: 1em 6em 1em 6em;
 
-				h1 {
+				h4 {
 					// max-width:100%;
 					font-size: 3em;
 					// margin-bottom: 1em;
