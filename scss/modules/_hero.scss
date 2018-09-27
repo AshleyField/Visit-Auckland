@@ -168,20 +168,31 @@
 		}
 
 		.hero-button {
-			padding: .5em;
-			border: 3px #fff solid;
-			display: block;
-			max-width: 100%;
-			text-align: center;
-			margin: auto;
+			// padding: .5em;
+			// border: 3px #fff solid;
+			// display: block;
+			// max-width: 100%;
+			// text-align: center;
+			// margin: auto;
 			// margin-bottom:4em;
 
 			a {
 				font-size:0.8em;
 				color: #fff;
 				text-transform: uppercase;
+				text-decoration:none;
 				font-family: $oswaldFont;
+				padding: .5em;
+				border: 3px #fff solid;
+				display: block;
+				max-width: 100%;
+				text-align: center;
+				margin: auto;
 				// @include textShadow;
+
+				&:hover{
+					opacity:0.5;
+				}
 
 			}
 		}

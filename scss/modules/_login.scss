@@ -1,8 +1,9 @@
 // Login
 
+
 #loginModal {
 	.modal-dialog {
-		max-width: 98%;
+		max-width: 100%;
 		
 		margin:auto;
 
@@ -10,8 +11,8 @@
 		.modal-content{
 			border-radius:0;
 			height:95vh;
-			// margin:auto;
-			margin-left:-0.5em;
+			margin:auto;
+			// margin-left:-0.5em;
 			margin-top:4%;
 			// width:98%;
 		}
@@ -21,6 +22,7 @@
 .login-area {
 	padding: 2em 1em;
 	// padding-bottom: 6em;
+	margin:auto;
 
 	.login-title {
 		h1 {
@@ -164,11 +166,12 @@
 @media only screen and (min-width : 60em) {
 	
 	#loginModal {
-		height: 100%;
+		// height: 100%;
 		margin-top:-2%;
 
 		.login-area{
 			padding: 2em 6em;
+			max-width:75%;
 
 			.social-title {
 				h1 {
